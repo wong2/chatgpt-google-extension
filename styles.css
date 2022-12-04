@@ -1,0 +1,43 @@
+.chat-gpt-container {
+  margin-bottom: 30px;
+  border-radius: 8px;
+  border: 1px solid #dadce0;
+  padding: 15px;
+  flex-basis: 0;
+  flex-grow: 1;
+}
+
+.chat-gpt-container p {
+  margin: 0;
+}
+
+.chat-gpt-container .prefix {
+  font-weight: bold;
+}
+
+.chat-gpt-container .loading {
+  color: #b6b8ba;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.chat-gpt-container.sidebar-free {
+  margin-left: 60px;
+  height: fit-content;
+}
+
+.chat-gpt-container pre {
+  white-space: pre-wrap;
+  min-width: 0;
+  margin-bottom: 0;
+  line-height: 20px;
+}

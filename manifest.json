@@ -1,0 +1,24 @@
+{
+  "name": "ChatGPT for Google",
+  "description": "Display ChatGPT response in Google Search results",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "icons": {
+    "16": "logo.png",
+    "32": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
+  "host_permissions": ["https://*.openai.com/"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/search*"],
+      "include_globs": ["*.google.*/*"],
+      "js": ["content-script.js"],
+      "css": ["styles.css"]
+    }
+  ]
+}
