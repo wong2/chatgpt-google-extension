@@ -8,7 +8,7 @@ A Chrome extension to show ChatGPT response in Google search results
 
 ### Local Install
 
-1. Download the zip file from [Github releases](https://github.com/wong2/chat-gpt-google-extension/releases)
+1. Download the `build.zip` file from [Github releases](https://github.com/wong2/chat-gpt-google-extension/releases)
 2. Unzip the file
 3. In Chrome/Edge go to the extensions page (`chrome://extensions` or `edge://extensions`).
 4. Enable Developer Mode.
@@ -16,7 +16,14 @@ A Chrome extension to show ChatGPT response in Google search results
 
 ### Chrome Web Store
 
-Still waiting for review.
+Still waiting for review
+
+## Build from source
+
+1. Clone the repo
+2. Install dependencies with `npm`
+3. Run `./build.sh`
+4. Load the `build` directory to Chrome
 
 ## Credit
 
