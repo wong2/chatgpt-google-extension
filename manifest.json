@@ -16,7 +16,7 @@
   "content_scripts": [
     {
       "matches": ["https://*/search*"],
-      "include_globs": ["*.google.*/*"],
+      "include_globs": ["*.google.*/*", "*.duckduckgo.*/*"],
       "js": ["content-script.js"],
       "css": ["styles.css"]
     }
