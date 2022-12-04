@@ -10,14 +10,17 @@ async function run(question) {
   container.className = "chat-gpt-container";
   container.innerHTML = '<p class="loading">Waiting for ChatGPT response...</p>';
 
-  const siderbarContainer = document.getElementById("rhs");
-  if (siderbarContainer) {
-    siderbarContainer.prepend(container);
-  } else {
-    container.classList.add("sidebar-free");
-    document.getElementById("rcnt").appendChild(container);
+  if (location.href.match("duckduckgo")) {
+    document.getElementById("web_content_wrapper").prepend(container);
+  } else if (location.href.match("google")) {
+    const siderbarContainer = document.getElementById("rhs");
+    if (siderbarContainer) {
+      siderbarContainer.prepend(container);
+    } else {
+      container.classList.add("sidebar-free");
+      document.getElementById("rcnt").appendChild(container);
+    }
   }
-
   const port = chrome.runtime.connect();
   port.onMessage.addListener(function (msg) {
     if (msg.answer) {
