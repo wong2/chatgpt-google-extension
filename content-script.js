@@ -21,6 +21,7 @@ async function run(question) {
       document.getElementById("rcnt").appendChild(container);
     }
   }
+
   const port = chrome.runtime.connect();
   port.onMessage.addListener(function (msg) {
     if (msg.answer) {
