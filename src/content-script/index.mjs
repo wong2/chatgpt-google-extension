@@ -1,9 +1,4 @@
-function getMainContainerWidth() {
-  const resultContainer = document.getElementById("center_col");
-  if (resultContainer) {
-    return resultContainer.offsetWidth + "px";
-  }
-}
+import Browser from "webextension-polyfill";
 
 async function run(question) {
   const container = document.createElement("div");
@@ -18,7 +13,7 @@ async function run(question) {
     document.getElementById("rcnt").appendChild(container);
   }
 
-  const port = chrome.runtime.connect();
+  const port = Browser.runtime.connect();
   port.onMessage.addListener(function (msg) {
     if (msg.answer) {
       container.innerHTML = `<p><span class="prefix">ChatGPT:</span><pre>${msg.answer}</pre></p>`;

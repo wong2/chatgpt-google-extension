@@ -10,5 +10,8 @@
     "eventsource-parser": "^0.0.5",
     "expiry-map": "^2.0.0",
     "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "webextension-polyfill": "^0.10.0"
   }
 }
