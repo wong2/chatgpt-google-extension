@@ -15,8 +15,16 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://*/search*"],
-      "include_globs": ["*.google.*/*"],
+      "matches": [
+        "https://*/search*",
+        "https://*/*q=*",
+        "https://*/sp/search"
+      ],
+      "include_globs": [
+        "https://www.google.*/*",
+        "https://duckduckgo.com/*",
+        "https://www.startpage.com/*"
+      ],
       "js": ["content-script/index.js"],
       "css": ["styles.css"]
     }
