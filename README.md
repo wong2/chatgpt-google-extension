@@ -14,6 +14,13 @@ A Chrome extension to display ChatGPT response alongside Google Search results
 4. Enable Developer Mode.
 5. Drag the unzipped folder anywhere on the page to import it (do not delete the folder afterwards).
 
+### Firefox Installation
+
+1. Clone the repo
+2. Install dependencies with `npm`
+3. Run `./build.sh firefox`
+4. Go to `about:debugging` and load temporary add-on by selecting any file in the `build` directory
+
 ### Chrome Web Store
 
 Still waiting for review
