@@ -1,6 +1,6 @@
 # ChatGPT for Google
 
-A Chrome extension to show ChatGPT response in Google search results
+A Chrome extension to display ChatGPT response alongside Google Search results
 
 ![Screenshot](screenshot.jpg?raw=true)
 
