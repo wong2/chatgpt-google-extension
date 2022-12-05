@@ -39,6 +39,20 @@ if(location.hostname.match("startpage")){
       run(searchInput.value);
     }
   }
+} else if (location.hostname.match("kagi.com")) {
+  // Kagi
+  const sidebarContainer = document.querySelector('.right-content-box._0_right_sidebar')
+  if (sidebarContainer) {
+    sidebarContainer.prepend(container);
+  } else {
+    container.classList.add("sidebar-free");
+    document.getElementById("main").appendChild(container);
+  }
+  const searchInput = document.getElementsByName("q")[0];
+  if (searchInput && searchInput.value) {
+    // note: Kagi results aren't paginated, no need to check the page number
+    run(searchInput.value);
+  }
 }else if(location.hostname.match("google")){
   // google
   const siderbarContainer = document.getElementById("rhs");

@@ -23,7 +23,8 @@
       "include_globs": [
         "https://www.google.*/*",
         "https://duckduckgo.com/*",
-        "https://www.startpage.com/*"
+        "https://www.startpage.com/*",
+        "https://kagi.com/*"
       ],
       "js": ["content-script/index.js"],
       "css": ["styles.css"]
