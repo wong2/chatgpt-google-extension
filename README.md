@@ -8,9 +8,9 @@ A browser extension to display ChatGPT response alongside Google Search results,
 
 ### Install to Chrome/Edge
 
-#### Install from Chrome Web Store
+#### Install from Chrome Web Store (Preferred)
 
-The extension is pending for review.
+<https://chrome.google.com/webstore/detail/chatgpt-for-google/jgjaeacdkonaoafenlfkkkmbaopkbilf>
 
 #### Local Install
 
