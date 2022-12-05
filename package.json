@@ -9,9 +9,14 @@
     "esbuild": "^0.15.17",
     "eventsource-parser": "^0.0.5",
     "expiry-map": "^2.0.0",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "markdown-it": "^13.0.1",
+    "punycode": "^2.1.1"
   },
   "devDependencies": {
     "webextension-polyfill": "^0.10.0"
-  }
+  },
+  "scripts": {
+    "build": "sh build.sh"
+}
 }
