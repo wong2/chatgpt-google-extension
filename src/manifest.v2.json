@@ -18,7 +18,7 @@
       "matches": [
         "https://*/search*",
         "https://*/*q=*",
-        "https://*/sp/search"
+        "https://*/sp/search*"
       ],
       "include_globs": [
         "https://www.google.*/*",
