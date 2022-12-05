@@ -8,6 +8,12 @@ A browser extension to display ChatGPT response alongside Google Search results,
 
 ### Install to Chrome/Edge
 
+#### Install from Chrome Web Store
+
+The extension is pending for review.
+
+#### Local Install
+
 1. Download `chrome.zip` from [Releases](https://github.com/wong2/chat-gpt-google-extension/releases)
 2. Unzip the file
 3. In Chrome/Edge go to the extensions page (`chrome://extensions` or `edge://extensions`).
@@ -16,14 +22,16 @@ A browser extension to display ChatGPT response alongside Google Search results,
 
 ### Install to Firefox
 
+#### Install from Mozilla Add-on Store (Preferred)
+
+<https://addons.mozilla.org/addon/chatgpt-for-google/>
+
+#### Local Install
+
 1. Download `firefox.zip` from [Releases](https://github.com/wong2/chat-gpt-google-extension/releases)
 2. Unzip the file
 3. Go to `about:debugging`, click "This Firefox" on the sidebar
 4. Click "Load Temporary Add-on" button, then select any file in the unzipped folder
-
-### Chrome Web Store
-
-Still waiting for review
 
 ## Build from source
 
