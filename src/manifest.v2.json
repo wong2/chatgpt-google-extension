@@ -1,0 +1,24 @@
+{
+  "name": "ChatGPT for Firefox",
+  "description": "Display ChatGPT response in Google Search results",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "icons": {
+    "16": "logo.png",
+    "32": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
+  "permissions": ["webRequest", "https://*.openai.com/"],
+  "background": {
+    "scripts": ["background/index.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/search*"],
+      "include_globs": ["*.google.*/*"],
+      "js": ["content-script/index.js"],
+      "css": ["styles.css"]
+    }
+  ]
+}
