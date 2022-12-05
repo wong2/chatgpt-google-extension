@@ -16,7 +16,8 @@ async function run(question) {
   const port = Browser.runtime.connect();
   port.onMessage.addListener(function (msg) {
     if (msg.answer) {
-      container.innerHTML = `<p><span class="prefix">ChatGPT:</span><pre>${msg.answer}</pre></p>`;
+      container.innerHTML = '<p><span class="prefix">ChatGPT:</span><pre></pre></p>';
+      container.querySelector("pre").textContent = msg.answer;
     } else if (msg.error === "UNAUTHORIZED") {
       container.innerHTML =
         '<p>Please login at <a href="https://chat.openai.com" target="_blank">chat.openai.com</a> first</p>';
