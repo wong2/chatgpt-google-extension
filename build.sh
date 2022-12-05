@@ -1,9 +1,7 @@
 #!/bin/bash
 
-npx esbuild background/index.mjs --bundle --outfile=background.js
-
-mkdir -p build
-cp manifest.json build
-cp *.js build
-cp *.css build
-cp logo.png build
+rm -rf build
+npx esbuild src/content-script/index.mjs src/background/index.mjs --bundle --outdir=build
+cp src/*.css build/
+cp src/*.json build/
+cp src/*.png build/
