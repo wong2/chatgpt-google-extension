@@ -11,6 +11,8 @@
     "expiry-map": "^2.0.0",
     "uuid": "^9.0.0",
     "markdown-it": "^13.0.1",
+    "markdown-it-code-copy": "^0.1.1",
+    "markdown-it-prism": "^2.3.0",
     "punycode": "^2.1.1"
   },
   "devDependencies": {

@@ -1,5 +1,9 @@
 import Browser from "webextension-polyfill";
 import MarkdownIt from 'markdown-it';
+import  prism  from 'markdown-it-prism';
+import "prismjs/components/prism-clike"
+import "prismjs/components/prism-java"
+import CodeCopy from "markdown-it-code-copy";
 
 async function run(question) {
   const container = document.createElement("div");
@@ -18,7 +22,19 @@ async function run(question) {
   port.onMessage.addListener(function (msg) {
     if (msg.answer) {
       const markdownIt = new MarkdownIt();
-      container.innerHTML =  '<div><span class="prefix">ChatGPT:</span><div id="answer"></div></div>';
+
+      // code hightlight
+      markdownIt.use(prism, {
+				highlightInlineCode: true,
+				defaultLanguage: 'java'
+			});
+
+      // add copy button
+			markdownIt.use(CodeCopy, {
+				buttonClass: 'chat-gpt-copy-button',
+			});
+
+      container.innerHTML =  '<div><span class="prefix">ChatGPT:</span><div id="answer" class="markdown-body"></div></div>';
       container.querySelector("#answer").innerHTML = markdownIt.render(msg.answer);
     } else if (msg.error === "UNAUTHORIZED") {
       container.innerHTML =
