@@ -6,12 +6,13 @@ const config = {
   inputName: ['q', 'wd', 'text', 'query', 'p'],
   // prepend child to
   sidebarContainerId: [
-    'rhs', 'content_right', 'b_rrsr', 'search-result-aside', 'b_context', 'right', 'sub_pack'
+    'rhs', 'content_right', 'b_rrsr', 'search-result-aside', 'b_context', 'right', 'sub_pack', 'sidebar_results',
+    'side-right'
   ],
   // if above ids not exist, prepend child to
   sidebarContainerClass: [
     'right-content-box _0_right_sidebar', 'results--sidebar js-results-sidebar', 'layout-web__sidebar layout-web__sidebar--web',
-    'Contents__inner Contents__inner--sub'
+    'Contents__inner Contents__inner--sub', 'sidebar web__sidebar'
   ],
   // if above all not exist, append child to
   appendContainerId: [
