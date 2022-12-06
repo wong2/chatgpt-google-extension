@@ -5,6 +5,19 @@ async function run(question) {
   container.className = "chat-gpt-container";
   container.innerHTML = '<p class="loading">Waiting for ChatGPT response...</p>';
 
+  function createTryAgainButton() {
+    const tryAgainButton = document.createElement("button");
+    tryAgainButton.id = "try-again-button";
+    tryAgainButton.innerText = "Try Again";
+    tryAgainButton.onclick = function() {
+      tryAgainButton.innerText = "Please Wait...";
+      tryAgainButton.onclick = null;
+      tryAgainButton.classList.add("loading");
+      port.postMessage({ question });
+    }
+    container.insertAdjacentElement("beforeend", tryAgainButton);
+  }
+
   const siderbarContainer = document.getElementById("rhs");
   if (siderbarContainer) {
     siderbarContainer.prepend(container);
@@ -18,6 +31,7 @@ async function run(question) {
     if (msg.answer) {
       container.innerHTML = '<p><span class="prefix">ChatGPT:</span><pre></pre></p>';
       container.querySelector("pre").textContent = msg.answer;
+      createTryAgainButton();
     } else if (msg.error === "UNAUTHORIZED") {
       container.innerHTML =
         '<p>Please login at <a href="https://chat.openai.com" target="_blank">chat.openai.com</a> first</p>';
