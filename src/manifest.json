@@ -1,7 +1,7 @@
 {
   "name": "ChatGPT for Google",
-  "description": "Display ChatGPT response alongside Google Search results",
-  "version": "1.1.0",
+  "description": "Display ChatGPT response alongside Search Engine results",
+  "version": "1.2.0",
   "manifest_version": 3,
   "icons": {
     "16": "logo.png",
@@ -9,16 +9,37 @@
     "48": "logo.png",
     "128": "logo.png"
   },
-  "host_permissions": ["https://*.openai.com/"],
+  "host_permissions": [
+    "https://*.openai.com/"
+  ],
   "background": {
     "service_worker": "background/index.js"
   },
   "content_scripts": [
     {
-      "matches": ["https://*/search*"],
-      "include_globs": ["*.google.*/*"],
-      "js": ["content-script/index.js"],
-      "css": ["styles.css"]
+      "matches": [
+        "https://*/search*",
+        "https://duckduckgo.com/*q=*",
+        "https://*.startpage.com/sp/search*",
+        "https://*.baidu.com/s*wd=*"
+      ],
+      "include_globs": [
+        "https://*.google.*/*",
+        "https://kagi.*/*",
+        "https://*.bing.*/*",
+        "https://*.yahoo.*/*",
+        "https://*.naver.*/*",
+        "https://yandex.*/*",
+        "https://duckduckgo.*",
+        "https://*.startpage.*/*",
+        "https://*.baidu.*"
+      ],
+      "js": [
+        "content-script/index.js"
+      ],
+      "css": [
+        "styles.css"
+      ]
     }
   ]
 }

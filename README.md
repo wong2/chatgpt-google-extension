@@ -1,6 +1,6 @@
 # ChatGPT for Google
 
-A browser extension to display ChatGPT response alongside Google Search results, supports Chrome/Edge/Firefox
+A browser extension to display ChatGPT response alongside Search Engine results, supports Chrome/Edge/Firefox
 
 ![Screenshot](screenshot.jpg?raw=true)
 
