@@ -18,7 +18,7 @@
       "matches": ["https://*/search*"],
       "include_globs": ["*.google.*/*"],
       "js": ["content-script/index.js"],
-      "css": ["styles.css"]
+      "css": ["github-markdown.css", "styles.css"]
     }
   ]
 }
