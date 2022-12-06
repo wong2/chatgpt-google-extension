@@ -2,6 +2,8 @@
 
 A browser extension to display ChatGPT response alongside Google Search results, supports Chrome/Edge/Firefox
 
+[<img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=369975&theme=light" />](https://www.producthunt.com/posts/chatgpt-for-google?utm_source=badge-featured)
+
 ![Screenshot](screenshot.jpg?raw=true)
 
 ## Installation
