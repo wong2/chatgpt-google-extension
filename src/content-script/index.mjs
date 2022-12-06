@@ -32,8 +32,17 @@ async function run(question) {
   port.postMessage({ question });
 }
 
+function endsWithQuestionMark(question) {
+  return (
+    question.endsWith("?") ||  // ASCII
+    question.endsWith("？") || // Chinese/Japanese
+    question.endsWith("؟") || // Arabic
+    question.endsWith("⸮") // Arabic
+  ); 
+}
+
 const searchInput = document.getElementsByName("q")[0];
-if (searchInput && searchInput.value) {
+if (searchInput && searchInput.value && endsWithQuestionMark(searchInput.value.trim())) {
   // only run on first page
   const startParam = new URL(location.href).searchParams.get("start") || "0";
   if (startParam === "0") {

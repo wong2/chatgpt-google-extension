@@ -1,6 +1,7 @@
 # ChatGPT for Google
 
-A browser extension to display ChatGPT response alongside Google Search results, supports Chrome/Edge/Firefox
+A browser extension to display ChatGPT response alongside Google Search results, supports Chrome/Edge/Firefox.
+To better protect your privacy, and reduce the excessive usage of ChatGPT quota, ChatGPT is only enabled when the query ends with question mark (ASCII, Chinese/Japanese, or Arabic style).
 
 [<img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=369975&theme=light" />](https://www.producthunt.com/posts/chatgpt-for-google?utm_source=badge-featured)
 
