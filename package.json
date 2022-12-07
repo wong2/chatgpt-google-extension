@@ -18,6 +18,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "prettier": "^2.8.0",
     "webextension-polyfill": "^0.10.0"
   }
 }
