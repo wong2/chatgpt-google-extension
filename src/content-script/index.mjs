@@ -20,7 +20,7 @@ async function run(question) {
   port.onMessage.addListener(function (msg) {
     if (msg.answer) {
       container.innerHTML =
-        '<p class="prefix">ChatGPT:</p><div id="answer" class="markdown-body"></div>';
+        '<p class="prefix">ChatGPT:</p><div id="answer" class="markdown-body" dir="auto"></div>';
       container.querySelector("#answer").innerHTML = markdown.render(msg.answer);
     } else if (msg.error === "UNAUTHORIZED") {
       container.innerHTML =
