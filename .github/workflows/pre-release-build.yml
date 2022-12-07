@@ -1,0 +1,28 @@
+name: Pre-release
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm install
+      - run: npm run build
+
+      - uses: josStorer/get-current-time@v2.0.2
+        id: current-time
+        with:
+          format: YYMMDD_HH_mm
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ChatGPT_Extension_Build_${{ steps.current-time.outputs.formattedTime }}
+          path: |
+            build/chromium.zip
+            build/firefox.zip
