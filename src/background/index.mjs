@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 import Browser from "webextension-polyfill";
 import { fetchSSE } from "./fetch-sse.mjs";
 
+let chunkText = '';
+
 const KEY_ACCESS_TOKEN = "accessToken";
 
 const cache = new ExpiryMap(10 * 1000);
@@ -47,10 +49,13 @@ async function getAnswer(question, callback) {
     onMessage(message) {
       console.debug("sse message", message);
       if (message === "[DONE]") {
+        callback(chunkText, true);
+        chunkText = '';
         return;
       }
       const data = JSON.parse(message);
       const text = data.message?.content?.parts?.[0];
+      chunkText = text;
       if (text) {
         callback(text);
       }
@@ -62,8 +67,8 @@ Browser.runtime.onConnect.addListener((port) => {
   port.onMessage.addListener(async (msg) => {
     console.debug("received msg", msg);
     try {
-      await getAnswer(msg.question, (answer) => {
-        port.postMessage({ answer });
+      await getAnswer(msg.question, (answer, stat) => {
+        port.postMessage({ answer, stat });
       });
     } catch (err) {
       console.error(err);
