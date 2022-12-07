@@ -6,7 +6,9 @@
   "author": "wong2",
   "license": "ISC",
   "scripts": {
-    "build": "node build.mjs"
+    "build": "node build.mjs",
+    "lint": "eslint --ext .js,.mjs .",
+    "lint:fix": "eslint --ext .js,.mjs . --fix"
   },
   "dependencies": {
     "archiver": "^5.3.1",
@@ -18,6 +20,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "eslint": "^8.29.0",
     "prettier": "^2.8.0",
     "webextension-polyfill": "^0.10.0"
   }
