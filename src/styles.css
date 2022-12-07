@@ -3,8 +3,6 @@
   border-radius: 8px;
   border: 1px solid #dadce0;
   padding: 15px;
-  flex-basis: 0;
-  flex-grow: 1;
 }
 
 .chat-gpt-container p {
@@ -48,4 +46,34 @@
 .chat-gpt-container #answer code {
   white-space: pre-wrap;
   word-break: break-all;
+}
+
+.resizable {
+  position: relative;
+}
+
+.resizer {
+  position: absolute;
+}
+
+.resizer:hover {
+  position: absolute;
+}
+.resizer-r:hover {
+  background-color: #009975;
+}
+
+.resizer-r {
+  top: 0;
+  height: 100%;
+  right: -2px;
+  width: 3px;
+  cursor: col-resize;
+  transition: all 0.3s ease-in-out;
+}
+
+.g-flex {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
