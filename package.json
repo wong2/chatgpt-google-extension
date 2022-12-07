@@ -5,7 +5,11 @@
   "keywords": [],
   "author": "wong2",
   "license": "ISC",
+  "scripts": {
+    "build": "node build.mjs"
+  },
   "dependencies": {
+    "archiver": "^5.3.1",
     "esbuild": "^0.15.17",
     "eventsource-parser": "^0.0.5",
     "expiry-map": "^2.0.0",
