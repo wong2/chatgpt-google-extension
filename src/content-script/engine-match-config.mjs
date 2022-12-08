@@ -14,7 +14,7 @@ export const config = {
     appendContainerQuery: ["#rcnt"]
   },
   bing: {
-    inputQuery: ["input[name='q']"],
+    inputQuery: ["textarea[name='q']"],
     sidebarContainerQuery: ["#b_context"],
     appendContainerQuery: []
   },
@@ -65,7 +65,7 @@ export const config = {
   },
   ecosia: {
     inputQuery: ["input[name='q']"],
-    sidebarContainerQuery: [".sidebar web__sidebar"],
+    sidebarContainerQuery: [".sidebar.web__sidebar"],
     appendContainerQuery: ["#main"]
   }
 }
