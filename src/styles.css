@@ -13,6 +13,7 @@
 
 .chat-gpt-container .prefix {
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .chat-gpt-container .loading {
@@ -35,9 +36,16 @@
   height: fit-content;
 }
 
-.chat-gpt-container pre {
+.chat-gpt-container #answer {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.chat-gpt-container #answer pre {
+  margin-top: 10px;
+}
+
+.chat-gpt-container #answer code {
   white-space: pre-wrap;
-  min-width: 0;
-  margin-bottom: 0;
-  line-height: 20px;
+  word-break: break-all;
 }
