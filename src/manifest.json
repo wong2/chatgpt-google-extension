@@ -13,12 +13,19 @@
   "background": {
     "service_worker": "background.js"
   },
+  "font": {},
   "content_scripts": [
     {
       "matches": ["https://*/search*"],
       "include_globs": ["*.google.*/*"],
       "js": ["content-script.js"],
-      "css": ["github-markdown.css", "styles.css"]
+      "css": ["github-markdown.css", "styles.css", "katex.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["fonts/*"],
+      "matches": ["https://*/*"]
     }
   ]
 }

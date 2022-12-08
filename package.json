@@ -15,12 +15,15 @@
     "esbuild": "^0.15.17",
     "eventsource-parser": "^0.0.5",
     "expiry-map": "^2.0.0",
+    "katex": "^0.16.4",
     "markdown-it": "^13.0.1",
+    "markdown-it-texmath": "^1.0.0",
     "punycode": "^2.1.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
     "eslint": "^8.29.0",
+    "fs-extra": "^11.1.0",
     "prettier": "^2.8.0",
     "webextension-polyfill": "^0.10.0"
   }

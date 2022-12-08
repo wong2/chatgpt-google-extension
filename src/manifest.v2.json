@@ -18,7 +18,8 @@
       "matches": ["https://*/search*"],
       "include_globs": ["*.google.*/*"],
       "js": ["content-script.js"],
-      "css": ["github-markdown.css", "styles.css"]
+      "css": ["github-markdown.css", "styles.css", "katex.css"]
     }
-  ]
+  ],
+  "web_accessible_resources": ["fonts/*"]
 }

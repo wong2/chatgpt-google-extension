@@ -1,8 +1,14 @@
 import MarkdownIt from "markdown-it";
+import MarkdownItTexmath from "markdown-it-texmath";
+import Katex from "katex"
 import Browser from "webextension-polyfill";
 
 async function run(question) {
-  const markdown = new MarkdownIt();
+  const markdown = new MarkdownIt().use(MarkdownItTexmath, {
+    engine: Katex,
+    delimiters: 'dollars',
+    katexOptions: { macros: { "\\RR": "\\mathbb{R}" } }
+  });
 
   const container = document.createElement("div");
   container.className = "chat-gpt-container";

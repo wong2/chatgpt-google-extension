@@ -1,11 +1,11 @@
 import archiver from 'archiver'
 import esbuild from 'esbuild'
-import fs, { promises as fsPromises } from 'fs'
+import fs from 'fs-extra'
 
 const outdir = 'build'
 
 async function deleteOldDir() {
-  await fsPromises.rm(outdir, { recursive: true, force: true })
+  await fs.rm(outdir, { recursive: true, force: true })
 }
 
 async function runEsbuild() {
@@ -27,10 +27,10 @@ async function zipFolder(dir) {
 }
 
 async function copyFiles(entryPoints, targetDir) {
-  await fsPromises.mkdir(targetDir)
+  await fs.mkdir(targetDir)
   await Promise.all(
     entryPoints.map(async (entryPoint) => {
-      await fsPromises.copyFile(entryPoint.src, `${targetDir}/${entryPoint.dst}`)
+      await fs.copy(entryPoint.src, `${targetDir}/${entryPoint.dst}`)
     }),
   )
 }
@@ -45,6 +45,8 @@ async function build() {
     { src: 'src/github-markdown.css', dst: 'github-markdown.css' },
     { src: 'src/styles.css', dst: 'styles.css' },
     { src: 'src/logo.png', dst: 'logo.png' },
+    { src: 'src/katex.css', dst: 'katex.css' },
+    { src: 'node_modules/katex/dist/fonts', dst: 'fonts' },
   ]
 
   // chromium
