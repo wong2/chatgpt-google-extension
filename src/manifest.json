@@ -11,13 +11,13 @@
   },
   "host_permissions": ["https://*.openai.com/"],
   "background": {
-    "service_worker": "background/index.js"
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
       "matches": ["https://*/search*"],
       "include_globs": ["*.google.*/*"],
-      "js": ["content-script/index.js"],
+      "js": ["content-script.js"],
       "css": ["github-markdown.css", "styles.css"]
     }
   ]

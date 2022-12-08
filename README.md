@@ -39,8 +39,8 @@ A browser extension to display ChatGPT response alongside Google Search results,
 
 1. Clone the repo
 2. Install dependencies with `npm`
-3. Run `./build.sh` for Chrome, `./build.sh firefox` for Firefox
-4. Load the `build` directory to your browser
+3. `npm run build`
+4. Load `build/chromium/` or `build/firefox/` directory to your browser
 
 ## Credit
 
