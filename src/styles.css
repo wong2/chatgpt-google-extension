@@ -1,10 +1,22 @@
 .chat-gpt-container {
   margin-bottom: 30px;
   border-radius: 8px;
-  border: 1px solid #dadce0;
+  border: 1px solid;
   padding: 15px;
   flex-basis: 0;
   flex-grow: 1;
+}
+
+@media (prefers-color-scheme: light) {
+  .chat-gpt-container {
+    border-color: #dadce0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .chat-gpt-container {
+    border-color: #3c4043;
+  }
 }
 
 .chat-gpt-container p {
