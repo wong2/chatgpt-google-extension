@@ -40,10 +40,9 @@ async function run(question) {
   port.postMessage({ question });
 }
 
-const siteNameReplaceList = [document.location.hostname, "www.", "search.", "cn."]
-const siteName = siteNameReplaceList.reduce((pre, cur) => {
-  return pre.replace(cur, "")
-}).match(/(.+?)\./)[1]
+const matchedSites = Object.keys(config);
+const siteRegex = new RegExp(`(${matchedSites.join('|')})`);
+const siteName = document.location.hostname.match(siteRegex)[0];
 
 const searchInput = getPossibleElementByNameArray(config[siteName].inputName);
 if (searchInput && searchInput.value) {
