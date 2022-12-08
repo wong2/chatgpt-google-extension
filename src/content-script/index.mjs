@@ -1,6 +1,6 @@
 import MarkdownIt from "markdown-it";
 import Browser from "webextension-polyfill";
-import {getPossibleElementByClassArray, getPossibleElementByIdArray, getPossibleElementByNameArray} from "./utils.mjs"
+import {getPossibleElementByQuerySelector} from "./utils.mjs"
 import {config} from "./engine-match-config.mjs"
 
 async function run(question) {
@@ -10,16 +10,12 @@ async function run(question) {
   container.className = "chat-gpt-container";
   container.innerHTML = '<p class="loading">Waiting for ChatGPT response...</p>';
 
-  const siderbarContainer =
-    getPossibleElementByIdArray(config[siteName].sidebarContainerId)
-    || getPossibleElementByClassArray(config[siteName].sidebarContainerClass);
+  const siderbarContainer = getPossibleElementByQuerySelector(config[siteName].sidebarContainerQuery);
   if (siderbarContainer) {
     siderbarContainer.prepend(container);
   } else {
     container.classList.add("sidebar-free");
-    const appendContainer =
-      getPossibleElementByIdArray(config[siteName].appendContainerId)
-      || getPossibleElementByClassArray(config[siteName].appendContainerClass);
+    const appendContainer = getPossibleElementByQuerySelector(config[siteName].appendContainerQuery);
     if (appendContainer)
       appendContainer.appendChild(container);
   }
@@ -44,7 +40,7 @@ const matchedSites = Object.keys(config);
 const siteRegex = new RegExp(`(${matchedSites.join('|')})`);
 const siteName = document.location.hostname.match(siteRegex)[0];
 
-const searchInput = getPossibleElementByNameArray(config[siteName].inputName);
+const searchInput = getPossibleElementByQuerySelector(config[siteName].inputQuery);
 if (searchInput && searchInput.value) {
   // only run on first page
   const startParam = new URL(location.href).searchParams.get("start") || "0";

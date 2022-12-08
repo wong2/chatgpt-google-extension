@@ -1,97 +1,71 @@
 /**
  * @typedef {object} SiteConfig
- * @property {string[]} inputName - input element name of search box
- * @property {string[]} sidebarContainerId - prepend child to
- * @property {string[]} sidebarContainerClass - if above ids not exist, prepend child to
- * @property {string[]} appendContainerId - if above all not exist, append child to
- * @property {string[]} appendContainerClass - if above all not exist, append child to
+ * @property {string[]} inputQuery - for search box
+ * @property {string[]} sidebarContainerQuery - prepend child to
+ * @property {string[]} appendContainerQuery - if sidebarContainer not exists, append child to
  */
 /**
  * @type {Object.<string,SiteConfig>}
  */
 export const config = {
   google: {
-    inputName: ["q"],
-    sidebarContainerId: ["rhs"],
-    sidebarContainerClass: [],
-    appendContainerId: ["rcnt"],
-    appendContainerClass: []
+    inputQuery: ["input[name='q']"],
+    sidebarContainerQuery: ["#rhs"],
+    appendContainerQuery: ["#rcnt"]
   },
   bing: {
-    inputName: ["q"],
-    sidebarContainerId: ["b_context"],
-    sidebarContainerClass: [],
-    appendContainerId: [],
-    appendContainerClass: []
+    inputQuery: ["input[name='q']"],
+    sidebarContainerQuery: ["#b_context"],
+    appendContainerQuery: []
   },
   yahoo: {
-    inputName: ["p"],
-    sidebarContainerId: ["right"],
-    sidebarContainerClass: ["Contents__inner Contents__inner--sub"],
-    appendContainerId: ["cols", "contents__wrap"], // and yahoo jp
-    appendContainerClass: []
+    inputQuery: ["input[name='p']"],
+    sidebarContainerQuery: ["#right", ".Contents__inner.Contents__inner--sub"],
+    appendContainerQuery: ["#cols", "#contents__wrap"]
   },
   duckduckgo: {
-    inputName: ["q"],
-    sidebarContainerId: [],
-    sidebarContainerClass: ["results--sidebar js-results-sidebar"],
-    appendContainerId: ["links_wrapper"],
-    appendContainerClass: []
+    inputQuery: ["input[name='q']"],
+    sidebarContainerQuery: [".results--sidebar.js-results-sidebar"],
+    appendContainerQuery: ["#links_wrapper"]
   },
   startpage: {
-    inputName: ["query"],
-    sidebarContainerId: [],
-    sidebarContainerClass: ["layout-web__sidebar layout-web__sidebar--web"],
-    appendContainerId: [],
-    appendContainerClass: ["layout-web__body layout-web__body--desktop"]
+    inputQuery: ["input[name='query']"],
+    sidebarContainerQuery: [".layout-web__sidebar.layout-web__sidebar--web"],
+    appendContainerQuery: [".layout-web__body.layout-web__body--desktop"]
   },
   baidu: {
-    inputName: ["wd"],
-    sidebarContainerId: ["content_right"],
-    sidebarContainerClass: [],
-    appendContainerId: ["container"],
-    appendContainerClass: []
+    inputQuery: ["input[name='wd']"],
+    sidebarContainerQuery: ["#content_right"],
+    appendContainerQuery: ["#container"]
   },
   kagi: {
-    inputName: ["q"],
-    sidebarContainerId: [],
-    sidebarContainerClass: ["right-content-box _0_right_sidebar"],
-    appendContainerId: ["_0_app_content"],
-    appendContainerClass: []
+    inputQuery: ["input[name='q']"],
+    sidebarContainerQuery: [".right-content-box._0_right_sidebar"],
+    appendContainerQuery: ["#_0_app_content"],
   },
   yandex: {
-    inputName: ["text"],
-    sidebarContainerId: ["search-result-aside"],
-    sidebarContainerClass: [],
-    appendContainerId: [],
-    appendContainerClass: []
+    inputQuery: ["input[name='text']"],
+    sidebarContainerQuery: ["#search-result-aside"],
+    appendContainerQuery: []
   },
   naver: {
-    inputName: ["query"],
-    sidebarContainerId: ["sub_pack"],
-    sidebarContainerClass: [],
-    appendContainerId: ["content"],
-    appendContainerClass: []
+    inputQuery: ["input[name='query']"],
+    sidebarContainerQuery: ["#sub_pack"],
+    appendContainerQuery: ["#content"]
   },
   brave: {
-    inputName: ["q"],
-    sidebarContainerId: ["side-right"],
-    sidebarContainerClass: [],
-    appendContainerId: [],
-    appendContainerClass: []
+    inputQuery: ["input[name='q']"],
+    sidebarContainerQuery: ["#side-right"],
+    appendContainerQuery: []
   },
   searx: {
-    inputName: ["q"],
-    sidebarContainerId: ["sidebar_results"],
-    sidebarContainerClass: [],
-    appendContainerId: [],
-    appendContainerClass: []
+    inputQuery: ["input[name='q']"],
+    sidebarContainerQuery: ["#sidebar_results"],
+    appendContainerQuery: []
   },
   ecosia: {
-    inputName: ["q"],
-    sidebarContainerId: [],
-    sidebarContainerClass: ["sidebar web__sidebar"],
-    appendContainerId: ["main"],
-    appendContainerClass: []
+    inputQuery: ["input[name='q']"],
+    sidebarContainerQuery: [".sidebar web__sidebar"],
+    appendContainerQuery: ["#main"]
   }
 }
