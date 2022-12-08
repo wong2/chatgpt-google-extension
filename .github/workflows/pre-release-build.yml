@@ -18,11 +18,14 @@ jobs:
       - uses: josStorer/get-current-time@v2.0.2
         id: current-time
         with:
-          format: YYMMDD_HH_mm
+          format: YY_MMDD_HH_mm
 
       - uses: actions/upload-artifact@v3
         with:
-          name: ChatGPT_Extension_Build_${{ steps.current-time.outputs.formattedTime }}
-          path: |
-            build/chromium.zip
-            build/firefox.zip
+          name: Chromium_ChatGPT_Extension_Build_${{ steps.current-time.outputs.formattedTime }}
+          path: build/chromium/*
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Firefox_ChatGPT_Extension_Build_${{ steps.current-time.outputs.formattedTime }}
+          path: build/firefox/*

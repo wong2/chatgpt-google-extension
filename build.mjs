@@ -61,7 +61,7 @@ async function build() {
     `./${outdir}/firefox`,
   )
 
-  await zipFolder(`./${outdir}/filefox`)
+  await zipFolder(`./${outdir}/firefox`)
 }
 
 build()
