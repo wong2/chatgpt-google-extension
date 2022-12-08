@@ -15,12 +15,7 @@
   },
   "content_scripts": [
     {
-      "matches": [
-        "https://*/search*",
-        "https://duckduckgo.com/*q=*",
-        "https://*.startpage.com/sp/search*",
-        "https://*.baidu.com/s*wd=*"
-      ],
+      "matches": ["https://*/*"],
       "include_globs": [
         "https://*.google.*/*",
         "https://kagi.*/*",
