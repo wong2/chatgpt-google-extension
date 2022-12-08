@@ -1,35 +1,26 @@
 export function getPossibleElementByNameArray(elementNameArray) {
-  let element;
-  elementNameArray.some(
-    (e) => {
-      element = document.getElementsByName(e)[0];
-      if (element)
-        return true;
+  for (const elementName of elementNameArray) {
+    const element = document.getElementsByName(elementName)[0];
+    if (element) {
+      return element;
     }
-  );
-  return element;
+  }
 }
 
 export function getPossibleElementByIdArray(elementIdArray) {
-  let element;
-  elementIdArray.some(
-    (e) => {
-      element = document.getElementById(e);
-      if (element)
-        return true;
+  for (const elementId of elementIdArray) {
+    const element = document.getElementById(elementId);
+    if (element) {
+      return element;
     }
-  );
-  return element;
+  }
 }
 
 export function getPossibleElementByClassArray(elementClassArray) {
-  let element;
-  elementClassArray.some(
-    (e) => {
-      element = document.getElementsByClassName(e)[0];
-      if (element)
-        return true;
+  for (const elementClass of elementClassArray) {
+    const element = document.getElementsByClassName(elementClass)[0];
+    if (element) {
+      return element;
     }
-  );
-  return element;
+  }
 }
