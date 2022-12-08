@@ -36,9 +36,10 @@ async function run(question) {
   port.postMessage({ question });
 }
 
-const siteName = document.location.hostname
-  .replace("www.", "").replace("search.", "")
-  .match(/(.+?)\./)[1]
+const siteNameReplaceList = [document.location.hostname, "www.", "search.", "cn."]
+const siteName = siteNameReplaceList.reduce((pre, cur) => {
+  return pre.replace(cur, "")
+}).match(/(.+?)\./)[1]
 
 const searchInput = getPossibleElementByNameArray(config[siteName].inputName);
 if (searchInput && searchInput.value) {
