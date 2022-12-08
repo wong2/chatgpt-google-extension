@@ -9,7 +9,7 @@
     "48": "logo.png",
     "128": "logo.png"
   },
-  "permissions": ["webRequest", "https://*.openai.com/"],
+  "permissions": ["contextMenus", "webRequest", "https://*.openai.com/"],
   "background": {
     "scripts": ["background/index.js"]
   },

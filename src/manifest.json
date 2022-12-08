@@ -9,6 +9,7 @@
     "48": "logo.png",
     "128": "logo.png"
   },
+  "permissions": ["contextMenus"],
   "host_permissions": ["https://*.openai.com/"],
   "background": {
     "service_worker": "background/index.js"

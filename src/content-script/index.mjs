@@ -30,6 +30,14 @@ async function run(question) {
     }
   });
   port.postMessage({ question });
+
+
+  Browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.question) {
+      run(request.question)
+    }
+  });
+
 }
 
 const searchInput = document.getElementsByName("q")[0];
