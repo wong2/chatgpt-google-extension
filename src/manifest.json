@@ -21,6 +21,7 @@
         "https://kagi.com/search*",
         "https://*.bing.com/search*",
         "https://search.yahoo.com/search*",
+        "https://search.yahoo.co.jp/search*",
         "https://search.naver.com/search*",
         "https://search.brave.com/search*",
         "https://*.yandex.com/search*",
