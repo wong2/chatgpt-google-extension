@@ -28,11 +28,6 @@ export const config = {
     sidebarContainerQuery: ['.results--sidebar.js-results-sidebar'],
     appendContainerQuery: ['#links_wrapper'],
   },
-  startpage: {
-    inputQuery: ["input[name='query']"],
-    sidebarContainerQuery: ['.layout-web__sidebar.layout-web__sidebar--web'],
-    appendContainerQuery: ['.layout-web__body.layout-web__body--desktop'],
-  },
   baidu: {
     inputQuery: ["input[name='wd']"],
     sidebarContainerQuery: ['#content_right'],
@@ -57,15 +52,5 @@ export const config = {
     inputQuery: ["input[name='q']"],
     sidebarContainerQuery: ['#side-right'],
     appendContainerQuery: [],
-  },
-  searx: {
-    inputQuery: ["input[name='q']"],
-    sidebarContainerQuery: ['#sidebar_results'],
-    appendContainerQuery: [],
-  },
-  ecosia: {
-    inputQuery: ["input[name='q']"],
-    sidebarContainerQuery: ['.sidebar.web__sidebar'],
-    appendContainerQuery: ['#main'],
   },
 }

@@ -17,19 +17,15 @@
     {
       "matches": ["https://*/*"],
       "include_globs": [
-        "https://*.google.*/*",
-        "https://kagi.*/*",
-        "https://*.bing.*/*",
-        "https://*.yahoo.*/*",
-        "https://*.naver.*/*",
-        "https://*.brave.*/*",
-        "https://*.ecosia.org/*",
-        "https://searx.be/*",
-        "https://www.searx.be/*",
-        "https://yandex.*/*",
-        "https://duckduckgo.*",
-        "https://*.startpage.*/*",
-        "https://*.baidu.*"
+        "https://*.google.*/search",
+        "https://kagi.com/search",
+        "https://*.bing.com/search",
+        "https://search.yahoo.com/search",
+        "https://search.naver.com/search",
+        "https://search.brave.com/search",
+        "https://*.yandex.com/search",
+        "https://duckduckgo.com",
+        "https://www.baidu.com/s"
       ],
       "js": ["content-script.js"],
       "css": ["content-script.css"]
