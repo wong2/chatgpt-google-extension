@@ -13,6 +13,11 @@ async function runEsbuild() {
     entryPoints: ['src/content-script/index.mjs', 'src/background/index.mjs'],
     bundle: true,
     outdir: outdir,
+    loader: {
+      '.ttf': 'dataurl',
+      '.woff': 'dataurl',
+      '.woff2': 'dataurl',
+    },
   })
 }
 
@@ -44,8 +49,6 @@ async function build() {
     { src: 'build/content-script/index.css', dst: 'content-script.css' },
     { src: 'build/background/index.js', dst: 'background.js' },
     { src: 'src/logo.png', dst: 'logo.png' },
-    { src: 'src/katex.css', dst: 'katex.css' },
-    { src: 'node_modules/katex/dist/fonts', dst: 'fonts' },
   ]
 
   // chromium

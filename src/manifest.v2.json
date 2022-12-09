@@ -217,8 +217,7 @@
         "https://www.baidu.com/s*"
       ],
       "js": ["content-script.js"],
-      "css": ["content-script.css", "katex.css"]
+      "css": ["content-script.css"]
     }
-  ],
-  "web_accessible_resources": ["fonts/*"]
+  ]
 }

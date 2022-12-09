@@ -1,10 +1,11 @@
+import './styles.css'
 import 'github-markdown-css'
+import 'katex/dist/katex.min.css'
 import MarkdownIt from 'markdown-it'
 import MarkdownItTexmath from "markdown-it-texmath";
 import Katex from "katex"
 import Browser from 'webextension-polyfill'
 import { config } from './search-engine-configs.mjs'
-import './styles.css'
 import { getPossibleElementByQuerySelector } from './utils.mjs'
 
 async function run(question, siteConfig) {
