@@ -8,12 +8,16 @@ async function run(question) {
   container.className = "chat-gpt-container";
   container.innerHTML = '<p class="loading">Waiting for ChatGPT response...</p>';
 
-  const siderbarContainer = document.getElementById("rhs");
+  // google, baidu
+  const siderbarContainer = document.querySelector("#rhs, #content_right")
   if (siderbarContainer) {
     siderbarContainer.prepend(container);
   } else {
     container.classList.add("sidebar-free");
-    document.getElementById("rcnt").appendChild(container);
+    // google
+    document.getElementById("rcnt") && document.getElementById("rcnt").appendChild(container);
+    // baidu
+    document.getElementById("content_right") && document.getElementById("content_right").prepend(container);
   }
 
   const port = Browser.runtime.connect();
@@ -32,11 +36,28 @@ async function run(question) {
   port.postMessage({ question });
 }
 
-const searchInput = document.getElementsByName("q")[0];
-if (searchInput && searchInput.value) {
-  // only run on first page
-  const startParam = new URL(location.href).searchParams.get("start") || "0";
-  if (startParam === "0") {
-    run(searchInput.value);
+// get the input el
+const inputElSelectors = {
+  google: 'input[name=q]',
+  baidu: 'input[name=wd]',
+}
+
+// baidu（special process）
+if (location.host == 'www.baidu.com') {
+  // when baidu search req is over, then call the chatAI req
+  const el = document.querySelector('input[name=rsv_t]')
+  const ob = new MutationObserver(search)
+  ob.observe(el, {attributes: true})
+}
+// call chatAI req
+function search() {
+  const searchInput = document.querySelector(Object.values(inputElSelectors).join(', '))
+  if (searchInput && searchInput.value) {
+    // only run on first page
+    const startParam = new URL(location.href).searchParams.get("start") || "0";
+    if (startParam === "0") {
+      run(searchInput.value);
+    }
   }
 }
+search()

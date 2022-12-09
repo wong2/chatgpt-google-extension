@@ -15,8 +15,8 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://*/search*"],
-      "include_globs": ["*.google.*/*"],
+      "matches": ["https://*/search*", "https://*/s*"],
+      "include_globs": ["*.google.*/*", "*.baidu.*/*"],
       "js": ["content-script.js"],
       "css": ["github-markdown.css", "styles.css"]
     }
