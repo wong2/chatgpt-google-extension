@@ -32,7 +32,7 @@
         "https://*.baidu.*"
       ],
       "js": ["content-script.js"],
-      "css": ["github-markdown.css", "styles.css"]
+      "css": ["content-script.css"]
     }
   ]
 }
