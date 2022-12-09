@@ -1,14 +1,14 @@
 export async function* streamAsyncIterable(stream) {
-  const reader = stream.getReader();
+  const reader = stream.getReader()
   try {
     while (true) {
-      const { done, value } = await reader.read();
+      const { done, value } = await reader.read()
       if (done) {
-        return;
+        return
       }
-      yield value;
+      yield value
     }
   } finally {
-    reader.releaseLock();
+    reader.releaseLock()
   }
 }

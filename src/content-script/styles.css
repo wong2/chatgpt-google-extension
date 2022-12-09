@@ -2,7 +2,6 @@
   margin-bottom: 30px;
   border-radius: 8px;
   border: 1px solid;
-  padding: 15px;
   flex-basis: 0;
   flex-grow: 1;
 }
@@ -17,23 +16,22 @@
   .chat-gpt-container {
     border-color: #3c4043;
   }
+  .chat-gpt-container #answer {
+    background-color: #202124;
+  }
 }
 
 .chat-gpt-container p {
   margin: 0;
 }
 
-.chat-gpt-container .prefix {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.chat-gpt-container .loading {
+.chat-gpt-container .gpt-loading {
   color: #b6b8ba;
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: gpt-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  padding: 15px;
 }
 
-@keyframes pulse {
+@keyframes gpt-pulse {
   0%,
   100% {
     opacity: 1;
@@ -51,6 +49,8 @@
 .chat-gpt-container #answer {
   font-size: 15px;
   line-height: 1.6;
+  padding: 15px;
+  border-radius: 8px;
 }
 
 .chat-gpt-container #answer pre {

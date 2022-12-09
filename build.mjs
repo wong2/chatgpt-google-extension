@@ -41,9 +41,8 @@ async function build() {
 
   const commonFiles = [
     { src: 'build/content-script/index.js', dst: 'content-script.js' },
+    { src: 'build/content-script/index.css', dst: 'content-script.css' },
     { src: 'build/background/index.js', dst: 'background.js' },
-    { src: 'src/github-markdown.css', dst: 'github-markdown.css' },
-    { src: 'src/styles.css', dst: 'styles.css' },
     { src: 'src/logo.png', dst: 'logo.png' },
     { src: 'src/katex.css', dst: 'katex.css' },
     { src: 'node_modules/katex/dist/fonts', dst: 'fonts' },
