@@ -16,9 +16,6 @@
   .chat-gpt-container {
     border-color: #3c4043;
   }
-  .chat-gpt-container .prefix {
-    color: white;
-  }
   .chat-gpt-container #answer {
     background-color: #202124;
   }
@@ -26,11 +23,6 @@
 
 .chat-gpt-container p {
   margin: 0;
-}
-
-.chat-gpt-container .prefix {
-  font-weight: bold;
-  margin-bottom: 10px;
 }
 
 .chat-gpt-container .gpt-loading {
