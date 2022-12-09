@@ -1,5 +1,7 @@
 import MarkdownIt from "markdown-it";
 import Browser from "webextension-polyfill";
+import {getPossibleElementByQuerySelector} from "./utils.mjs"
+import {config} from "./engine-match-config.mjs"
 
 async function run(question) {
   const markdown = new MarkdownIt();
@@ -8,12 +10,14 @@ async function run(question) {
   container.className = "chat-gpt-container";
   container.innerHTML = '<p class="loading">Waiting for ChatGPT response...</p>';
 
-  const siderbarContainer = document.getElementById("rhs");
+  const siderbarContainer = getPossibleElementByQuerySelector(config[siteName].sidebarContainerQuery);
   if (siderbarContainer) {
     siderbarContainer.prepend(container);
   } else {
     container.classList.add("sidebar-free");
-    document.getElementById("rcnt").appendChild(container);
+    const appendContainer = getPossibleElementByQuerySelector(config[siteName].appendContainerQuery);
+    if (appendContainer)
+      appendContainer.appendChild(container);
   }
 
   const port = Browser.runtime.connect();
@@ -32,7 +36,11 @@ async function run(question) {
   port.postMessage({ question });
 }
 
-const searchInput = document.getElementsByName("q")[0];
+const matchedSites = Object.keys(config);
+const siteRegex = new RegExp(`(${matchedSites.join('|')})`);
+const siteName = document.location.hostname.match(siteRegex)[0];
+
+const searchInput = getPossibleElementByQuerySelector(config[siteName].inputQuery);
 if (searchInput && searchInput.value) {
   // only run on first page
   const startParam = new URL(location.href).searchParams.get("start") || "0";
