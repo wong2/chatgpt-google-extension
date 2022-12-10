@@ -1,6 +1,6 @@
 import './styles.css'
 import 'github-markdown-css'
-import 'katex/dist/katex.min.css'
+import './katex.less'
 import MarkdownIt from 'markdown-it'
 import MarkdownItTexmath from "markdown-it-texmath";
 import Katex from "katex"
@@ -12,7 +12,7 @@ async function run(question, siteConfig) {
   const markdown = new MarkdownIt().use(MarkdownItTexmath, {
     engine: Katex,
     delimiters: 'dollars',
-    katexOptions: { macros: { "\\RR": "\\mathbb{R}" } }
+    katexOptions: { macros: { "\\RR": "\\mathbb{R}" }, throwOnError: false }
   })
 
   const container = document.createElement('div')

@@ -23,6 +23,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "esbuild-plugin-less": "^1.1.11",
     "eslint": "^8.29.0",
     "fs-extra": "^11.1.0",
     "prettier": "^2.8.0",
