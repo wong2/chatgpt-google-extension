@@ -1,7 +1,7 @@
 {
   "name": "ChatGPT for Google",
   "description": "Display ChatGPT response alongside Google Search results",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "manifest_version": 3,
   "icons": {
     "16": "logo.png",
@@ -10,8 +10,12 @@
     "128": "logo.png"
   },
   "host_permissions": ["https://*.openai.com/"],
+  "permissions": ["storage"],
   "background": {
     "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
   },
   "content_scripts": [
     {

@@ -1,7 +1,7 @@
 import archiver from 'archiver'
 import esbuild from 'esbuild'
 import fs from 'fs-extra'
-import { lessLoader } from 'esbuild-plugin-less';
+import { lessLoader } from 'esbuild-plugin-less'
 const outdir = 'build'
 
 async function deleteOldDir() {
@@ -10,15 +10,22 @@ async function deleteOldDir() {
 
 async function runEsbuild() {
   await esbuild.build({
-    entryPoints: ['src/content-script/index.mjs', 'src/background/index.mjs'],
+    entryPoints: [
+      'src/content-script/index.jsx',
+      'src/background/index.mjs',
+      'src/popup/index.jsx',
+    ],
     bundle: true,
     outdir: outdir,
+    jsxFactory: 'h',
+    jsxFragment: 'Fragment',
+    jsx: 'automatic',
     minify: true,
     loader: {
       '.ttf': 'dataurl',
       '.woff': 'dataurl',
       '.woff2': 'dataurl',
-      '.less': 'css'
+      '.less': 'css',
     },
     plugins: [lessLoader()],
   })
@@ -51,6 +58,9 @@ async function build() {
     { src: 'build/content-script/index.js', dst: 'content-script.js' },
     { src: 'build/content-script/index.css', dst: 'content-script.css' },
     { src: 'build/background/index.js', dst: 'background.js' },
+    { src: 'build/popup/index.js', dst: 'popup.js' },
+    { src: 'build/popup/index.css', dst: 'popup.css' },
+    { src: 'src/popup/index.html', dst: 'popup.html' },
     { src: 'src/logo.png', dst: 'logo.png' },
   ]
 
