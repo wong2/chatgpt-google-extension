@@ -9,9 +9,12 @@
     "48": "logo.png",
     "128": "logo.png"
   },
-  "permissions": ["webRequest", "https://*.openai.com/"],
+  "permissions": ["storage", "https://*.openai.com/"],
   "background": {
     "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
   },
   "content_scripts": [
     {
