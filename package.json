@@ -1,15 +1,11 @@
 {
   "name": "chat-gpt-google-extension",
-  "version": "1.0.0",
-  "main": "background.js",
-  "keywords": [],
   "author": "wong2",
-  "license": "ISC",
   "scripts": {
     "build": "node build.mjs",
-    "lint": "eslint --ext .js,.mjs .",
-    "lint:fix": "eslint --ext .js,.mjs . --fix",
-    "pretty": "prettier --write ./**/*.{js,mjs,json}",
+    "lint": "eslint --ext .js,.mjs,.jsx .",
+    "lint:fix": "eslint --ext .js,.mjs,.jsx . --fix",
+    "pretty": "prettier --write ./**/*.{js,mjs,json,jsx}",
     "stage": "git add -u"
   },
   "pre-commit": [
@@ -22,13 +18,18 @@
     "expiry-map": "^2.0.0",
     "github-markdown-css": "^5.1.0",
     "markdown-it": "^13.0.1",
+    "preact": "^10.11.3",
+    "prop-types": "^15.8.1",
     "punycode": "^2.1.1",
+    "react": "npm:@preact/compat@^17.1.2",
+    "react-dom": "npm:@preact/compat@^17.1.2",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
     "archiver": "^5.3.1",
     "esbuild": "^0.16.4",
     "eslint": "^8.29.0",
+    "eslint-plugin-react": "^7.31.11",
     "pre-commit": "^1.2.2",
     "prettier": "^2.8.0",
     "webextension-polyfill": "^0.10.0"
