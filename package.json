@@ -5,14 +5,8 @@
     "build": "node build.mjs",
     "lint": "eslint --ext .js,.mjs,.jsx .",
     "lint:fix": "eslint --ext .js,.mjs,.jsx . --fix",
-    "pretty": "prettier --write ./**/*.{js,mjs,json,jsx}",
-    "stage": "git add -u"
+    "prepare": "husky install"
   },
-  "pre-commit": [
-    "pretty",
-    "stage",
-    "lint"
-  ],
   "dependencies": {
     "eventsource-parser": "^0.0.5",
     "expiry-map": "^2.0.0",
@@ -29,9 +23,17 @@
     "archiver": "^5.3.1",
     "esbuild": "^0.16.4",
     "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.31.11",
-    "pre-commit": "^1.2.2",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.1.0",
     "prettier": "^2.8.0",
     "webextension-polyfill": "^0.10.0"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,mjs}": [
+      "npx prettier --write",
+      "npx eslint --fix"
+    ]
   }
 }
