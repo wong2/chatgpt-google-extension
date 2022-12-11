@@ -7,9 +7,9 @@ export const TRIGGER_MODES = {
 }
 
 export async function getUserConfig() {
-  return Browser.storage.sync.get(['triggerMode'])
+  return Browser.storage.local.get(['triggerMode'])
 }
 
 export async function updateUserConfig(updates) {
-  return Browser.storage.sync.set(updates)
+  return Browser.storage.local.set(updates)
 }

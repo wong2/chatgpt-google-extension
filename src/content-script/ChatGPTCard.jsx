@@ -1,62 +1,37 @@
-import { useEffect, useMemo, useState } from 'preact/hooks'
+import { LightBulbIcon, SearchIcon } from '@primer/octicons-react'
+import { useState } from 'preact/hooks'
 import PropTypes from 'prop-types'
-import Browser from 'webextension-polyfill'
-import { getMarkdownRenderer } from './markdown.mjs'
+import ChatGPTQuery from './ChatGPTQuery'
+import { endsWithQuestionMark } from './utils.mjs'
 
 function ChatGPTCard(props) {
-  const [answer, setAnswer] = useState('')
-  const [error, setError] = useState('')
-  const markdown = useMemo(() => getMarkdownRenderer(), [])
-
-  useEffect(() => {
-    const port = Browser.runtime.connect()
-    const listener = (msg) => {
-      if (msg.answer) {
-        setAnswer(markdown.render('**ChatGPT:**\n\n' + msg.answer))
-      } else if (msg.error === 'UNAUTHORIZED') {
-        setError('UNAUTHORIZED')
-      } else {
-        setError('EXCEPTION')
-      }
-    }
-    port.onMessage.addListener(listener)
-    port.postMessage({ question: props.question })
-    return () => {
-      port.onMessage.removeListener(listener)
-    }
-  }, [])
-
-  if (answer) {
-    return (
-      <div
-        id="answer"
-        className="markdown-body gpt-inner"
-        dir="auto"
-        dangerouslySetInnerHTML={{ __html: answer }}
-      ></div>
-    )
+  const [triggered, setTriggered] = useState(false)
+  if (props.triggerMode === 'always') {
+    return <ChatGPTQuery question={props.question} />
   }
-
-  if (error === 'UNAUTHORIZED') {
+  if (props.triggerMode === 'questionMark') {
+    if (endsWithQuestionMark(props.question.trim())) {
+      return <ChatGPTQuery question={props.question} />
+    }
     return (
-      <p className="gpt-inner">
-        Please login at{' '}
-        <a href="https://chat.openai.com" target="_blank" rel="noreferrer">
-          chat.openai.com
-        </a>{' '}
-        first
+      <p className="gpt-inner icon-and-text">
+        <LightBulbIcon size="small" /> Trigger ChatGPT by append a question mark after your query
       </p>
     )
   }
-  if (error) {
-    return <p className="gpt-inner">Failed to load response from ChatGPT</p>
+  if (triggered) {
+    return <ChatGPTQuery question={props.question} />
   }
-
-  return <p className="gpt-loading gpt-inner">Waiting for ChatGPT response...</p>
+  return (
+    <p className="gpt-inner manual-btn icon-and-text" onClick={() => setTriggered(true)}>
+      <SearchIcon size="small" /> Ask ChatGPT for this query
+    </p>
+  )
 }
 
 ChatGPTCard.propTypes = {
   question: PropTypes.string.isRequired,
+  triggerMode: PropTypes.string.isRequired,
 }
 
 export default ChatGPTCard

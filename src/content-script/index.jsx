@@ -6,6 +6,7 @@ import './styles.css'
 import './katex.less'
 import { getPossibleElementByQuerySelector } from './utils.mjs'
 import { getUserConfig } from '../config'
+
 async function run(question, siteConfig) {
   const container = document.createElement('div')
   container.className = 'chat-gpt-container'
