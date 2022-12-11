@@ -1,4 +1,6 @@
 import MarkdownIt from 'markdown-it'
+import MarkdownItTexmath from 'markdown-it-texmath';
+import Katex from 'katex'
 
 export function getMarkdownRenderer() {
   const markdown = new MarkdownIt({
@@ -27,6 +29,13 @@ export function getMarkdownRenderer() {
     // pass token to default renderer.
     return defaultRender(tokens, idx, options, env, self)
   }
+
+  // use katex for math rendering
+  markdown.use(MarkdownItTexmath, {
+    engine: Katex,
+    delimiters: 'dollars',
+    katexOptions: { macros: { '\\RR': '\\mathbb{R}' }, throwOnError: false }
+  })
 
   return markdown
 }

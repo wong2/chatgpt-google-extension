@@ -1,19 +1,14 @@
 import './styles.css'
+import './katex.less' 
 import 'github-markdown-css'
-import './katex.less'
-import MarkdownItTexmath from "markdown-it-texmath";
-import Katex from "katex"
+
 import Browser from 'webextension-polyfill'
 import { getMarkdownRenderer } from './markdown.mjs'
 import { config } from './search-engine-configs.mjs'
 import { getPossibleElementByQuerySelector } from './utils.mjs'
 
 async function run(question, siteConfig) {
-  const markdown = getMarkdownRenderer().use(MarkdownItTexmath, {
-    engine: Katex,
-    delimiters: 'dollars',
-    katexOptions: { macros: { "\\RR": "\\mathbb{R}" }, throwOnError: false }
-  })
+  const markdown = getMarkdownRenderer()
 
   const container = document.createElement('div')
   container.className = 'chat-gpt-container'
