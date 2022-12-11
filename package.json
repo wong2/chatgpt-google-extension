@@ -8,8 +8,15 @@
   "scripts": {
     "build": "node build.mjs",
     "lint": "eslint --ext .js,.mjs .",
-    "lint:fix": "eslint --ext .js,.mjs . --fix"
+    "lint:fix": "eslint --ext .js,.mjs . --fix",
+    "pretty": "prettier --write ./**/*.{js,mjs,json}",
+    "stage": "git add -u"
   },
+  "pre-commit": [
+    "pretty",
+    "stage",
+    "lint"
+  ],
   "dependencies": {
     "archiver": "^5.3.1",
     "esbuild": "^0.15.17",
@@ -22,6 +29,7 @@
   },
   "devDependencies": {
     "eslint": "^8.29.0",
+    "pre-commit": "^1.2.2",
     "prettier": "^2.8.0",
     "webextension-polyfill": "^0.10.0"
   }
