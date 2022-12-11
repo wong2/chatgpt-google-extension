@@ -10,8 +10,12 @@
     "128": "logo.png"
   },
   "host_permissions": ["https://*.openai.com/"],
+  "permissions": ["storage"],
   "background": {
     "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
   },
   "content_scripts": [
     {

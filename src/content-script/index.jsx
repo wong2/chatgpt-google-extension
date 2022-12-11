@@ -4,6 +4,7 @@ import ChatGPTCard from './ChatGPTCard'
 import { config } from './search-engine-configs.mjs'
 import './styles.css'
 import { getPossibleElementByQuerySelector } from './utils.mjs'
+import { getUserConfig } from '../config'
 
 async function run(question, siteConfig) {
   const container = document.createElement('div')
@@ -20,7 +21,11 @@ async function run(question, siteConfig) {
     }
   }
 
-  render(<ChatGPTCard question={question} />, container)
+  const userConfig = await getUserConfig()
+  render(
+    <ChatGPTCard question={question} triggerMode={userConfig.triggerMode || 'always'} />,
+    container,
+  )
 }
 
 const siteRegex = new RegExp(Object.keys(config).join('|'))
