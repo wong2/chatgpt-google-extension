@@ -27,6 +27,17 @@
 
 .chat-gpt-container .gpt-inner {
   padding: 15px;
+  line-height: 1.5;
+}
+
+.chat-gpt-container .icon-and-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chat-gpt-container .manual-btn {
+  cursor: pointer;
 }
 
 .chat-gpt-container .gpt-loading {

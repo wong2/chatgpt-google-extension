@@ -8,6 +8,8 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@picocss/pico": "^1.5.6",
+    "@primer/octicons-react": "^17.9.0",
     "eventsource-parser": "^0.0.5",
     "expiry-map": "^2.0.0",
     "github-markdown-css": "^5.1.0",
