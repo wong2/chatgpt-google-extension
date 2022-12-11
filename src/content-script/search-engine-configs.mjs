@@ -4,6 +4,7 @@
  * @property {string[]} sidebarContainerQuery - prepend child to
  * @property {string[]} appendContainerQuery - if sidebarContainer not exists, append child to
  */
+
 /**
  * @type {Object.<string,SiteConfig>}
  */

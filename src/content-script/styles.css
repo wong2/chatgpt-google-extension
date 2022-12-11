@@ -4,6 +4,7 @@
   border: 1px solid;
   flex-basis: 0;
   flex-grow: 1;
+  overflow: hidden;
 }
 
 @media (prefers-color-scheme: light) {
@@ -16,7 +17,7 @@
   .chat-gpt-container {
     border-color: #3c4043;
   }
-  .chat-gpt-container #answer {
+  .chat-gpt-container :is(.answer, .question) {
     background-color: #202124;
   }
 }
@@ -46,18 +47,17 @@
   height: fit-content;
 }
 
-.chat-gpt-container #answer {
+.chat-gpt-container :is(.answer, .question) {
   font-size: 15px;
   line-height: 1.6;
   padding: 15px;
-  border-radius: 8px;
 }
 
-.chat-gpt-container #answer pre {
+.chat-gpt-container :is(.answer, .question) pre {
   margin-top: 10px;
 }
 
-.chat-gpt-container #answer code {
+.chat-gpt-container :is(.answer, .question) code {
   white-space: pre-wrap;
   word-break: break-word;
 }
