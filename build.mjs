@@ -10,9 +10,12 @@ async function deleteOldDir() {
 
 async function runEsbuild() {
   await esbuild.build({
-    entryPoints: ['src/content-script/index.mjs', 'src/background/index.mjs'],
+    entryPoints: ['src/content-script/index.jsx', 'src/background/index.mjs'],
     bundle: true,
     outdir: outdir,
+    jsxFactory: 'h',
+    jsxFragment: 'Fragment',
+    jsx: 'automatic',
   })
 }
 
