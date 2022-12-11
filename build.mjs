@@ -17,6 +17,11 @@ async function runEsbuild() {
     ],
     bundle: true,
     outdir: outdir,
+    treeShaking: true,
+    minify: true,
+    define: {
+      'process.env.NODE_ENV': '"production"',
+    },
     jsxFactory: 'h',
     jsxFragment: 'Fragment',
     jsx: 'automatic',
