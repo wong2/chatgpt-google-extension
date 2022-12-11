@@ -61,3 +61,12 @@
   white-space: pre-wrap;
   word-break: break-word;
 }
+
+.interact-container {
+  position: relative;
+}
+
+.interact-input {
+  box-sizing: border-box;
+  width: 100%;
+}

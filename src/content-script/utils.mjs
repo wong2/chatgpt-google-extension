@@ -1,3 +1,5 @@
+
+
 export function getPossibleElementByQuerySelector(queryArray) {
   for (const query of queryArray) {
     const element = document.querySelector(query)

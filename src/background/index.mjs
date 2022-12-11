@@ -21,9 +21,12 @@ async function getAccessToken() {
   return resp.accessToken
 }
 
+/**
+ * @param {Browser.Runtime.Port} port
+ * @param {string} question
+ */
 async function generateAnswers(port, question) {
   const accessToken = await getAccessToken()
-
   const controller = new AbortController()
   port.onDisconnect.addListener(() => {
     controller.abort()
@@ -54,6 +57,7 @@ async function generateAnswers(port, question) {
     onMessage(message) {
       console.debug('sse message', message)
       if (message === '[DONE]') {
+        port.postMessage({ answer: null })
         return
       }
       const data = JSON.parse(message)

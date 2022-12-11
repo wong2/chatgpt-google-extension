@@ -7,7 +7,10 @@ import Katex from "katex"
 import Browser from 'webextension-polyfill'
 import { config } from './search-engine-configs.mjs'
 import { getPossibleElementByQuerySelector } from './utils.mjs'
-
+/**
+ * @param {string} question 
+ * @param {*} siteConfig 
+ */
 async function run(question, siteConfig) {
   const markdown = new MarkdownIt().use(MarkdownItTexmath, {
     engine: Katex,
@@ -29,19 +32,38 @@ async function run(question, siteConfig) {
       appendContainer.appendChild(container)
     }
   }
-
   const port = Browser.runtime.connect()
+  /**
+   * @returns {HTMLDivElement}
+   */
+  function createContent() {
+    container.innerHTML = ''
+    const answer = document.createElement('div')
+    answer.id = 'answer'
+    answer.className = 'markdown-body'
+    answer.dir = 'auto'
+    container.appendChild(answer)
+    const interact = document.createElement('label')
+    interact.className = 'interact-container';
+    interact.id = 'interact'
+    interact.type = 'text';
+    interact.innerHTML = '<input type="text" class="interact-input" >'
+    container.appendChild(interact)
+    return answer
+  }
   port.onMessage.addListener(function (msg) {
+    const answer = document.querySelector('#answer') || createContent()
     if (msg.answer) {
-      container.innerHTML = '<div id="answer" class="markdown-body" dir="auto"></div>'
-      container.querySelector('#answer').innerHTML = markdown.render(
+      answer.innerHTML = markdown.render(
         '**ChatGPT:**\n\n' + msg.answer,
       )
+    } else if (msg.answer == null) {
+      answer.appendChild(document.createTextNode('Completed'))
     } else if (msg.error === 'UNAUTHORIZED') {
-      container.innerHTML =
+      answer.innerHTML =
         '<p>Please login at <a href="https://chat.openai.com" target="_blank">chat.openai.com</a> first</p>'
     } else {
-      container.innerHTML = '<p>Failed to load response from ChatGPT</p>'
+      answer.innerHTML = '<p>Failed to load response from ChatGPT</p>'
     }
   })
   port.postMessage({ question })
@@ -58,3 +80,4 @@ if (searchInput && searchInput.value) {
     run(searchInput.value, config[siteName])
   }
 }
+
