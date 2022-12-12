@@ -104,14 +104,15 @@ function ChatGPTQuery(props) {
       if (msg.answer) {
         UpdateAnswer('**ChatGPT:**\n' + msg.answer, false)
         setIsReady(false)
+        return
       } else if (msg.answer == null) {
         UpdateAnswer('<hr>', true)
-        setIsReady(true)
       } else if (msg.error === 'UNAUTHORIZED') {
         setTalk([...talk, new Talk('error', 'UNAUTHORIZED')])
       } else {
         setTalk([...talk, new Talk('error', 'EXCEPTION')])
       }
+      setIsReady(true)
     }
     port.onMessage.addListener(listener)
     port.postMessage({

@@ -25,13 +25,6 @@ async function getAccessToken() {
 }
 
 /**
- * @typedef {object} Message
- * @property {string} [answer]
- * @property {string} [error]
- * @property {boolean} isReady
- */
-
-/**
  * @param {Browser.Runtime.Port} port
  * @param {string} question
  */
@@ -41,7 +34,7 @@ async function generateAnswers(port, question, session) {
   port.onDisconnect.addListener(() => {
     console.debug('port disconnected')
     controller.abort()
-    session.conversationId = null;
+    session.conversationId = null
   })
 
   await fetchSSE('https://chat.openai.com/backend-api/conversation', {
@@ -79,30 +72,30 @@ async function generateAnswers(port, question, session) {
         port.postMessage({ answer: text })
       }
 
-      session.conversationId = data.conversation_id;
-      session.parentMessageId = data.message.id;
+      session.conversationId = data.conversation_id
+      session.parentMessageId = data.message.id
     },
   })
 }
-(function () {
+;(function () {
   let session = new Object({
     conversationId: null,
     messageId: null,
-    parentMessageId: null
-  });
+    parentMessageId: null,
+  })
 
   Browser.runtime.onConnect.addListener((port) => {
     port.onMessage.addListener(
       /**
        * @typedef ClientMessage
        * @property {string} question
-       * @param {ClientMessage} msg 
+       * @param {ClientMessage} msg
        */
       async (msg) => {
         console.debug('received msg', msg)
-        session.messageId = uuidv4();
+        session.messageId = uuidv4()
         if (session.parentMessageId == null) {
-          session.parentMessageId = uuidv4();
+          session.parentMessageId = uuidv4()
         }
         try {
           await generateAnswers(port, msg.question, session)
@@ -111,7 +104,7 @@ async function generateAnswers(port, question, session) {
           port.postMessage({ error: err.message })
           cache.delete(KEY_ACCESS_TOKEN)
         }
-      })
+      },
+    )
   })
-
 })()

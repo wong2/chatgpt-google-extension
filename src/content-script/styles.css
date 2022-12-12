@@ -22,9 +22,14 @@
 .chat-gpt-container {
   border-color: var(--theme-border-color);
 }
-.chat-gpt-container :is(.answer, .question) {
+.chat-gpt-container :is(.answer, .question, .error) {
   background-color: var(--theme-color);
 }
+
+.chat-gpt-container .error {
+  color: #f44336;
+}
+
 .chat-gpt-container p {
   margin: 0;
 }
@@ -65,17 +70,17 @@
   height: fit-content;
 }
 
-.chat-gpt-container :is(.answer, .question) {
+.chat-gpt-container :is(.answer, .question, .error) {
   font-size: 15px;
   line-height: 1.6;
   border-radius: 8px;
 }
 
-.chat-gpt-container :is(.answer, .question) pre {
+.chat-gpt-container :is(.answer, .question, .error) pre {
   margin-top: 10px;
 }
 
-.chat-gpt-container :is(.answer, .question) code {
+.chat-gpt-container :is(.answer, .question, .error) code {
   white-space: pre-wrap;
   word-break: break-word;
 }
