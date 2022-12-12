@@ -119,8 +119,9 @@ function ChatGPTQuery(props) {
     })
     return () => {
       port.onMessage.removeListener(listener)
+      port.disconnect()
     }
-  }, [])
+  }, [props.question])
 
   return (
     <>
