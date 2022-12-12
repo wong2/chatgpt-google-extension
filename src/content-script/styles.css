@@ -8,25 +8,29 @@
 }
 
 @media (prefers-color-scheme: light) {
-  .chat-gpt-container {
+  :root {
     border-color: #dadce0;
   }
 }
 
 @media (prefers-color-scheme: dark) {
-  .chat-gpt-container {
-    border-color: #3c4043;
-  }
-  .chat-gpt-container :is(.answer, .question) {
-    background-color: #202124;
+  :root {
+    --theme-color: #202124;
+    --theme-border-color: #3c4043;
   }
 }
-
+.chat-gpt-container {
+  border-color: var(--theme-border-color);
+}
+.chat-gpt-container :is(.answer, .question) {
+  background-color: var(--theme-color);
+}
 .chat-gpt-container p {
   margin: 0;
 }
 
 .chat-gpt-container .gpt-inner {
+  background-color: var(--theme-color);
   padding: 15px;
   line-height: 1.5;
 }
@@ -82,5 +86,8 @@
 
 .interact-input {
   box-sizing: border-box;
+  padding: 0 15px;
+  height: 30px;
+  border: 0;
   width: 100%;
 }

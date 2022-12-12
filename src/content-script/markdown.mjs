@@ -1,5 +1,5 @@
 import MarkdownIt from 'markdown-it'
-import MarkdownItTexmath from 'markdown-it-texmath';
+import MarkdownItTexmath from 'markdown-it-texmath'
 import Katex from 'katex'
 
 /**
@@ -7,6 +7,7 @@ import Katex from 'katex'
  */
 export function getMarkdownRenderer() {
   const markdown = new MarkdownIt({
+    html: true,
     linkify: true,
   })
 
@@ -37,7 +38,7 @@ export function getMarkdownRenderer() {
   markdown.use(MarkdownItTexmath, {
     engine: Katex,
     delimiters: 'dollars',
-    katexOptions: { macros: { '\\RR': '\\mathbb{R}' }, throwOnError: false }
+    katexOptions: { macros: { '\\RR': '\\mathbb{R}' }, throwOnError: false },
   })
 
   return markdown
