@@ -23,8 +23,9 @@ function ChatGPTQuery(props) {
     port.postMessage({ question: props.question })
     return () => {
       port.onMessage.removeListener(listener)
+      port.disconnect()
     }
-  }, [])
+  }, [props.question])
 
   if (answer) {
     return (
