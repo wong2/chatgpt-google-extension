@@ -1,18 +1,17 @@
-import { useEffect, useMemo, useState } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
 import PropTypes from 'prop-types'
+import ReactMarkdown from 'react-markdown'
 import Browser from 'webextension-polyfill'
-import { getMarkdownRenderer } from './markdown.mjs'
 
 function ChatGPTQuery(props) {
   const [answer, setAnswer] = useState('')
   const [error, setError] = useState('')
-  const markdown = useMemo(() => getMarkdownRenderer(), [])
 
   useEffect(() => {
     const port = Browser.runtime.connect()
     const listener = (msg) => {
       if (msg.answer) {
-        setAnswer(markdown.render('**ChatGPT:**\n\n' + msg.answer))
+        setAnswer('**ChatGPT:**\n\n' + msg.answer)
       } else if (msg.error === 'UNAUTHORIZED') {
         setError('UNAUTHORIZED')
       } else {
@@ -29,12 +28,9 @@ function ChatGPTQuery(props) {
 
   if (answer) {
     return (
-      <div
-        id="answer"
-        className="markdown-body gpt-inner"
-        dir="auto"
-        dangerouslySetInnerHTML={{ __html: answer }}
-      ></div>
+      <div id="answer" className="markdown-body gpt-inner" dir="auto">
+        <ReactMarkdown>{answer}</ReactMarkdown>
+      </div>
     )
   }
 

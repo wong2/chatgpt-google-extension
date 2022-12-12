@@ -13,12 +13,12 @@
     "eventsource-parser": "^0.0.5",
     "expiry-map": "^2.0.0",
     "github-markdown-css": "^5.1.0",
-    "markdown-it": "^13.0.1",
     "preact": "^10.11.3",
     "prop-types": "^15.8.1",
     "punycode": "^2.1.1",
     "react": "npm:@preact/compat@^17.1.2",
     "react-dom": "npm:@preact/compat@^17.1.2",
+    "react-markdown": "^8.0.4",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
