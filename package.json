@@ -1,32 +1,45 @@
 {
   "name": "chat-gpt-google-extension",
-  "version": "1.0.0",
-  "main": "background.js",
-  "keywords": [],
   "author": "wong2",
-  "license": "ISC",
   "scripts": {
     "build": "node build.mjs",
-    "lint": "eslint --ext .js,.mjs .",
-    "lint:fix": "eslint --ext .js,.mjs . --fix"
+    "lint": "eslint --ext .js,.mjs,.jsx .",
+    "lint:fix": "eslint --ext .js,.mjs,.jsx . --fix",
+    "prepare": "husky install"
   },
   "dependencies": {
-    "archiver": "^5.3.1",
-    "esbuild": "^0.15.17",
+    "@picocss/pico": "^1.5.6",
+    "@primer/octicons-react": "^17.9.0",
     "eventsource-parser": "^0.0.5",
     "expiry-map": "^2.0.0",
     "github-markdown-css": "^5.1.0",
     "katex": "^0.16.4",
     "markdown-it": "^13.0.1",
+    "preact": "^10.11.3",
+    "prop-types": "^15.8.1",
     "markdown-it-texmath": "^1.0.0",
     "punycode": "^2.1.1",
+    "react": "npm:@preact/compat@^17.1.2",
+    "react-dom": "npm:@preact/compat@^17.1.2",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "archiver": "^5.3.1",
+    "esbuild": "^0.16.4",
     "esbuild-plugin-less": "^1.1.11",
     "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-react": "^7.31.11",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.1.0",
     "fs-extra": "^11.1.0",
     "prettier": "^2.8.0",
     "webextension-polyfill": "^0.10.0"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,mjs}": [
+      "npx prettier --write",
+      "npx eslint --fix"
+    ]
   }
 }

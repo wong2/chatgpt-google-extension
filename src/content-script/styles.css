@@ -26,10 +26,24 @@
   margin: 0;
 }
 
+.chat-gpt-container .gpt-inner {
+  padding: 15px;
+  line-height: 1.5;
+}
+
+.chat-gpt-container .icon-and-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chat-gpt-container .manual-btn {
+  cursor: pointer;
+}
+
 .chat-gpt-container .gpt-loading {
   color: #b6b8ba;
   animation: gpt-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  padding: 15px;
 }
 
 @keyframes gpt-pulse {
@@ -50,7 +64,7 @@
 .chat-gpt-container :is(.answer, .question) {
   font-size: 15px;
   line-height: 1.6;
-  padding: 15px;
+  border-radius: 8px;
 }
 
 .chat-gpt-container :is(.answer, .question) pre {

@@ -2,8 +2,6 @@
 
 A browser extension to display ChatGPT response alongside Google (and other search engines) results, supports Chrome/Edge/Firefox
 
-<a href="https://www.buymeacoffee.com/wong2" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 55px !important;width: 217px !important;" ></a> <a href="https://www.producthunt.com/posts/chatgpt-for-google?utm_source=badge-featured" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=369975&theme=light" /></a>
-
 ![Screenshot](screenshot.png?raw=true)
 
 ## Supported Search Engines
