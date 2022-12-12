@@ -79,8 +79,9 @@ function ChatGPTQuery(props) {
   /**
    * @param {string} value
    * @param {boolean} appended
+   * @param {'question'|'answer'|'error'} type
    */
-  function UpdateAnswer(value, appended) {
+  function UpdateAnswer(value, appended, type) {
     setTalk((old) => {
       const copy = [...old]
       const revCopy = [...copy].reverse() // reverse to get the last answer
@@ -90,7 +91,7 @@ function ChatGPTQuery(props) {
       index = old.length - index - 1 // reverse back
       if (index < old.length) {
         const newValue = old[index].content + value
-        copy[index] = new Talk('answer', appended ? newValue : value)
+        copy[index] = new Talk(type, appended ? newValue : value)
         return copy
       } else {
         return old
@@ -102,15 +103,15 @@ function ChatGPTQuery(props) {
   useEffect(() => {
     const listener = (msg) => {
       if (msg.answer) {
-        UpdateAnswer('**ChatGPT:**\n' + msg.answer, false)
+        UpdateAnswer('**ChatGPT:**\n' + msg.answer, false, 'answer')
         setIsReady(false)
         return
       } else if (msg.answer == null) {
-        UpdateAnswer('<hr>', true)
+        UpdateAnswer('<hr>', true, 'answer')
       } else if (msg.error === 'UNAUTHORIZED') {
-        setTalk([...talk, new Talk('error', 'UNAUTHORIZED')])
+        UpdateAnswer('UNAUTHORIZED', false, 'error')
       } else {
-        setTalk([...talk, new Talk('error', 'EXCEPTION')])
+        UpdateAnswer('EXCEPTION', false, 'error')
       }
       setIsReady(true)
     }
