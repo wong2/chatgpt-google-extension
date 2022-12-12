@@ -125,6 +125,10 @@ function ChatGPTQuery(props) {
 
   return (
     <>
+      <link
+        rel="stylesheet"
+        href={'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.4/katex.min.css'}
+      />
       <div className="markdown-body gpt-inner">
         <Markdown.Provider value={getMarkdownRenderer()}>
           {talk.map((talk, idx) => (
