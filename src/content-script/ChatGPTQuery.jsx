@@ -31,7 +31,9 @@ function ChatGPTQuery(props) {
   if (answer) {
     return (
       <div id="answer" className="markdown-body gpt-inner" dir="auto">
-        <ReactMarkdown rehypePlugins={[rehypeHighlight]}>{answer}</ReactMarkdown>
+        <ReactMarkdown rehypePlugins={[[rehypeHighlight, { detect: true }]]}>
+          {answer}
+        </ReactMarkdown>
       </div>
     )
   }
