@@ -13,6 +13,7 @@
     "eventsource-parser": "^0.0.5",
     "expiry-map": "^2.0.0",
     "github-markdown-css": "^5.1.0",
+    "highlight.js": "^11.7.0",
     "markdown-it": "^13.0.1",
     "preact": "^10.11.3",
     "prop-types": "^15.8.1",

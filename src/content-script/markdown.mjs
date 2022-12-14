@@ -1,8 +1,13 @@
 import MarkdownIt from 'markdown-it'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/default.css'
 
 export function getMarkdownRenderer() {
   const markdown = new MarkdownIt({
     linkify: true,
+    highlight: function (str) {
+      return '<pre class="hljs"><code>' + hljs.highlightAuto(str).value + '</code></pre>'
+    },
   })
 
   // source: https://github.com/markdown-it/markdown-it/blob/master/docs/architecture.md#renderer
