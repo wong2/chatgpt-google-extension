@@ -12,8 +12,8 @@ function ChatGPTQuery(props) {
     const listener = (msg) => {
       if (msg.answer) {
         setAnswer('**ChatGPT:**\n\n' + msg.answer)
-      } else if (msg.error === 'UNAUTHORIZED') {
-        setError('UNAUTHORIZED')
+      } else if (msg.error === 'UNAUTHORIZED' || msg.error === 'CLOUDFLARE') {
+        setError(msg.error)
       } else {
         setError('EXCEPTION')
       }
@@ -42,6 +42,16 @@ function ChatGPTQuery(props) {
           chat.openai.com
         </a>{' '}
         first
+      </p>
+    )
+  }
+  if (error === 'CLOUDFLARE') {
+    return (
+      <p className="gpt-inner">
+        Please pass Cloudflare security check at{' '}
+        <a href="https://chat.openai.com" target="_blank" rel="noreferrer">
+          chat.openai.com
+        </a>{' '}
       </p>
     )
   }
