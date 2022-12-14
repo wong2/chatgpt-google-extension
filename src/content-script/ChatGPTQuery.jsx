@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'preact/hooks'
 import PropTypes from 'prop-types'
 import ReactMarkdown from 'react-markdown'
+import rehypeHighlight from 'rehype-highlight'
+import 'highlight.js/styles/default.css'
 import Browser from 'webextension-polyfill'
 
 function ChatGPTQuery(props) {
@@ -29,7 +31,7 @@ function ChatGPTQuery(props) {
   if (answer) {
     return (
       <div id="answer" className="markdown-body gpt-inner" dir="auto">
-        <ReactMarkdown>{answer}</ReactMarkdown>
+        <ReactMarkdown rehypePlugins={[rehypeHighlight]}>{answer}</ReactMarkdown>
       </div>
     )
   }

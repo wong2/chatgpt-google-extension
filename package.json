@@ -19,6 +19,7 @@
     "react": "npm:@preact/compat@^17.1.2",
     "react-dom": "npm:@preact/compat@^17.1.2",
     "react-markdown": "^8.0.4",
+    "rehype-highlight": "^6.0.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
