@@ -75,6 +75,6 @@
   word-break: break-all;
 }
 
-.hljs {
+.chat-gpt-container #answer .hljs {
   padding: 0 !important;
 }
