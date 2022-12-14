@@ -217,7 +217,12 @@
         "https://search.brave.com/search*",
         "https://*.yandex.com/search*",
         "https://duckduckgo.com/*",
-        "https://www.baidu.com/s*"
+        "https://www.baidu.com/s*",
+        "https://*.yandex.ru/search*",
+        "https://*.yandex.com.tr/search*",
+        "https://*.yandex.uz/search*",
+        "https://*.yandex.kz/search*",
+        "https://*.yandex.by/search*"
       ],
       "js": ["content-script.js"],
       "css": ["content-script.css"]
