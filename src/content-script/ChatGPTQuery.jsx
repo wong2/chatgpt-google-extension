@@ -2,8 +2,8 @@ import { useEffect, useState } from 'preact/hooks'
 import PropTypes from 'prop-types'
 import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
-import 'highlight.js/styles/default.css'
 import Browser from 'webextension-polyfill'
+import './highlight.scss'
 
 function ChatGPTQuery(props) {
   const [answer, setAnswer] = useState('')
