@@ -74,3 +74,8 @@
   white-space: pre-wrap;
   word-break: break-all;
 }
+
+.chat-gpt-container pre code.hljs {
+  padding: 0;
+  background-color: transparent;
+}

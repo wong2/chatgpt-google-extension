@@ -1,4 +1,5 @@
 import archiver from 'archiver'
+import { sassPlugin } from 'esbuild-sass-plugin'
 import esbuild from 'esbuild'
 import fs, { promises as fsPromises } from 'fs'
 
@@ -25,6 +26,7 @@ async function runEsbuild() {
     jsxFactory: 'h',
     jsxFragment: 'Fragment',
     jsx: 'automatic',
+    plugins: [sassPlugin()],
   })
 }
 
