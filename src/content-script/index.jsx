@@ -2,7 +2,7 @@ import 'github-markdown-css'
 import { render } from 'preact'
 import ChatGPTCard from './ChatGPTCard'
 import { config } from './search-engine-configs.mjs'
-import './styles.css'
+import './styles.scss'
 import { getPossibleElementByQuerySelector } from './utils.mjs'
 import { getUserConfig } from '../config'
 
