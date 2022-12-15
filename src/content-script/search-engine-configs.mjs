@@ -53,4 +53,9 @@ export const config = {
     sidebarContainerQuery: ['#side-right'],
     appendContainerQuery: [],
   },
+  searx: {
+    inputQuery: ["input[name='q']"],
+    sidebarContainerQuery: ['#sidebar_results'],
+    appendContainerQuery: [],
+  },
 }
