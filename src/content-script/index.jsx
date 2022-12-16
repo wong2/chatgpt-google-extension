@@ -6,7 +6,7 @@ import { config } from './search-engine-configs.mjs'
 import './styles.scss'
 import { getPossibleElementByQuerySelector } from './utils.mjs'
 
-async function run(question, siteConfig) {
+async function mount(question, siteConfig) {
   const container = document.createElement('div')
   container.className = 'chat-gpt-container'
 
@@ -30,8 +30,18 @@ async function run(question, siteConfig) {
 
 const siteRegex = new RegExp(Object.keys(config).join('|'))
 const siteName = location.hostname.match(siteRegex)[0]
+const siteConfig = config[siteName]
 
-const searchInput = getPossibleElementByQuerySelector(config[siteName].inputQuery)
-if (searchInput && searchInput.value) {
-  run(searchInput.value, config[siteName])
+function run() {
+  const searchInput = getPossibleElementByQuerySelector(siteConfig.inputQuery)
+  if (searchInput && searchInput.value) {
+    console.debug('Mount ChatGPT on', siteName)
+    mount(searchInput.value, siteConfig)
+  }
+}
+
+run()
+
+if (siteConfig.watchRouteChange) {
+  siteConfig.watchRouteChange(run)
 }

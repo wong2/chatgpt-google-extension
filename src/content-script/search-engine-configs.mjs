@@ -4,6 +4,7 @@
  * @property {string[]} sidebarContainerQuery - prepend child to
  * @property {string[]} appendContainerQuery - if sidebarContainer not exists, append child to
  */
+
 /**
  * @type {Object.<string,SiteConfig>}
  */
@@ -32,6 +33,22 @@ export const config = {
     inputQuery: ["input[name='wd']"],
     sidebarContainerQuery: ['#content_right'],
     appendContainerQuery: ['#container'],
+    watchRouteChange(callback) {
+      const targetNode = document.getElementById('wrapper_wrapper')
+      const observer = new MutationObserver(function (records) {
+        for (const record of records) {
+          if (record.type === 'childList') {
+            for (const node of record.addedNodes) {
+              if (node.id === 'container') {
+                callback()
+                return
+              }
+            }
+          }
+        }
+      })
+      observer.observe(targetNode, { childList: true })
+    },
   },
   kagi: {
     inputQuery: ["input[name='q']"],
