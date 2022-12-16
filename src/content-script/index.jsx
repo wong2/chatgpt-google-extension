@@ -1,10 +1,10 @@
 import 'github-markdown-css'
 import { render } from 'preact'
+import { getUserConfig } from '../config'
 import ChatGPTCard from './ChatGPTCard'
 import { config } from './search-engine-configs.mjs'
 import './styles.scss'
 import { getPossibleElementByQuerySelector } from './utils.mjs'
-import { getUserConfig } from '../config'
 
 async function run(question, siteConfig) {
   const container = document.createElement('div')
@@ -33,9 +33,5 @@ const siteName = location.hostname.match(siteRegex)[0]
 
 const searchInput = getPossibleElementByQuerySelector(config[siteName].inputQuery)
 if (searchInput && searchInput.value) {
-  // only run on first page
-  const startParam = new URL(location.href).searchParams.get('start') || '0'
-  if (startParam === '0') {
-    run(searchInput.value, config[siteName])
-  }
+  run(searchInput.value, config[siteName])
 }
