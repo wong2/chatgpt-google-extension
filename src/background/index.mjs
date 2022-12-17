@@ -1,6 +1,7 @@
 import ExpiryMap from 'expiry-map'
 import { v4 as uuidv4 } from 'uuid'
 import Browser from 'webextension-polyfill'
+import { sendMessageFeedback } from './chatgpt.mjs'
 import { fetchSSE } from './fetch-sse.mjs'
 
 const KEY_ACCESS_TOKEN = 'accessToken'
@@ -61,7 +62,11 @@ async function generateAnswers(port, question) {
       const data = JSON.parse(message)
       const text = data.message?.content?.parts?.[0]
       if (text) {
-        port.postMessage({ answer: text })
+        port.postMessage({
+          text,
+          messageId: data.message.id,
+          conversationId: data.conversation_id,
+        })
       }
     },
   })
@@ -78,4 +83,11 @@ Browser.runtime.onConnect.addListener((port) => {
       cache.delete(KEY_ACCESS_TOKEN)
     }
   })
+})
+
+Browser.runtime.onMessage.addListener(async (message) => {
+  if (message.type === 'FEEDBACK') {
+    const token = await getAccessToken()
+    await sendMessageFeedback(token, message.data)
+  }
 })

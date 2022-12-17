@@ -22,13 +22,12 @@
 
   @media (prefers-color-scheme: light) {
     border-color: #dadce0;
+    background-color: white;
   }
 
   @media (prefers-color-scheme: dark) {
     border-color: #3c4043;
-    & #answer {
-      background-color: #202124;
-    }
+    background-color: #202124;
   }
 
   p {
@@ -72,6 +71,28 @@
     pre code.hljs {
       padding: 0;
       background-color: transparent;
+    }
+
+    .gpt-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+
+      p {
+        font-weight: bold;
+      }
+
+      .gpt-feedback {
+        display: flex;
+        gap: 6px;
+        cursor: pointer;
+      }
+
+      .gpt-feedback-selected {
+        color: #f08080;
+      }
     }
   }
 }
