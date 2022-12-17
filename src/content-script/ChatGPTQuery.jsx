@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'preact/hooks'
 import PropTypes from 'prop-types'
+import { memo } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 import Browser from 'webextension-polyfill'
+import ChatGPTFeedback from './ChatGPTFeedback'
 import './highlight.scss'
 
 function ChatGPTQuery(props) {
-  const [answer, setAnswer] = useState('')
+  const [answer, setAnswer] = useState(null)
   const [error, setError] = useState('')
 
   useEffect(() => {
     const port = Browser.runtime.connect()
     const listener = (msg) => {
-      if (msg.answer) {
-        setAnswer('**ChatGPT:**\n\n' + msg.answer)
+      if (msg.text) {
+        setAnswer(msg)
       } else if (msg.error === 'UNAUTHORIZED' || msg.error === 'CLOUDFLARE') {
         setError(msg.error)
       } else {
@@ -31,8 +33,12 @@ function ChatGPTQuery(props) {
   if (answer) {
     return (
       <div id="answer" className="markdown-body gpt-inner" dir="auto">
+        <div className="gpt-header">
+          <p>ChatGPT</p>
+          <ChatGPTFeedback messageId={answer.messageId} conversationId={answer.conversationId} />
+        </div>
         <ReactMarkdown rehypePlugins={[[rehypeHighlight, { detect: true }]]}>
-          {answer}
+          {answer.text}
         </ReactMarkdown>
       </div>
     )
@@ -70,4 +76,4 @@ ChatGPTQuery.propTypes = {
   question: PropTypes.string.isRequired,
 }
 
-export default ChatGPTQuery
+export default memo(ChatGPTQuery)
