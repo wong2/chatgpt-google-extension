@@ -6,11 +6,12 @@
     "lint": "eslint --ext .js,.mjs,.jsx .",
     "lint:fix": "eslint --ext .js,.mjs,.jsx . --fix",
     "prepare": "husky install",
-    "watch": "watch 'npm run build' src"
+    "watch": "chokidar src -c 'npm run build'"
   },
   "dependencies": {
     "@picocss/pico": "^1.5.6",
     "@primer/octicons-react": "^17.9.0",
+    "chokidar-cli": "^3.0.0",
     "esbuild-sass-plugin": "^2.4.3",
     "eventsource-parser": "^0.0.5",
     "expiry-map": "^2.0.0",
@@ -33,7 +34,6 @@
     "husky": "^8.0.0",
     "lint-staged": "^13.1.0",
     "prettier": "^2.8.0",
-    "watch": "^1.0.2",
     "webextension-polyfill": "^0.10.0"
   },
   "lint-staged": {
