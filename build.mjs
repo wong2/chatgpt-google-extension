@@ -78,6 +78,8 @@ async function build() {
   )
 
   await zipFolder(`./${outdir}/firefox`)
+
+  console.log('Build success.')
 }
 
 build()
