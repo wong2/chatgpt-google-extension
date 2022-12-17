@@ -50,8 +50,7 @@ function ChatGPTQuery(props) {
         Please login and pass Cloudflare check at{' '}
         <a href="https://chat.openai.com" target="_blank" rel="noreferrer">
           chat.openai.com
-        </a>{' '}
-        first
+        </a>
       </p>
     )
   }
