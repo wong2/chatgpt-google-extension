@@ -31,20 +31,6 @@ function ChatGPTQuery(props) {
     }
   }, [props.question, retry])
 
-  if (answer) {
-    return (
-      <div id="answer" className="markdown-body gpt-inner" dir="auto">
-        <div className="gpt-header">
-          <p>ChatGPT</p>
-          <ChatGPTFeedback messageId={answer.messageId} conversationId={answer.conversationId} />
-        </div>
-        <ReactMarkdown rehypePlugins={[[rehypeHighlight, { detect: true }]]}>
-          {answer.text}
-        </ReactMarkdown>
-      </div>
-    )
-  }
-
   // retry error on focus
   useEffect(() => {
     const onFocus = () => {
@@ -58,6 +44,20 @@ function ChatGPTQuery(props) {
       window.removeEventListener('focus', onFocus)
     }
   }, [error])
+
+  if (answer) {
+    return (
+      <div id="answer" className="markdown-body gpt-inner" dir="auto">
+        <div className="gpt-header">
+          <p>ChatGPT</p>
+          <ChatGPTFeedback messageId={answer.messageId} conversationId={answer.conversationId} />
+        </div>
+        <ReactMarkdown rehypePlugins={[[rehypeHighlight, { detect: true }]]}>
+          {answer.text}
+        </ReactMarkdown>
+      </div>
+    )
+  }
 
   if (error === 'UNAUTHORIZED' || error === 'CLOUDFLARE') {
     return (
