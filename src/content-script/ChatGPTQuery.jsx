@@ -10,6 +10,7 @@ import './highlight.scss'
 function ChatGPTQuery(props) {
   const [answer, setAnswer] = useState(null)
   const [error, setError] = useState('')
+  const [retry, setRetry] = useState(0)
 
   useEffect(() => {
     const port = Browser.runtime.connect()
@@ -28,7 +29,7 @@ function ChatGPTQuery(props) {
       port.onMessage.removeListener(listener)
       port.disconnect()
     }
-  }, [props.question])
+  }, [props.question, retry])
 
   if (answer) {
     return (
@@ -43,6 +44,20 @@ function ChatGPTQuery(props) {
       </div>
     )
   }
+
+  // retry error on focus
+  useEffect(() => {
+    const onFocus = () => {
+      if (error && error !== 'EXCEPTION') {
+        setError('')
+        setRetry((r) => r + 1)
+      }
+    }
+    window.addEventListener('focus', onFocus)
+    return () => {
+      window.removeEventListener('focus', onFocus)
+    }
+  }, [error])
 
   if (error === 'UNAUTHORIZED' || error === 'CLOUDFLARE') {
     return (
