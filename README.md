@@ -8,11 +8,13 @@ Google, Baidu, Bing, DuckDuckGo, Brave, Yahoo, Naver, Yandex, Kagi, Searx
 
 ## Screenshot
 
-![Screenshot](screenshot.png?raw=true)
+![Screenshot](screenshots/extension.png?raw=true)
 
 ## Installation
 
-### Install to Chrome/Edge
+### Install to Chrome/Edge/Brave/Opera
+
+_Notice: Brave/Opera users please follow [Troubleshooting](#troubleshooting) section after install_
 
 #### Install from Chrome Web Store (Preferred)
 
@@ -45,6 +47,18 @@ Google, Baidu, Bing, DuckDuckGo, Brave, Yahoo, Naver, Yandex, Kagi, Searx
 2. Install dependencies with `npm`
 3. `npm run build`
 4. Load `build/chromium/` or `build/firefox/` directory to your browser
+
+## Troubleshooting
+
+### How to make it work in Brave
+
+Brave has security features which breaks this extension, please follow solution in this [comment](https://github.com/wong2/chat-gpt-google-extension/issues/120#issuecomment-1356264089)
+
+### How to make it work in Opera
+
+![Screenshot](screenshots/opera.png?raw=true)
+
+Enable "Allow access to search page results" in the extension management page
 
 ## Credit
 
