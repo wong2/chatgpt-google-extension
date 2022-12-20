@@ -14,3 +14,8 @@
 .container fieldset {
   margin-bottom: 0;
 }
+
+.github-link {
+  float: right;
+  margin-bottom: 10px;
+}

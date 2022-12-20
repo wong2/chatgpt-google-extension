@@ -1,6 +1,7 @@
 import '@picocss/pico'
+import { MarkGithubIcon } from '@primer/octicons-react'
 import { useCallback, useEffect, useState } from 'preact/hooks'
-import { getUserConfig, updateUserConfig, TRIGGER_MODES } from '../config'
+import { getUserConfig, TRIGGER_MODES, updateUserConfig } from '../config'
 import './styles.css'
 
 function Popup() {
@@ -39,6 +40,14 @@ function Popup() {
           })}
         </fieldset>
       </form>
+      <a
+        href="https://github.com/wong2/chat-gpt-google-extension"
+        target="_blank"
+        rel="noreferrer"
+        className="github-link"
+      >
+        <MarkGithubIcon />
+      </a>
     </div>
   )
 }
