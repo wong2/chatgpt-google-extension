@@ -16,7 +16,7 @@ Google, Baidu, Bing, DuckDuckGo, Brave, Yahoo, Naver, Yandex, Kagi, Searx
 
 #### Install from Chrome Web Store (Preferred)
 
-<https://chrome.google.com/webstore/detail/chatgpt-for-google/jgjaeacdkonaoafenlfkkkmbaopkbilf>
+[![chrome web store badge](https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png)](https://chrome.google.com/webstore/detail/chatgpt-for-google/jgjaeacdkonaoafenlfkkkmbaopkbilf)
 
 #### Local Install
 
@@ -30,7 +30,7 @@ Google, Baidu, Bing, DuckDuckGo, Brave, Yahoo, Naver, Yandex, Kagi, Searx
 
 #### Install from Mozilla Add-on Store (Preferred)
 
-<https://addons.mozilla.org/addon/chatgpt-for-google/>
+[![firefox add-on store badge](https://blog.mozilla.org/addons/files/2015/11/get-the-addon.png)](https://addons.mozilla.org/addon/chatgpt-for-google)
 
 #### Local Install
 
