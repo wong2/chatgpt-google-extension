@@ -1,7 +1,7 @@
 import ExpiryMap from 'expiry-map'
 import { v4 as uuidv4 } from 'uuid'
 import Browser from 'webextension-polyfill'
-import { sendMessageFeedback } from './chatgpt.mjs'
+import { sendMessageFeedback, setConversationProperty } from './chatgpt.mjs'
 import { fetchSSE } from './fetch-sse.mjs'
 
 const KEY_ACCESS_TOKEN = 'accessToken'
@@ -27,9 +27,17 @@ async function getAccessToken() {
 async function generateAnswers(port, question) {
   const accessToken = await getAccessToken()
 
+  let conversationId
+  const deleteConversation = () => {
+    if (conversationId) {
+      setConversationProperty(accessToken, conversationId, { is_visible: false })
+    }
+  }
+
   const controller = new AbortController()
   port.onDisconnect.addListener(() => {
     controller.abort()
+    deleteConversation()
   })
 
   await fetchSSE('https://chat.openai.com/backend-api/conversation', {
@@ -57,10 +65,13 @@ async function generateAnswers(port, question) {
     onMessage(message) {
       console.debug('sse message', message)
       if (message === '[DONE]') {
+        port.postMessage({ event: 'DONE' })
+        deleteConversation()
         return
       }
       const data = JSON.parse(message)
       const text = data.message?.content?.parts?.[0]
+      conversationId = data.conversation_id
       if (text) {
         port.postMessage({
           text,

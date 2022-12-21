@@ -11,16 +11,17 @@ function ChatGPTQuery(props) {
   const [answer, setAnswer] = useState(null)
   const [error, setError] = useState('')
   const [retry, setRetry] = useState(0)
+  const [, setDone] = useState(false)
 
   useEffect(() => {
     const port = Browser.runtime.connect()
     const listener = (msg) => {
       if (msg.text) {
         setAnswer(msg)
-      } else if (msg.error === 'UNAUTHORIZED' || msg.error === 'CLOUDFLARE') {
+      } else if (msg.error) {
         setError(msg.error)
-      } else {
-        setError('EXCEPTION')
+      } else if (msg.event === 'DONE') {
+        setDone(true)
       }
     }
     port.onMessage.addListener(listener)
@@ -34,7 +35,7 @@ function ChatGPTQuery(props) {
   // retry error on focus
   useEffect(() => {
     const onFocus = () => {
-      if (error && error !== 'EXCEPTION') {
+      if (error && (error == 'UNAUTHORIZED' || error === 'CLOUDFLARE')) {
         setError('')
         setRetry((r) => r + 1)
       }
@@ -70,7 +71,12 @@ function ChatGPTQuery(props) {
     )
   }
   if (error) {
-    return <p className="gpt-inner">Failed to load response from ChatGPT</p>
+    return (
+      <p className="gpt-inner">
+        Failed to load response from ChatGPT:
+        <br /> {error}
+      </p>
+    )
   }
 
   return <p className="gpt-loading gpt-inner">Waiting for ChatGPT response...</p>

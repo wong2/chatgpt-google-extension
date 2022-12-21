@@ -77,6 +77,19 @@
       list-style: disc;
     }
 
+    .gpt-link {
+      float: right;
+      font-size: 13px;
+      margin-top: 5px;
+      text-decoration: underline;
+      color: black;
+      opacity: 0.8;
+
+      &:visited {
+        color: black;
+      }
+    }
+
     .gpt-header {
       display: flex;
       flex-direction: row;
