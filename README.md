@@ -52,7 +52,9 @@ _Notice: Brave/Opera users please follow [Troubleshooting](#troubleshooting) sec
 
 ### How to make it work in Brave
 
-Brave has security features which breaks this extension, please follow solution in this [comment](https://github.com/wong2/chat-gpt-google-extension/issues/120#issuecomment-1356264089)
+![Screenshot](screenshots/brave.png?raw=true)
+
+Disable "Prevent sites from fingerprinting me based on my language preferences" in `brave://settings/shields`
 
 ### How to make it work in Opera
 
