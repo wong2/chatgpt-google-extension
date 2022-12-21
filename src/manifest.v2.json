@@ -1,7 +1,7 @@
 {
   "name": "ChatGPT for Google",
   "description": "Display ChatGPT response alongside Google Search results",
-  "version": "1.8.5",
+  "version": "1.8.6",
   "manifest_version": 2,
   "icons": {
     "16": "logo.png",
