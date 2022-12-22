@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 import Browser from 'webextension-polyfill'
 import ChatGPTFeedback from './ChatGPTFeedback'
+import { isBraveBrowser } from './utils.mjs'
 import './highlight.scss'
 
 function ChatGPTQuery(props) {
@@ -67,6 +68,15 @@ function ChatGPTQuery(props) {
         <a href="https://chat.openai.com" target="_blank" rel="noreferrer">
           chat.openai.com
         </a>
+        {isBraveBrowser() && retry > 0 && (
+          <span>
+            <br />
+            Still not working? Follow{' '}
+            <a href="https://github.com/wong2/chat-gpt-google-extension#troubleshooting">
+              Brave Troubleshooting
+            </a>
+          </span>
+        )}
       </p>
     )
   }

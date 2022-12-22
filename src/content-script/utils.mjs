@@ -15,3 +15,7 @@ export function endsWithQuestionMark(question) {
     question.endsWith('⸮') // Arabic
   )
 }
+
+export function isBraveBrowser() {
+  return navigator.brave?.isBrave()
+}
