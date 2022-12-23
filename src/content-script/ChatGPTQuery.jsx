@@ -5,14 +5,15 @@ import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 import Browser from 'webextension-polyfill'
 import ChatGPTFeedback from './ChatGPTFeedback'
-import { isBraveBrowser } from './utils.mjs'
+import { isBraveBrowser, shouldShowTriggerModeTip } from './utils.mjs'
 import './highlight.scss'
 
 function ChatGPTQuery(props) {
   const [answer, setAnswer] = useState(null)
   const [error, setError] = useState('')
   const [retry, setRetry] = useState(0)
-  const [, setDone] = useState(false)
+  const [done, setDone] = useState(false)
+  const [showTip, setShowTip] = useState(false)
 
   useEffect(() => {
     const port = Browser.runtime.connect()
@@ -47,6 +48,10 @@ function ChatGPTQuery(props) {
     }
   }, [error])
 
+  useEffect(() => {
+    shouldShowTriggerModeTip().then((show) => setShowTip(show))
+  }, [])
+
   if (answer) {
     return (
       <div id="answer" className="markdown-body gpt-inner" dir="auto">
@@ -57,6 +62,11 @@ function ChatGPTQuery(props) {
         <ReactMarkdown rehypePlugins={[[rehypeHighlight, { detect: true }]]}>
           {answer.text}
         </ReactMarkdown>
+        {done && showTip && (
+          <p className="gpt-tip">
+            Tip: you can switch to manual trigger mode by clicking the extension icon.
+          </p>
+        )}
       </div>
     )
   }
