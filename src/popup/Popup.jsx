@@ -1,5 +1,4 @@
 import '@picocss/pico'
-import { MarkGithubIcon } from '@primer/octicons-react'
 import { useCallback, useEffect, useState } from 'preact/hooks'
 import { getUserConfig, TRIGGER_MODES, updateUserConfig } from '../config'
 import './styles.css'
@@ -40,14 +39,25 @@ function Popup() {
           })}
         </fieldset>
       </form>
-      <a
-        href="https://github.com/wong2/chat-gpt-google-extension"
-        target="_blank"
-        rel="noreferrer"
-        className="github-link"
-      >
-        <MarkGithubIcon />
-      </a>
+      <footer>
+        <a
+          href="https://chatgpt-for-google.canny.io/feature-requests"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Feedback
+        </a>
+        <a href="https://chatgpt-for-google.canny.io/changelog" target="_blank" rel="noreferrer">
+          Changelog
+        </a>
+        <a
+          href="https://github.com/wong2/chat-gpt-google-extension"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Source code
+        </a>
+      </footer>
     </div>
   )
 }

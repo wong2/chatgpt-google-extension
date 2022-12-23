@@ -15,7 +15,10 @@
   margin-bottom: 0;
 }
 
-.github-link {
-  float: right;
-  margin-bottom: 10px;
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
 }
