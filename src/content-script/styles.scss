@@ -97,22 +97,15 @@
     .gpt-header {
       display: flex;
       flex-direction: row;
-      justify-content: flex-start;
+      justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
-      gap: 5px;
-
-      .gpt-setting-icon {
-        cursor: pointer;
-        line-height: 0;
-      }
 
       p {
         font-weight: bold;
       }
 
       .gpt-feedback {
-        margin-left: auto;
         display: flex;
         gap: 6px;
         cursor: pointer;

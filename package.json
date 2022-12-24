@@ -11,6 +11,8 @@
   "dependencies": {
     "@picocss/pico": "^1.5.6",
     "@primer/octicons-react": "^17.9.0",
+    "chokidar-cli": "^3.0.0",
+    "esbuild-sass-plugin": "^2.4.3",
     "eventsource-parser": "^0.0.5",
     "expiry-map": "^2.0.0",
     "github-markdown-css": "^5.1.0",
@@ -25,9 +27,7 @@
   },
   "devDependencies": {
     "archiver": "^5.3.1",
-    "chokidar-cli": "^3.0.0",
     "esbuild": "^0.16.4",
-    "esbuild-sass-plugin": "^2.4.4",
     "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.31.11",

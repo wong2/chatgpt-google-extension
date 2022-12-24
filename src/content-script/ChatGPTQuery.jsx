@@ -7,7 +7,6 @@ import Browser from 'webextension-polyfill'
 import ChatGPTFeedback from './ChatGPTFeedback'
 import { isBraveBrowser, shouldShowTriggerModeTip } from './utils.mjs'
 import './highlight.scss'
-import { GearIcon } from '@primer/octicons-react'
 
 function ChatGPTQuery(props) {
   const [answer, setAnswer] = useState(null)
@@ -58,9 +57,6 @@ function ChatGPTQuery(props) {
       <div id="answer" className="markdown-body gpt-inner" dir="auto">
         <div className="gpt-header">
           <p>ChatGPT</p>
-          <span className="gpt-setting-icon">
-            <GearIcon size={14} />
-          </span>
           <ChatGPTFeedback messageId={answer.messageId} conversationId={answer.conversationId} />
         </div>
         <ReactMarkdown rehypePlugins={[[rehypeHighlight, { detect: true }]]}>
