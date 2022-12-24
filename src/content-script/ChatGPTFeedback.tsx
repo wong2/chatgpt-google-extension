@@ -1,10 +1,14 @@
-import PropTypes from 'prop-types'
+import { ThumbsdownIcon, ThumbsupIcon } from '@primer/octicons-react'
 import { memo, useCallback, useState } from 'react'
-import { ThumbsupIcon, ThumbsdownIcon } from '@primer/octicons-react'
 import Browser from 'webextension-polyfill'
 
-const ChatGPTFeedback = (props) => {
-  const [action, setAction] = useState(null)
+interface Props {
+  messageId: string
+  conversationId: string
+}
+
+function ChatGPTFeedback(props: Props) {
+  const [action, setAction] = useState<'thumbsUp' | 'thumbsDown' | null>(null)
 
   const clickThumbsUp = useCallback(async () => {
     if (action) {
@@ -54,11 +58,6 @@ const ChatGPTFeedback = (props) => {
       </span>
     </div>
   )
-}
-
-ChatGPTFeedback.propTypes = {
-  messageId: PropTypes.string.isRequired,
-  conversationId: PropTypes.string.isRequired,
 }
 
 export default memo(ChatGPTFeedback)

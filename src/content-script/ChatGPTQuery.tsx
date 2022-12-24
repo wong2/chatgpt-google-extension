@@ -1,15 +1,19 @@
 import { useEffect, useState } from 'preact/hooks'
-import PropTypes from 'prop-types'
 import { memo } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 import Browser from 'webextension-polyfill'
+import { Answer } from '../messaging'
 import ChatGPTFeedback from './ChatGPTFeedback'
-import { isBraveBrowser, shouldShowTriggerModeTip } from './utils.mjs'
 import './highlight.scss'
+import { isBraveBrowser, shouldShowTriggerModeTip } from './utils.js'
 
-function ChatGPTQuery(props) {
-  const [answer, setAnswer] = useState(null)
+interface Props {
+  question: string
+}
+
+function ChatGPTQuery(props: Props) {
+  const [answer, setAnswer] = useState<Answer | null>(null)
   const [error, setError] = useState('')
   const [retry, setRetry] = useState(0)
   const [done, setDone] = useState(false)
@@ -17,7 +21,7 @@ function ChatGPTQuery(props) {
 
   useEffect(() => {
     const port = Browser.runtime.connect()
-    const listener = (msg) => {
+    const listener = (msg: any) => {
       if (msg.text) {
         setAnswer(msg)
       } else if (msg.error) {
@@ -100,10 +104,6 @@ function ChatGPTQuery(props) {
   }
 
   return <p className="gpt-loading gpt-inner">Waiting for ChatGPT response...</p>
-}
-
-ChatGPTQuery.propTypes = {
-  question: PropTypes.string.isRequired,
 }
 
 export default memo(ChatGPTQuery)

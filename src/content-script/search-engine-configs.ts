@@ -1,14 +1,11 @@
-/**
- * @typedef {object} SiteConfig
- * @property {string[]} inputQuery - for search box
- * @property {string[]} sidebarContainerQuery - prepend child to
- * @property {string[]} appendContainerQuery - if sidebarContainer not exists, append child to
- */
+export interface SearchEngine {
+  inputQuery: string[]
+  sidebarContainerQuery: string[]
+  appendContainerQuery: string[]
+  watchRouteChange?: (callback: () => void) => void
+}
 
-/**
- * @type {Object.<string,SiteConfig>}
- */
-export const config = {
+export const config: Record<string, SearchEngine> = {
   google: {
     inputQuery: ["input[name='q']"],
     sidebarContainerQuery: ['#rhs'],
@@ -34,12 +31,12 @@ export const config = {
     sidebarContainerQuery: ['#content_right'],
     appendContainerQuery: ['#container'],
     watchRouteChange(callback) {
-      const targetNode = document.getElementById('wrapper_wrapper')
+      const targetNode = document.getElementById('wrapper_wrapper')!
       const observer = new MutationObserver(function (records) {
         for (const record of records) {
           if (record.type === 'childList') {
             for (const node of record.addedNodes) {
-              if (node.id === 'container') {
+              if ('id' in node && node.id === 'container') {
                 callback()
                 return
               }

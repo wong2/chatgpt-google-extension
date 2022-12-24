@@ -1,19 +1,19 @@
 import '@picocss/pico'
 import { useCallback, useEffect, useState } from 'preact/hooks'
-import { getUserConfig, TRIGGER_MODES, updateUserConfig } from '../config'
+import { getUserConfig, TriggerMode, TRIGGER_MODE_TEXT, updateUserConfig } from '../config'
 import './styles.css'
 
 function Popup() {
-  const [triggerMode, setTriggerMode] = useState()
+  const [triggerMode, setTriggerMode] = useState<TriggerMode>(TriggerMode.Always)
 
   useEffect(() => {
     getUserConfig().then((config) => {
-      setTriggerMode(config.triggerMode || 'always')
+      setTriggerMode(config.triggerMode)
     })
   }, [])
 
-  const onTriggerModeChange = useCallback((e) => {
-    const mode = e.target.value
+  const onTriggerModeChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const mode = e.target.value as TriggerMode
     setTriggerMode(mode)
     updateUserConfig({ triggerMode: mode })
   }, [])
@@ -21,9 +21,9 @@ function Popup() {
   return (
     <div className="container">
       <form>
-        <fieldset onChange={onTriggerModeChange}>
+        <fieldset>
           <legend>Trigger Mode</legend>
-          {Object.entries(TRIGGER_MODES).map(([value, label]) => {
+          {Object.entries(TRIGGER_MODE_TEXT).map(([value, label]) => {
             return (
               <label htmlFor={value} key={value}>
                 <input
@@ -32,6 +32,7 @@ function Popup() {
                   name="triggerMode"
                   value={value}
                   checked={triggerMode === value}
+                  onChange={onTriggerModeChange}
                 />
                 {label}
               </label>
