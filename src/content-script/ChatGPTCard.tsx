@@ -1,15 +1,20 @@
 import { LightBulbIcon, SearchIcon } from '@primer/octicons-react'
 import { useState } from 'preact/hooks'
-import PropTypes from 'prop-types'
+import { TriggerMode } from '../config'
 import ChatGPTQuery from './ChatGPTQuery'
-import { endsWithQuestionMark } from './utils.mjs'
+import { endsWithQuestionMark } from './utils.js'
 
-function ChatGPTCard(props) {
+interface Props {
+  question: string
+  triggerMode: TriggerMode
+}
+
+function ChatGPTCard(props: Props) {
   const [triggered, setTriggered] = useState(false)
-  if (props.triggerMode === 'always') {
+  if (props.triggerMode === TriggerMode.Always) {
     return <ChatGPTQuery question={props.question} />
   }
-  if (props.triggerMode === 'questionMark') {
+  if (props.triggerMode === TriggerMode.QuestionMark) {
     if (endsWithQuestionMark(props.question.trim())) {
       return <ChatGPTQuery question={props.question} />
     }
@@ -27,11 +32,6 @@ function ChatGPTCard(props) {
       <SearchIcon size="small" /> Ask ChatGPT for this query
     </p>
   )
-}
-
-ChatGPTCard.propTypes = {
-  question: PropTypes.string.isRequired,
-  triggerMode: PropTypes.string.isRequired,
 }
 
 export default ChatGPTCard

@@ -1,16 +1,18 @@
 import Browser from 'webextension-polyfill'
-import { getUserConfig } from '../config'
+import { getUserConfig, TriggerMode } from '../config'
 
-export function getPossibleElementByQuerySelector(queryArray) {
+export function getPossibleElementByQuerySelector<T extends Element>(
+  queryArray: string[],
+): T | undefined {
   for (const query of queryArray) {
     const element = document.querySelector(query)
     if (element) {
-      return element
+      return element as T
     }
   }
 }
 
-export function endsWithQuestionMark(question) {
+export function endsWithQuestionMark(question: string) {
   return (
     question.endsWith('?') || // ASCII
     question.endsWith('？') || // Chinese/Japanese
@@ -20,7 +22,7 @@ export function endsWithQuestionMark(question) {
 }
 
 export function isBraveBrowser() {
-  return navigator.brave?.isBrave()
+  return (navigator as any).brave?.isBrave()
 }
 
 export async function shouldShowTriggerModeTip() {
@@ -28,8 +30,8 @@ export async function shouldShowTriggerModeTip() {
   if (triggerModeTipShowTimes >= 3) {
     return false
   }
-  const { triggerMode = 'always' } = await getUserConfig('triggerMode')
-  const show = triggerMode === 'always'
+  const { triggerMode } = await getUserConfig()
+  const show = triggerMode === TriggerMode.Always
   if (show) {
     await Browser.storage.local.set({ triggerModeTipShowCount: triggerModeTipShowTimes + 1 })
   }

@@ -2,11 +2,11 @@ import 'github-markdown-css'
 import { render } from 'preact'
 import { getUserConfig } from '../config'
 import ChatGPTCard from './ChatGPTCard'
-import { config } from './search-engine-configs.mjs'
+import { config, SearchEngine } from './search-engine-configs.js'
 import './styles.scss'
-import { getPossibleElementByQuerySelector } from './utils.mjs'
+import { getPossibleElementByQuerySelector } from './utils.js'
 
-async function mount(question, siteConfig) {
+async function mount(question: string, siteConfig: SearchEngine) {
   const container = document.createElement('div')
   container.className = 'chat-gpt-container'
 
@@ -29,11 +29,11 @@ async function mount(question, siteConfig) {
 }
 
 const siteRegex = new RegExp(Object.keys(config).join('|'))
-const siteName = location.hostname.match(siteRegex)[0]
+const siteName = location.hostname.match(siteRegex)![0]
 const siteConfig = config[siteName]
 
 function run() {
-  const searchInput = getPossibleElementByQuerySelector(siteConfig.inputQuery)
+  const searchInput = getPossibleElementByQuerySelector<HTMLInputElement>(siteConfig.inputQuery)
   if (searchInput && searchInput.value) {
     console.debug('Mount ChatGPT on', siteName)
     mount(searchInput.value, siteConfig)
