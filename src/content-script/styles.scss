@@ -63,6 +63,10 @@
       margin-top: 10px;
     }
 
+    & > p:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
     code {
       white-space: pre-wrap;
       word-break: break-all;
@@ -95,7 +99,7 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
 
       p {
         font-weight: bold;
