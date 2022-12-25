@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'preact/hooks'
-import { memo } from 'react'
+import { GearIcon } from '@primer/octicons-react'
+import { memo, useCallback } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 import Browser from 'webextension-polyfill'
@@ -56,19 +57,29 @@ function ChatGPTQuery(props: Props) {
     shouldShowTriggerModeTip().then((show) => setShowTip(show))
   }, [])
 
+  const openOptionsPage = useCallback(() => {
+    Browser.runtime.sendMessage({ type: 'OPEN_OPTIONS_PAGE' })
+  }, [])
+
   if (answer) {
     return (
       <div id="answer" className="markdown-body gpt-inner" dir="auto">
         <div className="gpt-header">
           <p>ChatGPT</p>
+          <span className="cursor-pointer leading-[0]" onClick={openOptionsPage}>
+            <GearIcon size={14} />
+          </span>
           <ChatGPTFeedback messageId={answer.messageId} conversationId={answer.conversationId} />
         </div>
         <ReactMarkdown rehypePlugins={[[rehypeHighlight, { detect: true }]]}>
           {answer.text}
         </ReactMarkdown>
         {done && showTip && (
-          <p className="gpt-tip">
-            Tip: you can switch to manual trigger mode by clicking the extension icon.
+          <p className="italic mt-2">
+            Tip: you can switch to manual trigger mode in{' '}
+            <span className="underline cursor-pointer" onClick={openOptionsPage}>
+              extension settings
+            </span>
           </p>
         )}
       </div>
@@ -79,7 +90,7 @@ function ChatGPTQuery(props: Props) {
     return (
       <p className="gpt-inner">
         Please login and pass Cloudflare check at{' '}
-        <a href="https://chat.openai.com" target="_blank" rel="noreferrer">
+        <a href="https://chat.openai.com" target="_blank" rel="noreferrer" className="underline">
           chat.openai.com
         </a>
         {isBraveBrowser() && retry > 0 && (

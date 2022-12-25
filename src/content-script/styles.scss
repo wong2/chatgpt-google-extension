@@ -45,10 +45,6 @@
     gap: 6px;
   }
 
-  .manual-btn {
-    cursor: pointer;
-  }
-
   .gpt-loading {
     color: #b6b8ba;
     animation: gpt-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
@@ -97,15 +93,17 @@
     .gpt-header {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
       margin-bottom: 10px;
+      gap: 5px;
 
       p {
         font-weight: bold;
       }
 
       .gpt-feedback {
+        margin-left: auto;
         display: flex;
         gap: 6px;
         cursor: pointer;
@@ -114,11 +112,6 @@
       .gpt-feedback-selected {
         color: #f08080;
       }
-    }
-
-    .gpt-tip {
-      font-style: italic;
-      margin-top: 10px;
     }
   }
 }

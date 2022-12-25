@@ -3,6 +3,7 @@ import { render } from 'preact'
 import { getUserConfig } from '../config'
 import ChatGPTCard from './ChatGPTCard'
 import { config, SearchEngine } from './search-engine-configs.js'
+import '../base.css'
 import './styles.scss'
 import { getPossibleElementByQuerySelector } from './utils.js'
 

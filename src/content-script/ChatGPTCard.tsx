@@ -28,7 +28,7 @@ function ChatGPTCard(props: Props) {
     return <ChatGPTQuery question={props.question} />
   }
   return (
-    <p className="gpt-inner manual-btn icon-and-text" onClick={() => setTriggered(true)}>
+    <p className="gpt-inner icon-and-text cursor-pointer" onClick={() => setTriggered(true)}>
       <SearchIcon size="small" /> Ask ChatGPT for this query
     </p>
   )
