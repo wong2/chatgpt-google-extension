@@ -1,7 +1,9 @@
 import archiver from 'archiver'
-import { sassPlugin } from 'esbuild-sass-plugin'
+import autoprefixer from 'autoprefixer'
 import esbuild from 'esbuild'
+import postcssPlugin from 'esbuild-style-plugin'
 import fs, { promises as fsPromises } from 'fs'
+import tailwindcss from 'tailwindcss'
 
 const outdir = 'build'
 
@@ -22,7 +24,13 @@ async function runEsbuild() {
     jsxFactory: 'h',
     jsxFragment: 'Fragment',
     jsx: 'automatic',
-    plugins: [sassPlugin()],
+    plugins: [
+      postcssPlugin({
+        postcss: {
+          plugins: [tailwindcss, autoprefixer],
+        },
+      }),
+    ],
   })
 }
 

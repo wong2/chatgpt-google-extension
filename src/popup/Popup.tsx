@@ -1,7 +1,7 @@
 import '@picocss/pico'
 import { useCallback, useEffect, useState } from 'preact/hooks'
 import { getUserConfig, TriggerMode, TRIGGER_MODE_TEXT, updateUserConfig } from '../config'
-import './styles.css'
+import '../base.css'
 
 function Popup() {
   const [triggerMode, setTriggerMode] = useState<TriggerMode>(TriggerMode.Always)
@@ -19,10 +19,10 @@ function Popup() {
   }, [])
 
   return (
-    <div className="container">
-      <form>
-        <fieldset>
-          <legend>Trigger Mode</legend>
+    <div className="p-5 w-[400px]">
+      <form className="mt-0">
+        <fieldset className="mb-0">
+          <legend className="font-bold">Trigger Mode</legend>
           {Object.entries(TRIGGER_MODE_TEXT).map(([value, label]) => {
             return (
               <label htmlFor={value} key={value}>
@@ -40,7 +40,7 @@ function Popup() {
           })}
         </fieldset>
       </form>
-      <footer>
+      <footer className="flex flex-row justify-end gap-[10px] mt-[10px]">
         <a
           href="https://chatgpt-for-google.canny.io/feature-requests"
           target="_blank"
