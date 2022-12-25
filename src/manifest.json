@@ -14,9 +14,8 @@
   "background": {
     "service_worker": "background.js"
   },
-  "action": {
-    "default_popup": "popup.html"
-  },
+  "action": {},
+  "options_page": "options.html",
   "content_scripts": [
     {
       "matches": [

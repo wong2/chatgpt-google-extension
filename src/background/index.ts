@@ -103,3 +103,7 @@ Browser.runtime.onMessage.addListener(async (message) => {
     await sendMessageFeedback(token, message.data)
   }
 })
+
+Browser.action.onClicked.addListener(() => {
+  Browser.runtime.openOptionsPage()
+})
