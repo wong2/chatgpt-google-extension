@@ -33,16 +33,15 @@ const siteRegex = new RegExp(Object.keys(config).join('|'))
 const siteName = location.hostname.match(siteRegex)![0]
 const siteConfig = config[siteName]
 
-function run() {
-  const searchInput = getPossibleElementByQuerySelector<HTMLInputElement>(siteConfig.inputQuery)
+async function run() {
+  const searchInput = siteConfig.getPrompt
+    ? await siteConfig.getPrompt()
+    : getPossibleElementByQuerySelector<HTMLInputElement>(siteConfig.inputQuery)
   if (searchInput && searchInput.value) {
     console.debug('Mount ChatGPT on', siteName)
     mount(searchInput.value, siteConfig)
   }
 }
 
-run()
-
-if (siteConfig.watchRouteChange) {
-  siteConfig.watchRouteChange(run)
-}
+if (siteConfig.watchRouteChange) siteConfig.watchRouteChange(run)
+else run()

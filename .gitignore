@@ -3,3 +3,5 @@ build/
 background.js
 .DS_Store
 *.zip
+.vscode/
+pnpm-lock.yaml

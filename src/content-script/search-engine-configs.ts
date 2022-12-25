@@ -3,6 +3,7 @@ export interface SearchEngine {
   sidebarContainerQuery: string[]
   appendContainerQuery: string[]
   watchRouteChange?: (callback: () => void) => void
+  getPrompt?: () => Promise<{ value: string }>
 }
 
 export const config: Record<string, SearchEngine> = {
@@ -71,5 +72,59 @@ export const config: Record<string, SearchEngine> = {
     inputQuery: ["input[name='q']"],
     sidebarContainerQuery: ['#sidebar_results'],
     appendContainerQuery: [],
+  },
+  youtube: {
+    inputQuery: ['input#search'],
+    sidebarContainerQuery: ['#secondary-inner>#related'],
+    appendContainerQuery: ['#secondary-inner>#related'],
+    async watchRouteChange(callback) {
+      await (async () => new Promise((resolve) => setTimeout(resolve, 5000)))()
+      const selector = '#secondary-inner>#related'
+      if (document.querySelector(selector)) return callback()
+      const observer = new MutationObserver(() => {
+        if (document.querySelector(selector)) {
+          observer.disconnect()
+          return callback()
+        }
+      })
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+      })
+    },
+    async getPrompt() {
+      async function getSubs(langCode = 'en') {
+        async function fetchYtInitialPlayerResponse(): Promise<any> {
+          const pageHtml = await (await fetch(window.location.href)).text()
+          try {
+            return JSON.parse(pageHtml.split(`var ytInitialPlayerResponse = `)[1].split(`;var`)[0])
+          } catch (err) {
+            return ytInitialPlayerResponse
+          }
+        }
+        const ytInitialPlayerResponse = await fetchYtInitialPlayerResponse()
+        const getBaseUrl = (langCode: string) =>
+          ytInitialPlayerResponse.captions.playerCaptionsTracklistRenderer.captionTracks.find(
+            (x) => x.vssId.indexOf('.' + langCode) === 0,
+          )?.baseUrl
+
+        const subsUrl =
+          (getBaseUrl(langCode) ||
+            ytInitialPlayerResponse.captions.playerCaptionsTracklistRenderer.captionTracks[0]
+              .baseUrl) +
+          '&tlang=' +
+          langCode
+        const subs = await (await fetch(subsUrl)).text()
+        const xml = new DOMParser().parseFromString(subs, 'text/xml')
+        const textNodes = [...xml.getElementsByTagName('text')]
+        const subsText = textNodes
+          .map((x) => x.textContent)
+          .join('\n')
+          .replaceAll('&#39;', "'")
+        return subsText
+      }
+      const subs = await getSubs('en')
+      return { value: 'Make a summary of the following text:\n' + subs.slice(0, 3000) }
+    },
   },
 }
