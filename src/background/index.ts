@@ -104,6 +104,12 @@ Browser.runtime.onMessage.addListener(async (message) => {
   }
 })
 
-Browser.action.onClicked.addListener(() => {
-  Browser.runtime.openOptionsPage()
-})
+if (Browser.action) {
+  Browser.action.onClicked.addListener(() => {
+    Browser.runtime.openOptionsPage()
+  })
+} else {
+  Browser.browserAction.onClicked.addListener(() => {
+    Browser.runtime.openOptionsPage()
+  })
+}
