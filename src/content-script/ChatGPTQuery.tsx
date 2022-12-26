@@ -90,7 +90,7 @@ function ChatGPTQuery(props: Props) {
     return (
       <p className="gpt-inner">
         Please login and pass Cloudflare check at{' '}
-        <a href="https://chat.openai.com" target="_blank" rel="noreferrer" className="underline">
+        <a href="https://chat.openai.com" target="_blank" rel="noreferrer">
           chat.openai.com
         </a>
         {isBraveBrowser() && retry > 0 && (
