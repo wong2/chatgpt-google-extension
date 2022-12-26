@@ -1,5 +1,5 @@
 import Browser from 'webextension-polyfill'
-import { getUserConfig, TriggerMode } from '../config'
+import { getUserConfig, Theme, TriggerMode } from '../config'
 
 export function getPossibleElementByQuerySelector<T extends Element>(
   queryArray: string[],

@@ -1,22 +1,29 @@
 import { CssBaseline, GeistProvider, Radio, Text } from '@geist-ui/core'
-import { useCallback, useEffect, useState } from 'preact/hooks'
-import { getUserConfig, TriggerMode, TRIGGER_MODE_TEXT, updateUserConfig } from '../config'
-import logo from '../logo.png'
+import { useCallback, useEffect, useMemo, useState } from 'preact/hooks'
 import '../base.css'
+import { getUserConfig, Theme, TriggerMode, TRIGGER_MODE_TEXT, updateUserConfig } from '../config'
+import logo from '../logo.png'
+import { detectSystemColorScheme } from '../utils'
 
-function OptionsPage() {
+function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => void }) {
   const [triggerMode, setTriggerMode] = useState<TriggerMode>(TriggerMode.Always)
 
   useEffect(() => {
-    getUserConfig().then((config) => {
-      setTriggerMode(config.triggerMode)
-    })
+    getUserConfig().then((config) => setTriggerMode(config.triggerMode))
   }, [])
 
   const onTriggerModeChange = useCallback((mode: TriggerMode) => {
     setTriggerMode(mode)
     updateUserConfig({ triggerMode: mode })
   }, [])
+
+  const onThemeChange = useCallback(
+    (theme: Theme) => {
+      updateUserConfig({ theme })
+      props.onThemeChange(theme)
+    },
+    [props],
+  )
 
   return (
     <div className="container mx-auto">
@@ -56,8 +63,20 @@ function OptionsPage() {
         >
           {Object.entries(TRIGGER_MODE_TEXT).map(([value, label]) => {
             return (
-              <Radio key={value} value={value} type="success">
+              <Radio key={value} value={value}>
                 {label}
+              </Radio>
+            )
+          })}
+        </Radio.Group>
+        <Text h3 className="mt-10">
+          Theme
+        </Text>
+        <Radio.Group value={props.theme} onChange={(val) => onThemeChange(val as Theme)}>
+          {Object.entries(Theme).map(([k, v]) => {
+            return (
+              <Radio key={v} value={v}>
+                {k}
               </Radio>
             )
           })}
@@ -68,10 +87,23 @@ function OptionsPage() {
 }
 
 function App() {
+  const [theme, setTheme] = useState(Theme.Auto)
+
+  const themeType = useMemo(() => {
+    if (theme === Theme.Auto) {
+      return detectSystemColorScheme()
+    }
+    return theme
+  }, [theme])
+
+  useEffect(() => {
+    getUserConfig().then((config) => setTheme(config.theme))
+  }, [])
+
   return (
-    <GeistProvider>
+    <GeistProvider themeType={themeType}>
       <CssBaseline />
-      <OptionsPage />
+      <OptionsPage theme={theme} onThemeChange={setTheme} />
     </GeistProvider>
   )
 }

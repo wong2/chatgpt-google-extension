@@ -13,11 +13,18 @@ export const TRIGGER_MODE_TEXT = {
   [TriggerMode.Manually]: 'Manually',
 }
 
-const userConfigWithDefaultValue = {
-  triggerMode: TriggerMode.Always,
+export enum Theme {
+  Auto = 'auto',
+  Light = 'light',
+  Dark = 'dark',
 }
 
-type UserConfig = typeof userConfigWithDefaultValue
+const userConfigWithDefaultValue = {
+  triggerMode: TriggerMode.Always,
+  theme: Theme.Auto,
+}
+
+export type UserConfig = typeof userConfigWithDefaultValue
 
 export async function getUserConfig(): Promise<UserConfig> {
   const result = await Browser.storage.local.get(Object.keys(userConfigWithDefaultValue))
@@ -25,5 +32,6 @@ export async function getUserConfig(): Promise<UserConfig> {
 }
 
 export async function updateUserConfig(updates: Partial<UserConfig>) {
+  console.debug('update configs', updates)
   return Browser.storage.local.set(updates)
 }
