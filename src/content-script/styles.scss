@@ -1,3 +1,6 @@
+@import 'light.scss';
+@import 'dark.scss';
+
 @keyframes gpt-pulse {
   0%,
   100% {
@@ -18,16 +21,6 @@
   &.sidebar-free {
     margin-left: 30px;
     height: fit-content;
-  }
-
-  @media (prefers-color-scheme: light) {
-    border-color: #dadce0;
-    background-color: white;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    border-color: #3c4043;
-    background-color: #202124;
   }
 
   p {
@@ -97,10 +90,6 @@
       align-items: center;
       margin-bottom: 10px;
       gap: 5px;
-
-      p {
-        font-weight: bold;
-      }
 
       .gpt-feedback {
         margin-left: auto;

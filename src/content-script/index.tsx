@@ -1,15 +1,28 @@
-import 'github-markdown-css'
 import { render } from 'preact'
-import { getUserConfig } from '../config'
-import ChatGPTCard from './ChatGPTCard'
-import { config, SearchEngine } from './search-engine-configs.js'
 import '../base.css'
+import { getUserConfig, Theme } from '../config'
+import { detectSystemColorScheme } from '../utils'
+import ChatGPTCard from './ChatGPTCard'
+import { config, SearchEngine } from './search-engine-configs'
 import './styles.scss'
-import { getPossibleElementByQuerySelector } from './utils.js'
+import { getPossibleElementByQuerySelector } from './utils'
 
 async function mount(question: string, siteConfig: SearchEngine) {
   const container = document.createElement('div')
   container.className = 'chat-gpt-container'
+
+  const userConfig = await getUserConfig()
+  let theme: Theme
+  if (userConfig.theme === Theme.Auto) {
+    theme = detectSystemColorScheme()
+  } else {
+    theme = userConfig.theme
+  }
+  if (theme === Theme.Dark) {
+    container.classList.add('gpt-dark')
+  } else {
+    container.classList.add('gpt-light')
+  }
 
   const siderbarContainer = getPossibleElementByQuerySelector(siteConfig.sidebarContainerQuery)
   if (siderbarContainer) {
@@ -22,7 +35,6 @@ async function mount(question: string, siteConfig: SearchEngine) {
     }
   }
 
-  const userConfig = await getUserConfig()
   render(
     <ChatGPTCard question={question} triggerMode={userConfig.triggerMode || 'always'} />,
     container,
