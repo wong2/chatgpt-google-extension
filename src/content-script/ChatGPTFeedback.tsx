@@ -1,14 +1,17 @@
-import { ThumbsdownIcon, ThumbsupIcon } from '@primer/octicons-react'
+import { ThumbsdownIcon, ThumbsupIcon, CopyIcon } from '@primer/octicons-react'
 import { memo, useCallback, useState } from 'react'
+import { useEffect } from 'preact/hooks'
 import Browser from 'webextension-polyfill'
 
 interface Props {
   messageId: string
   conversationId: string
+  answerText: string
 }
 
 function ChatGPTFeedback(props: Props) {
-  const [action, setAction] = useState<'thumbsUp' | 'thumbsDown' | null>(null)
+  const [copyToClipboard, setCopyToClipboard] = useState(false)
+  const [action, setAction] = useState<'thumbsUp' | 'thumbsDown' | 'copyToClipboard' | null>(null)
 
   const clickThumbsUp = useCallback(async () => {
     if (action) {
@@ -42,8 +45,34 @@ function ChatGPTFeedback(props: Props) {
     })
   }, [props, action])
 
+  const clickCopyToClipboard = useCallback(async () => {
+    setAction('copyToClipboard')
+    setCopyToClipboard(true)
+    if ('clipboard' in navigator) {
+      await navigator.clipboard.writeText(props.answerText)
+    } else {
+      return document.execCommand('copy', true, props.answerText)
+    }
+  }, [props])
+
+  useEffect(() => {
+    if (copyToClipboard) {
+      const timer = setTimeout(() => {
+        setCopyToClipboard(false)
+      }, 100)
+
+      return () => clearTimeout(timer)
+    }
+  }, [copyToClipboard])
+
   return (
     <div className="gpt-feedback">
+      <span
+        onClick={clickCopyToClipboard}
+        className={copyToClipboard ? 'gpt-feedback-selected' : undefined}
+      >
+        <CopyIcon size={14} />
+      </span>
       <span
         onClick={clickThumbsUp}
         className={action === 'thumbsUp' ? 'gpt-feedback-selected' : undefined}
