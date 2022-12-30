@@ -16,6 +16,7 @@
     "github-markdown-css": "^5.1.0",
     "inter-ui": "^3.19.3",
     "lodash-es": "^4.17.21",
+    "posthog-js": "^1.39.0",
     "preact": "^10.11.3",
     "prop-types": "^15.8.1",
     "punycode": "^2.1.1",
