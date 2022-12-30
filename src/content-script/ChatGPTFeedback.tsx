@@ -11,7 +11,7 @@ interface Props {
 
 function ChatGPTFeedback(props: Props) {
   const [copyToClipboard, setCopyToClipboard] = useState(false)
-  const [action, setAction] = useState<'thumbsUp' | 'thumbsDown' | 'copyToClipboard' | null>(null)
+  const [action, setAction] = useState<'thumbsUp' | 'thumbsDown' | null>(null)
 
   const clickThumbsUp = useCallback(async () => {
     if (action) {
@@ -46,7 +46,6 @@ function ChatGPTFeedback(props: Props) {
   }, [props, action])
 
   const clickCopyToClipboard = useCallback(async () => {
-    setAction('copyToClipboard')
     setCopyToClipboard(true)
     await navigator.clipboard.writeText(props.answerText)
   }, [props])
