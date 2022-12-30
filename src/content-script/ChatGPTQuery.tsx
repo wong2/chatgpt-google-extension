@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'preact/hooks'
 import { GearIcon } from '@primer/octicons-react'
+import { useEffect, useState } from 'preact/hooks'
 import { memo, useCallback } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 import Browser from 'webextension-polyfill'
+import { captureEvent } from '../analytics'
 import { Answer } from '../messaging'
 import ChatGPTFeedback from './ChatGPTFeedback'
 import { isBraveBrowser, shouldShowTriggerModeTip } from './utils.js'
@@ -18,14 +19,17 @@ function ChatGPTQuery(props: Props) {
   const [retry, setRetry] = useState(0)
   const [done, setDone] = useState(false)
   const [showTip, setShowTip] = useState(false)
+  const [status, setStatus] = useState<'success' | 'error' | undefined>()
 
   useEffect(() => {
     const port = Browser.runtime.connect()
     const listener = (msg: any) => {
       if (msg.text) {
         setAnswer(msg)
+        setStatus('success')
       } else if (msg.error) {
         setError(msg.error)
+        setStatus('error')
       } else if (msg.event === 'DONE') {
         setDone(true)
       }
@@ -55,6 +59,12 @@ function ChatGPTQuery(props: Props) {
   useEffect(() => {
     shouldShowTriggerModeTip().then((show) => setShowTip(show))
   }, [])
+
+  useEffect(() => {
+    if (status) {
+      captureEvent('showAnswer', { status })
+    }
+  }, [props.question, status])
 
   const openOptionsPage = useCallback(() => {
     Browser.runtime.sendMessage({ type: 'OPEN_OPTIONS_PAGE' })
