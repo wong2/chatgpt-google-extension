@@ -33,15 +33,15 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
           <span className="font-semibold">ChatGPT for Google</span>
         </div>
         <div className="flex flex-row gap-3">
+          <a href="https://chatgpt-for-google.canny.io/changelog" target="_blank" rel="noreferrer">
+            Changelog
+          </a>
           <a
-            href="https://chatgpt-for-google.canny.io/feature-requests"
+            href="https://github.com/wong2/chat-gpt-google-extension/issues"
             target="_blank"
             rel="noreferrer"
           >
             Feedback
-          </a>
-          <a href="https://chatgpt-for-google.canny.io/changelog" target="_blank" rel="noreferrer">
-            Changelog
           </a>
           <a
             href="https://github.com/wong2/chat-gpt-google-extension"
