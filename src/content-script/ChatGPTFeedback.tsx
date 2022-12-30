@@ -48,11 +48,7 @@ function ChatGPTFeedback(props: Props) {
   const clickCopyToClipboard = useCallback(async () => {
     setAction('copyToClipboard')
     setCopyToClipboard(true)
-    if ('clipboard' in navigator) {
-      await navigator.clipboard.writeText(props.answerText)
-    } else {
-      return document.execCommand('copy', true, props.answerText)
-    }
+    await navigator.clipboard.writeText(props.answerText)
   }, [props])
 
   useEffect(() => {
