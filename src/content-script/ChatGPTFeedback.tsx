@@ -10,7 +10,7 @@ interface Props {
 }
 
 function ChatGPTFeedback(props: Props) {
-  const [copyToClipboard, setCopyToClipboard] = useState(false)
+  const [copied, setCopied] = useState(false)
   const [action, setAction] = useState<'thumbsUp' | 'thumbsDown' | null>(null)
 
   const clickThumbsUp = useCallback(async () => {
@@ -26,7 +26,7 @@ function ChatGPTFeedback(props: Props) {
         rating: 'thumbsUp',
       },
     })
-  }, [props, action])
+  }, [action, props.conversationId, props.messageId])
 
   const clickThumbsDown = useCallback(async () => {
     if (action) {
@@ -43,31 +43,24 @@ function ChatGPTFeedback(props: Props) {
         tags: [],
       },
     })
-  }, [props, action])
+  }, [action, props.conversationId, props.messageId])
 
   const clickCopyToClipboard = useCallback(async () => {
-    setCopyToClipboard(true)
     await navigator.clipboard.writeText(props.answerText)
-  }, [props])
+    setCopied(true)
+  }, [props.answerText])
 
   useEffect(() => {
-    if (copyToClipboard) {
+    if (copied) {
       const timer = setTimeout(() => {
-        setCopyToClipboard(false)
-      }, 100)
-
+        setCopied(false)
+      }, 500)
       return () => clearTimeout(timer)
     }
-  }, [copyToClipboard])
+  }, [copied])
 
   return (
     <div className="gpt-feedback">
-      <span
-        onClick={clickCopyToClipboard}
-        className={copyToClipboard ? 'gpt-feedback-selected' : undefined}
-      >
-        <CopyIcon size={14} />
-      </span>
       <span
         onClick={clickThumbsUp}
         className={action === 'thumbsUp' ? 'gpt-feedback-selected' : undefined}
@@ -79,6 +72,9 @@ function ChatGPTFeedback(props: Props) {
         className={action === 'thumbsDown' ? 'gpt-feedback-selected' : undefined}
       >
         <ThumbsdownIcon size={14} />
+      </span>
+      <span onClick={clickCopyToClipboard} className={copied ? 'gpt-feedback-selected' : undefined}>
+        <CopyIcon size={14} />
       </span>
     </div>
   )
