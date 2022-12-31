@@ -1,7 +1,5 @@
 import { LightBulbIcon, SearchIcon } from '@primer/octicons-react'
 import { useState } from 'preact/hooks'
-import { useEffect } from 'react'
-import { captureEvent } from '../analytics'
 import { TriggerMode } from '../config'
 import ChatGPTQuery from './ChatGPTQuery'
 import { endsWithQuestionMark } from './utils.js'
@@ -13,10 +11,6 @@ interface Props {
 
 function ChatGPTCard(props: Props) {
   const [triggered, setTriggered] = useState(false)
-
-  useEffect(() => {
-    captureEvent('showCard', { triggerMode: props.triggerMode })
-  }, [props.triggerMode])
 
   if (props.triggerMode === TriggerMode.Always) {
     return <ChatGPTQuery question={props.question} />
