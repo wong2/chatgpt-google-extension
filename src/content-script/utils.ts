@@ -33,7 +33,7 @@ export async function shouldShowTriggerModeTip() {
   const { triggerMode } = await getUserConfig()
   const show = triggerMode === TriggerMode.Always
   if (show) {
-    await Browser.storage.local.set({ triggerModeTipShowCount: triggerModeTipShowTimes + 1 })
+    await Browser.storage.local.set({ triggerModeTipShowTimes: triggerModeTipShowTimes + 1 })
   }
   return show
 }
