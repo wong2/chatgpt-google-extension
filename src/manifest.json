@@ -220,6 +220,7 @@
         "https://search.naver.com/search*",
         "https://search.brave.com/search*",
         "https://duckduckgo.com/*",
+        "https://www.ecosia.org/search*",
         "https://www.baidu.com/*",
         "https://*.yandex.com/search*",
         "https://*.yandex.ru/search*",
