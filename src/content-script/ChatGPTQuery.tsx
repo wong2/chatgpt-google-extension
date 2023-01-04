@@ -106,15 +106,25 @@ function ChatGPTQuery(props: Props) {
         <a href="https://chat.openai.com" target="_blank" rel="noreferrer">
           chat.openai.com
         </a>
-        {isBraveBrowser() && retry > 0 && (
-          <span>
-            <br />
-            Still not working? Follow{' '}
-            <a href="https://github.com/wong2/chat-gpt-google-extension#troubleshooting">
-              Brave Troubleshooting
-            </a>
-          </span>
-        )}
+        {retry > 0 &&
+          (() => {
+            if (isBraveBrowser()) {
+              return (
+                <span className="block mt-2">
+                  Still not working? Follow{' '}
+                  <a href="https://github.com/wong2/chat-gpt-google-extension#troubleshooting">
+                    Brave Troubleshooting
+                  </a>
+                </span>
+              )
+            } else {
+              return (
+                <span className="italic block mt-2 text-xs">
+                  OpenAI requires passing a security check every once in a while.
+                </span>
+              )
+            }
+          })()}
       </p>
     )
   }
