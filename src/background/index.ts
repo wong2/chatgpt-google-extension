@@ -103,15 +103,7 @@ Browser.runtime.onMessage.addListener(async (message) => {
     await sendMessageFeedback(token, message.data)
   } else if (message.type === 'OPEN_OPTIONS_PAGE') {
     Browser.runtime.openOptionsPage()
+  } else if (message.type === 'GET_ACCESS_TOKEN') {
+    return getAccessToken()
   }
 })
-
-if (Browser.action) {
-  Browser.action.onClicked.addListener(() => {
-    Browser.runtime.openOptionsPage()
-  })
-} else {
-  Browser.browserAction.onClicked.addListener(() => {
-    Browser.runtime.openOptionsPage()
-  })
-}
