@@ -2,13 +2,13 @@ import archiver from 'archiver'
 import autoprefixer from 'autoprefixer'
 import esbuild from 'esbuild'
 import postcssPlugin from 'esbuild-style-plugin'
-import fs, { promises as fsPromises } from 'fs'
+import fs from 'fs-extra'
 import tailwindcss from 'tailwindcss'
 
 const outdir = 'build'
 
 async function deleteOldDir() {
-  await fsPromises.rm(outdir, { recursive: true, force: true })
+  await fs.remove(outdir)
 }
 
 async function runEsbuild() {
@@ -52,10 +52,10 @@ async function zipFolder(dir) {
 }
 
 async function copyFiles(entryPoints, targetDir) {
-  await fsPromises.mkdir(targetDir)
+  await fs.ensureDir(targetDir)
   await Promise.all(
     entryPoints.map(async (entryPoint) => {
-      await fsPromises.copyFile(entryPoint.src, `${targetDir}/${entryPoint.dst}`)
+      await fs.copy(entryPoint.src, `${targetDir}/${entryPoint.dst}`)
     }),
   )
 }
@@ -72,6 +72,7 @@ async function build() {
     { src: 'build/options/index.css', dst: 'options.css' },
     { src: 'src/options/index.html', dst: 'options.html' },
     { src: 'src/logo.png', dst: 'logo.png' },
+    { src: 'src/_locales', dst: '_locales' },
   ]
 
   // chromium
