@@ -5,15 +5,26 @@ import Browser from 'webextension-polyfill'
 import '../base.css'
 import logo from '../logo.png'
 
+const isChrome = /chrome/i.test(navigator.userAgent)
+
 function App() {
   const accessTokenQuery = useSWR(
     'accessToken',
     () => Browser.runtime.sendMessage({ type: 'GET_ACCESS_TOKEN' }),
     { shouldRetryOnError: false },
   )
+  const hideShortcutsTipQuery = useSWR('hideShortcutsTip', async () => {
+    const { hideShortcutsTip } = await Browser.storage.local.get('hideShortcutsTip')
+    return !!hideShortcutsTip
+  })
 
   const openOptionsPage = useCallback(() => {
     Browser.runtime.sendMessage({ type: 'OPEN_OPTIONS_PAGE' })
+  }, [])
+
+  const openShortcutsPage = useCallback(() => {
+    Browser.storage.local.set({ hideShortcutsTip: true })
+    Browser.tabs.create({ url: 'chrome://extensions/shortcuts' })
   }, [])
 
   return (
@@ -26,6 +37,15 @@ function App() {
           <GearIcon size={16} />
         </span>
       </div>
+      {isChrome && !hideShortcutsTipQuery.isLoading && !hideShortcutsTipQuery.data && (
+        <p className="m-0 mb-2">
+          Tip:{' '}
+          <a onClick={openShortcutsPage} className="underline cursor-pointer">
+            setup shortcuts
+          </a>{' '}
+          for faster access.
+        </p>
+      )}
       {(() => {
         if (accessTokenQuery.isLoading) {
           return (
