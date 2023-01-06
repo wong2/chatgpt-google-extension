@@ -1,9 +1,9 @@
 import { GearIcon, GlobeIcon } from '@primer/octicons-react'
-import logo from '../logo.png'
 import { useCallback } from 'react'
 import useSWR from 'swr'
 import Browser from 'webextension-polyfill'
 import '../base.css'
+import logo from '../logo.png'
 
 function App() {
   const accessTokenQuery = useSWR(
