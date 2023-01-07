@@ -1,3 +1,4 @@
+import { capitalize } from 'lodash-es'
 import { CssBaseline, GeistProvider, Radio, Select, Text } from '@geist-ui/core'
 import { useCallback, useEffect, useMemo, useState } from 'preact/hooks'
 import '../base.css'
@@ -100,14 +101,13 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
           Language
         </Text>
         <Select
-          dropdownStyle={{ height: '180px' }}
           value={language}
           placeholder="Choose one"
           onChange={(val) => onLanguageChange(val as Language)}
         >
           {Object.entries(Language).map(([k, v]) => (
             <Select.Option key={k} value={v}>
-              {v}
+              {capitalize(v)}
             </Select.Option>
           ))}
         </Select>

@@ -23,10 +23,10 @@ export enum Language {
   Auto = 'auto',
   English = 'english',
   Chinese = 'chinese',
-  Frech = 'frech',
-  Japanese = 'japanese',
-  Korean = 'korean',
   Spanish = 'spanish',
+  French = 'french',
+  Korean = 'korean',
+  Japanese = 'japanese',
 }
 
 const userConfigWithDefaultValue = {
