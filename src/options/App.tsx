@@ -1,15 +1,26 @@
-import { CssBaseline, GeistProvider, Radio, Text } from '@geist-ui/core'
+import { CssBaseline, GeistProvider, Radio, Select, Text } from '@geist-ui/core'
 import { useCallback, useEffect, useMemo, useState } from 'preact/hooks'
 import '../base.css'
-import { getUserConfig, Theme, TriggerMode, TRIGGER_MODE_TEXT, updateUserConfig } from '../config'
+import {
+  getUserConfig,
+  Language,
+  Theme,
+  TriggerMode,
+  TRIGGER_MODE_TEXT,
+  updateUserConfig,
+} from '../config'
 import logo from '../logo.png'
 import { detectSystemColorScheme } from '../utils'
 
 function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => void }) {
   const [triggerMode, setTriggerMode] = useState<TriggerMode>(TriggerMode.Always)
+  const [language, setLanguage] = useState<Language>(Language.Auto)
 
   useEffect(() => {
-    getUserConfig().then((config) => setTriggerMode(config.triggerMode))
+    getUserConfig().then((config) => {
+      setTriggerMode(config.triggerMode)
+      setLanguage(config.language)
+    })
   }, [])
 
   const onTriggerModeChange = useCallback((mode: TriggerMode) => {
@@ -24,6 +35,10 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
     },
     [props],
   )
+
+  const onLanguageChange = useCallback((language: Language) => {
+    updateUserConfig({ language })
+  }, [])
 
   return (
     <div className="container mx-auto">
@@ -81,6 +96,21 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
             )
           })}
         </Radio.Group>
+        <Text h3 className="mt-10">
+          Language
+        </Text>
+        <Select
+          dropdownStyle={{ height: '180px' }}
+          value={language}
+          placeholder="Choose one"
+          onChange={(val) => onLanguageChange(val as Language)}
+        >
+          {Object.entries(Language).map(([k, v]) => (
+            <Select.Option key={k} value={v}>
+              {v}
+            </Select.Option>
+          ))}
+        </Select>
       </main>
     </div>
   )
