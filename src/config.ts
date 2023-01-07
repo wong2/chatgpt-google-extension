@@ -19,9 +19,20 @@ export enum Theme {
   Dark = 'dark',
 }
 
+export enum Language {
+  Auto = 'auto',
+  English = 'english',
+  Chinese = 'chinese',
+  Frech = 'frech',
+  Japanese = 'japanese',
+  Korean = 'korean',
+  Spanish = 'spanish',
+}
+
 const userConfigWithDefaultValue = {
   triggerMode: TriggerMode.Always,
   theme: Theme.Auto,
+  language: Language.Auto,
 }
 
 export type UserConfig = typeof userConfigWithDefaultValue

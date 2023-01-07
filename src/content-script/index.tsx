@@ -1,6 +1,6 @@
 import { render } from 'preact'
 import '../base.css'
-import { getUserConfig, Theme } from '../config'
+import { getUserConfig, Language, Theme } from '../config'
 import { detectSystemColorScheme } from '../utils'
 import ChatGPTCard from './ChatGPTCard'
 import { config, SearchEngine } from './search-engine-configs'
@@ -45,11 +45,16 @@ const siteRegex = new RegExp(Object.keys(config).join('|'))
 const siteName = location.hostname.match(siteRegex)![0]
 const siteConfig = config[siteName]
 
-function run() {
+async function run() {
   const searchInput = getPossibleElementByQuerySelector<HTMLInputElement>(siteConfig.inputQuery)
   if (searchInput && searchInput.value) {
     console.debug('Mount ChatGPT on', siteName)
-    mount(searchInput.value, siteConfig)
+    const userConfig = await getUserConfig()
+    const searchValueWithLanguageOption =
+      userConfig.language === Language.Auto
+        ? searchInput.value
+        : `${searchInput.value}(in ${userConfig.language})`
+    mount(searchValueWithLanguageOption, siteConfig)
   }
 }
 
