@@ -23,6 +23,7 @@ Google, Baidu, Bing, DuckDuckGo, Brave, Yahoo, Naver, Yandex, Kagi, Searx
 - Provide feedback to improve ChatGPT
 - Copy to clipboard
 - Custom trigger mode
+- Switch languages
 
 ## Troubleshooting
 
