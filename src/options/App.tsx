@@ -59,6 +59,9 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
           >
             Feedback
           </a>
+          <a href="https://twitter.com/chatgpt4google" target="_blank" rel="noreferrer">
+            Twitter
+          </a>
           <a
             href="https://github.com/wong2/chat-gpt-google-extension"
             target="_blank"
