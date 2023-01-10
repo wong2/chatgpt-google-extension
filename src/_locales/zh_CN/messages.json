@@ -1,4 +1,7 @@
 {
+  "appName": {
+    "message": "ChatGPT for Google"
+  },
   "appDesc": {
     "message": "在搜索引擎结果中同时显示ChatGPT的回答"
   }
