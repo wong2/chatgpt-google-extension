@@ -1,7 +1,7 @@
 import posthog from 'posthog-js'
 import { getExtensionVersion } from './utils'
 
-posthog.init('phc_9ddG4YT65Cq2yuJPt8GQH4rDiYDuEw9MgdkAeKG1adA', {
+posthog.init('phc_vYOTewBdDTJImMRnKCUyymBkZbZmBM9kUHxHHCgTCrV', {
   api_host: 'https://app.posthog.com',
   persistence: 'localStorage',
   autocapture: false,
