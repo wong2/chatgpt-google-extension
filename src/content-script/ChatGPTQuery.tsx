@@ -9,8 +9,11 @@ import { Answer } from '../messaging'
 import ChatGPTFeedback from './ChatGPTFeedback'
 import { isBraveBrowser, shouldShowTriggerModeTip } from './utils.js'
 
+export type QueryStatus = 'success' | 'error' | undefined
+
 interface Props {
   question: string
+  onStatusChange?: (status: QueryStatus) => void
 }
 
 function ChatGPTQuery(props: Props) {
@@ -19,7 +22,11 @@ function ChatGPTQuery(props: Props) {
   const [retry, setRetry] = useState(0)
   const [done, setDone] = useState(false)
   const [showTip, setShowTip] = useState(false)
-  const [status, setStatus] = useState<'success' | 'error' | undefined>()
+  const [status, setStatus] = useState<QueryStatus>()
+
+  useEffect(() => {
+    props.onStatusChange?.(status)
+  }, [props, status])
 
   useEffect(() => {
     const port = Browser.runtime.connect()
@@ -72,7 +79,7 @@ function ChatGPTQuery(props: Props) {
 
   if (answer) {
     return (
-      <div id="answer" className="markdown-body gpt-inner" dir="auto">
+      <div className="markdown-body gpt-markdown" dir="auto">
         <div className="gpt-header">
           <span className="font-bold">ChatGPT</span>
           <span className="cursor-pointer leading-[0]" onClick={openOptionsPage}>
@@ -101,7 +108,7 @@ function ChatGPTQuery(props: Props) {
 
   if (error === 'UNAUTHORIZED' || error === 'CLOUDFLARE') {
     return (
-      <p className="gpt-inner">
+      <p>
         Please login and pass Cloudflare check at{' '}
         <a href="https://chat.openai.com" target="_blank" rel="noreferrer">
           chat.openai.com
@@ -130,14 +137,14 @@ function ChatGPTQuery(props: Props) {
   }
   if (error) {
     return (
-      <p className="gpt-inner">
+      <p>
         Failed to load response from ChatGPT:
         <br /> {error}
       </p>
     )
   }
 
-  return <p className="gpt-loading gpt-inner">Waiting for ChatGPT response...</p>
+  return <p className="text-[#b6b8ba] animate-pulse">Waiting for ChatGPT response...</p>
 }
 
 export default memo(ChatGPTQuery)

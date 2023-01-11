@@ -1,8 +1,10 @@
 .chat-gpt-container.gpt-dark {
 
-color: white;
-border-color: #3c4043;
-background-color: #202124;
+  .chat-gpt-card {
+    color: white;
+    border-color: #3c4043;
+    background-color: #0d1117;
+  }
 
 	pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}/*!
   Theme: GitHub Dark
