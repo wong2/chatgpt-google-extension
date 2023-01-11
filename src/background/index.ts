@@ -70,7 +70,13 @@ async function generateAnswers(port: Browser.Runtime.Port, question: string) {
         deleteConversation()
         return
       }
-      const data = JSON.parse(message)
+      let data
+      try {
+        data = JSON.parse(message)
+      } catch (err) {
+        console.error(err)
+        return
+      }
       const text = data.message?.content?.parts?.[0]
       conversationId = data.conversation_id
       if (text) {
