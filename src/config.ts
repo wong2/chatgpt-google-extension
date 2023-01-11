@@ -21,12 +21,16 @@ export enum Theme {
 
 export enum Language {
   Auto = 'auto',
-  English = 'english',
   Chinese = 'chinese',
-  Spanish = 'spanish',
+  English = 'english',
   French = 'french',
-  Korean = 'korean',
+  Hungarian = 'hungarian',
   Japanese = 'japanese',
+  Korean = 'korean',
+  Romanian = 'romanian',
+  Russian = 'russian',
+  Spanish = 'spanish',
+  Ukrainian = 'ukrainian',
 }
 
 const userConfigWithDefaultValue = {
