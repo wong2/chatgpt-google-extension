@@ -39,7 +39,7 @@ async function generateAnswers(port: Browser.Runtime.Port, question: string) {
   })
 
   await sendMessage({
-    accessToken,
+    token: accessToken,
     prompt: question,
     signal: controller.signal,
     onEvent(event) {

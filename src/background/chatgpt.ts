@@ -26,7 +26,7 @@ export async function setConversationProperty(
 }
 
 export async function sendMessage(params: {
-  accessToken: string
+  token: string
   prompt: string
   onEvent: (event: Event) => void
   signal?: AbortSignal
@@ -36,7 +36,7 @@ export async function sendMessage(params: {
     signal: params.signal,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${params.accessToken}`,
+      Authorization: `Bearer ${params.token}`,
     },
     body: JSON.stringify({
       action: 'next',
