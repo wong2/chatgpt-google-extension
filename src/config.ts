@@ -28,6 +28,7 @@ export enum Language {
   Korean = 'korean',
   Japanese = 'japanese',
   German = 'german',
+  Portuguese = 'portuguese',
 }
 
 const userConfigWithDefaultValue = {
