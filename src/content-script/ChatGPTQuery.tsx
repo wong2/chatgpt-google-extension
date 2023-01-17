@@ -139,7 +139,7 @@ function ChatGPTQuery(props: Props) {
     return (
       <p>
         Failed to load response from ChatGPT:
-        <br /> {error}
+        <span className="break-all block">{error}</span>
       </p>
     )
   }
