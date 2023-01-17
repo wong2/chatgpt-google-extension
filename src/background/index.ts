@@ -1,9 +1,6 @@
 import ExpiryMap from 'expiry-map'
-import { v4 as uuidv4 } from 'uuid'
 import Browser from 'webextension-polyfill'
-import { Answer } from '../messaging.js'
-import { sendMessageFeedback, setConversationProperty } from './chatgpt.js'
-import { fetchSSE } from './fetch-sse.js'
+import { sendMessage, sendMessageFeedback, setConversationProperty } from './chatgpt.js'
 
 const KEY_ACCESS_TOKEN = 'accessToken'
 
@@ -41,51 +38,18 @@ async function generateAnswers(port: Browser.Runtime.Port, question: string) {
     deleteConversation()
   })
 
-  await fetchSSE('https://chat.openai.com/backend-api/conversation', {
-    method: 'POST',
+  await sendMessage({
+    accessToken,
+    prompt: question,
     signal: controller.signal,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
-    },
-    body: JSON.stringify({
-      action: 'next',
-      messages: [
-        {
-          id: uuidv4(),
-          role: 'user',
-          content: {
-            content_type: 'text',
-            parts: [question],
-          },
-        },
-      ],
-      model: 'text-davinci-002-render',
-      parent_message_id: uuidv4(),
-    }),
-    onMessage(message: string) {
-      console.debug('sse message', message)
-      if (message === '[DONE]') {
+    onEvent(event) {
+      if (event.type === 'done') {
         port.postMessage({ event: 'DONE' })
         deleteConversation()
         return
       }
-      let data
-      try {
-        data = JSON.parse(message)
-      } catch (err) {
-        console.error(err)
-        return
-      }
-      const text = data.message?.content?.parts?.[0]
-      conversationId = data.conversation_id
-      if (text) {
-        port.postMessage({
-          text,
-          messageId: data.message.id,
-          conversationId: data.conversation_id,
-        } as Answer)
-      }
+      conversationId = event.data.conversationId
+      port.postMessage(event.data)
     },
   })
 }
