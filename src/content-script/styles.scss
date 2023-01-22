@@ -35,10 +35,9 @@
     gap: 6px;
   }
 
-  .gpt-markdown {
+  #gpt-answer.markdown-body.gpt-markdown {
     font-size: 15px;
     line-height: 1.6;
-    border-radius: 8px;
 
     pre {
       margin-top: 10px;
@@ -48,7 +47,7 @@
       margin-bottom: 10px;
     }
 
-    code {
+    pre code {
       white-space: pre-wrap;
       word-break: break-all;
     }
