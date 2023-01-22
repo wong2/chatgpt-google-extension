@@ -30,7 +30,14 @@ function Promotion({ data }: Props) {
               <p className="font-bold">{data.title}</p>
             </a>
           )}
-          {!!data.text && <p>{data.text}</p>}
+          {!!data.text &&
+            (data.title ? (
+              <p>{data.text}</p>
+            ) : (
+              <a href={data.url} target="_blank" rel="noreferrer">
+                <p>{data.text}</p>
+              </a>
+            ))}
         </div>
         <div className="flex flex-row justify-between">
           {!!data.footer && (
