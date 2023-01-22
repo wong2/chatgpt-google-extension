@@ -13,7 +13,7 @@ function Promotion({ data }: Props) {
     )
   }
   return (
-    <div className="chat-gpt-card flex flex-row gap-4 mt-5 gpt-promotion">
+    <div className="chat-gpt-card flex flex-row gap-2 mt-5 gpt-promotion">
       {!!data.image && (
         <a href={data.url} target="_blank" rel="noreferrer">
           <img
@@ -24,14 +24,31 @@ function Promotion({ data }: Props) {
         </a>
       )}
       <div className="flex flex-col justify-between">
-        <a href={data.url} target="_blank" rel="noreferrer">
-          <p>{data.text}</p>
-        </a>
-        {!!data.footer && (
-          <a href={data.footer.url} target="_blank" rel="noreferrer">
-            <span className="text-xs">{data.footer.text}</span>
-          </a>
-        )}
+        <div>
+          {!!data.title && (
+            <a href={data.url} target="_blank" rel="noreferrer">
+              <p className="font-bold">{data.title}</p>
+            </a>
+          )}
+          {!!data.text && <p>{data.text}</p>}
+        </div>
+        <div className="flex flex-row justify-between">
+          {!!data.footer && (
+            <a href={data.footer.url} target="_blank" rel="noreferrer" className="text-xs">
+              {data.footer.text}
+            </a>
+          )}
+          {!!data.label && (
+            <a
+              href={data.label.url}
+              target="_blank"
+              rel="noreferrer"
+              className="text-xs rounded-sm border border-solid px-[2px] text-inherit"
+            >
+              {data.label.text}
+            </a>
+          )}
+        </div>
       </div>
     </div>
   )
