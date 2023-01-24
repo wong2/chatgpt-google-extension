@@ -1,5 +1,5 @@
+import { CssBaseline, GeistProvider, Radio, Select, Text, useToasts } from '@geist-ui/core'
 import { capitalize } from 'lodash-es'
-import { CssBaseline, GeistProvider, Radio, Select, Text } from '@geist-ui/core'
 import { useCallback, useEffect, useMemo, useState } from 'preact/hooks'
 import '../base.css'
 import {
@@ -16,6 +16,7 @@ import { detectSystemColorScheme } from '../utils'
 function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => void }) {
   const [triggerMode, setTriggerMode] = useState<TriggerMode>(TriggerMode.Always)
   const [language, setLanguage] = useState<Language>(Language.Auto)
+  const { setToast } = useToasts()
 
   useEffect(() => {
     getUserConfig().then((config) => {
@@ -24,22 +25,31 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
     })
   }, [])
 
-  const onTriggerModeChange = useCallback((mode: TriggerMode) => {
-    setTriggerMode(mode)
-    updateUserConfig({ triggerMode: mode })
-  }, [])
+  const onTriggerModeChange = useCallback(
+    (mode: TriggerMode) => {
+      setTriggerMode(mode)
+      updateUserConfig({ triggerMode: mode })
+      setToast({ text: 'Changes saved', type: 'success' })
+    },
+    [setToast],
+  )
 
   const onThemeChange = useCallback(
     (theme: Theme) => {
       updateUserConfig({ theme })
       props.onThemeChange(theme)
+      setToast({ text: 'Changes saved', type: 'success' })
     },
-    [props],
+    [props, setToast],
   )
 
-  const onLanguageChange = useCallback((language: Language) => {
-    updateUserConfig({ language })
-  }, [])
+  const onLanguageChange = useCallback(
+    (language: Language) => {
+      updateUserConfig({ language })
+      setToast({ text: 'Changes saved', type: 'success' })
+    },
+    [setToast],
+  )
 
   return (
     <div className="container mx-auto">
@@ -80,10 +90,11 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
           value={triggerMode}
           onChange={(val) => onTriggerModeChange(val as TriggerMode)}
         >
-          {Object.entries(TRIGGER_MODE_TEXT).map(([value, label]) => {
+          {Object.entries(TRIGGER_MODE_TEXT).map(([value, texts]) => {
             return (
               <Radio key={value} value={value}>
-                {label}
+                {texts.title}
+                <Radio.Description>{texts.desc}</Radio.Description>
               </Radio>
             )
           })}
