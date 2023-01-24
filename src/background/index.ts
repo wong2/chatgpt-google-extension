@@ -77,3 +77,9 @@ Browser.runtime.onMessage.addListener(async (message) => {
     return getAccessToken()
   }
 })
+
+Browser.runtime.onInstalled.addListener((details) => {
+  if (details.reason === 'install') {
+    Browser.runtime.openOptionsPage()
+  }
+})
