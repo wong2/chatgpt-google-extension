@@ -3,3 +3,4 @@ build/
 background.js
 .DS_Store
 *.zip
+.env

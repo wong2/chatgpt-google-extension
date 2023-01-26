@@ -69,7 +69,7 @@ function ChatGPTQuery(props: Props) {
 
   useEffect(() => {
     if (status === 'success') {
-      captureEvent('showAnswer', { status })
+      captureEvent('show_answer', { host: location.host, language: navigator.language })
     }
   }, [props.question, status])
 

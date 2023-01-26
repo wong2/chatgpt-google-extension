@@ -1,9 +1,13 @@
 import archiver from 'archiver'
 import autoprefixer from 'autoprefixer'
+import * as dotenv from 'dotenv'
 import esbuild from 'esbuild'
 import postcssPlugin from 'esbuild-style-plugin'
 import fs from 'fs-extra'
+import process from 'node:process'
 import tailwindcss from 'tailwindcss'
+
+dotenv.config()
 
 const outdir = 'build'
 
@@ -25,6 +29,7 @@ async function runEsbuild() {
     minify: true,
     define: {
       'process.env.NODE_ENV': '"production"',
+      'process.env.AXIOM_TOKEN': JSON.stringify(process.env.AXIOM_TOKEN || 'UNDEFINED'),
     },
     jsxFactory: 'h',
     jsxFragment: 'Fragment',
