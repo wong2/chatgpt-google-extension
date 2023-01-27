@@ -27,6 +27,7 @@ async function runEsbuild() {
     outdir: outdir,
     treeShaking: true,
     minify: true,
+    legalComments: 'none',
     define: {
       'process.env.NODE_ENV': '"production"',
       'process.env.AXIOM_TOKEN': JSON.stringify(process.env.AXIOM_TOKEN || 'UNDEFINED'),
