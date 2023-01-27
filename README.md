@@ -49,3 +49,7 @@ Enable "Allow access to search page results" in the extension management page
 ## Credit
 
 This project is inspired by [ZohaibAhmed/ChatGPT-Google](https://github.com/ZohaibAhmed/ChatGPT-Google)
+
+
+![Visitors](https://visitor-badge.glitch.me/badge?page_id=wong2.chat-gpt-google-extension&left_color=green&right_color=red)
+![Discord](https://img.shields.io/discord/1067789258124951614?label=Discord)
