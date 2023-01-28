@@ -23,7 +23,10 @@
     margin: 0;
   }
 
-  .gpt-promotion {
+  a.gpt-promotion-link {
+    &:hover {
+      text-decoration: none;
+    }
     a:visited {
       color: inherit;
     }
