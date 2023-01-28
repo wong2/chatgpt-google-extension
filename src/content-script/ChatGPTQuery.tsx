@@ -7,7 +7,7 @@ import Browser from 'webextension-polyfill'
 import { captureEvent } from '../analytics'
 import { Answer } from '../messaging'
 import ChatGPTFeedback from './ChatGPTFeedback'
-import { isBraveBrowser, shouldShowTriggerModeTip } from './utils.js'
+import { isBraveBrowser, shouldShowRatingTip } from './utils.js'
 
 export type QueryStatus = 'success' | 'error' | undefined
 
@@ -64,7 +64,7 @@ function ChatGPTQuery(props: Props) {
   }, [error])
 
   useEffect(() => {
-    shouldShowTriggerModeTip().then((show) => setShowTip(show))
+    shouldShowRatingTip().then((show) => setShowTip(show))
   }, [])
 
   useEffect(() => {
@@ -96,10 +96,14 @@ function ChatGPTQuery(props: Props) {
         </ReactMarkdown>
         {done && showTip && (
           <p className="italic mt-2">
-            Tip: you can switch to manual trigger mode in{' '}
-            <span className="underline cursor-pointer" onClick={openOptionsPage}>
-              extension settings
-            </span>
+            Enjoy this extension? Give us a 5-star rating at{' '}
+            <a
+              href="https://chatgpt4google.com/chrome?utm_source=rating_tip"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Chrome Web Store
+            </a>
           </p>
         )}
       </div>

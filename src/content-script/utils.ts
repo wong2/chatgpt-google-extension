@@ -1,5 +1,4 @@
 import Browser from 'webextension-polyfill'
-import { getUserConfig, Theme, TriggerMode } from '../config'
 
 export function getPossibleElementByQuerySelector<T extends Element>(
   queryArray: string[],
@@ -25,15 +24,11 @@ export function isBraveBrowser() {
   return (navigator as any).brave?.isBrave()
 }
 
-export async function shouldShowTriggerModeTip() {
-  const { triggerModeTipShowTimes = 0 } = await Browser.storage.local.get('triggerModeTipShowTimes')
-  if (triggerModeTipShowTimes >= 3) {
+export async function shouldShowRatingTip() {
+  const { ratingTipShowTimes = 0 } = await Browser.storage.local.get('ratingTipShowTimes')
+  if (ratingTipShowTimes >= 5) {
     return false
   }
-  const { triggerMode } = await getUserConfig()
-  const show = triggerMode === TriggerMode.Always
-  if (show) {
-    await Browser.storage.local.set({ triggerModeTipShowTimes: triggerModeTipShowTimes + 1 })
-  }
-  return show
+  await Browser.storage.local.set({ ratingTipShowTimes: ratingTipShowTimes + 1 })
+  return ratingTipShowTimes >= 2
 }
