@@ -2,9 +2,9 @@
 
 A browser extension to display ChatGPT response alongside Google (and other search engines) results
 
-[Install from Chrome Web Store](https://chrome.google.com/webstore/detail/chatgpt-for-google/jgjaeacdkonaoafenlfkkkmbaopkbilf)
+[Install from Chrome Web Store](https://chatgpt4google.com/chrome?utm_source=github)
 
-[Install from Mozilla Add-on Store](https://addons.mozilla.org/addon/chatgpt-for-google/)
+[Install from Mozilla Add-on Store](https://chatgpt4google.com/firefox?utm_source=github)
 
 ## Supported Search Engines
 
