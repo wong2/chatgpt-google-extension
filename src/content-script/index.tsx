@@ -5,7 +5,7 @@ import { detectSystemColorScheme } from '../utils'
 import ChatGPTContainer from './ChatGPTContainer'
 import { config, SearchEngine } from './search-engine-configs'
 import './styles.scss'
-import { getPossibleElementByQuerySelector } from './utils'
+import { getPossibleElementByQuerySelector, isCarouselSearch, offsetContainer } from './utils'
 
 async function mount(question: string, siteConfig: SearchEngine) {
   const container = document.createElement('div')
@@ -33,6 +33,10 @@ async function mount(question: string, siteConfig: SearchEngine) {
     if (appendContainer) {
       appendContainer.appendChild(container)
     }
+  }
+
+  if (isCarouselSearch() && siteConfig.listenForCarouselExpand) {
+    siteConfig.listenForCarouselExpand((height) => offsetContainer(container, { top: height }))
   }
 
   render(

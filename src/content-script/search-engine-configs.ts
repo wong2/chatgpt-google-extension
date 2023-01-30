@@ -3,6 +3,7 @@ export interface SearchEngine {
   sidebarContainerQuery: string[]
   appendContainerQuery: string[]
   watchRouteChange?: (callback: () => void) => void
+  listenForCarouselExpand?: (callback: (height: number) => void) => void
 }
 
 export const config: Record<string, SearchEngine> = {
@@ -10,6 +11,29 @@ export const config: Record<string, SearchEngine> = {
     inputQuery: ["input[name='q']"],
     sidebarContainerQuery: ['#rhs'],
     appendContainerQuery: ['#rcnt'],
+    listenForCarouselExpand(callback) {
+      const targetNode = document.querySelector('div.exp-button')
+
+      if (!targetNode) {
+        return
+      }
+
+      const observer = new MutationObserver(function (records) {
+        // Detect if the element has a display style of "none"
+        for (const record of records) {
+          if (record.type === 'attributes' && record.attributeName === 'style') {
+            // The carousel height is updated again after expanding
+            // TODO: This is hacky, find a better way to do this
+            setTimeout(() => {
+              const carousel = document.querySelector('div.commercial-unit-desktop-top')
+              callback(carousel?.clientHeight ?? 0)
+            }, 200)
+            return
+          }
+        }
+      })
+      observer.observe(targetNode, { attributes: true, attributeFilter: ['style'] })
+    },
   },
   bing: {
     inputQuery: ["[name='q']"],

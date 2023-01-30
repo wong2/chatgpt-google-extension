@@ -32,3 +32,21 @@ export async function shouldShowRatingTip() {
   await Browser.storage.local.set({ ratingTipShowTimes: ratingTipShowTimes + 1 })
   return ratingTipShowTimes >= 2
 }
+
+export function isCarouselSearch() {
+  const carousel = document.querySelector('g-scrolling-carousel.pla-carousel')
+  return carousel !== null
+}
+
+export function offsetContainer<T extends HTMLElement>(
+  element: T,
+  offsets: { top?: number; left?: number },
+) {
+  if (offsets.top) {
+    element.style.transform = `translateY(${offsets.top}px) `
+  }
+
+  if (offsets.left) {
+    element.style.transform += `translateX(${offsets.left}px)`
+  }
+}
