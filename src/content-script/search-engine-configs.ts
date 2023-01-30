@@ -25,6 +25,8 @@ export const config: Record<string, SearchEngine> = {
             // The carousel height is updated again after expanding
             // TODO: This is hacky, find a better way to do this
             setTimeout(() => {
+              // This element includes the height of some other elements which
+              // are considered to be part of the carousel
               const carousel = document.querySelector('div.commercial-unit-desktop-top')
               callback(carousel?.clientHeight ?? 0)
             }, 200)
