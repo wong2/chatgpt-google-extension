@@ -12,6 +12,7 @@ import {
 } from '../config'
 import logo from '../logo.png'
 import { detectSystemColorScheme } from '../utils'
+import ProviderSelect from './ProviderSelect'
 
 function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => void }) {
   const [triggerMode, setTriggerMode] = useState<TriggerMode>(TriggerMode.Always)
@@ -129,7 +130,11 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
             </Select.Option>
           ))}
         </Select>
-        <Text h3 className="mt-5">
+        <Text h3 className="mt-5 mb-0">
+          AI Provider
+        </Text>
+        <ProviderSelect />
+        <Text h3 className="mt-8">
           Misc
         </Text>
         <div className="flex flex-row items-center gap-4">
