@@ -3,6 +3,7 @@ export interface SearchEngine {
   sidebarContainerQuery: string[]
   appendContainerQuery: string[]
   watchRouteChange?: (callback: () => void) => void
+  containerStyle?: string
 }
 
 export const config: Record<string, SearchEngine> = {
@@ -71,5 +72,11 @@ export const config: Record<string, SearchEngine> = {
     inputQuery: ["input[name='q']"],
     sidebarContainerQuery: ['#sidebar_results'],
     appendContainerQuery: [],
+  },
+  ecosia: {
+    inputQuery: ["input[name='q']"],
+    sidebarContainerQuery: ['.sidebar.web__sidebar'],
+    appendContainerQuery: ['.web'],
+    containerStyle: 'grid-area: sidebar;',
   },
 }

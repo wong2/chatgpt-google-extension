@@ -24,6 +24,7 @@ async function mount(question: string, siteConfig: SearchEngine) {
     container.classList.add('gpt-light')
   }
 
+  container.style.cssText += siteConfig.containerStyle
   const siderbarContainer = getPossibleElementByQuerySelector(siteConfig.sidebarContainerQuery)
   if (siderbarContainer) {
     siderbarContainer.prepend(container)
