@@ -102,7 +102,7 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
         <Text h3 className="mt-5">
           Theme
         </Text>
-        <Radio.Group value={props.theme} onChange={(val) => onThemeChange(val as Theme)}>
+        <Radio.Group value={props.theme} onChange={(val) => onThemeChange(val as Theme)} useRow>
           {Object.entries(Theme).map(([k, v]) => {
             return (
               <Radio key={v} value={v}>
