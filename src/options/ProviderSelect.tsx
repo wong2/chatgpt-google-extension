@@ -2,23 +2,22 @@ import { Button, Input, Select, Spinner, Tabs, useInput, useToasts } from '@geis
 import { FC, useCallback, useState } from 'react'
 import useSWR from 'swr'
 import { getProviderConfigs, ProviderConfigs, ProviderType, saveProviderConfigs } from '../config'
+import { API_HOST } from '../utils'
 
 interface ConfigProps {
   config: ProviderConfigs
+  models: string[]
 }
 
-const GPT3_MODELS = [
-  'text-chat-davinci-002-20230126',
-  'text-davinci-003',
-  'text-curie-001',
-  'text-babbage-001',
-  'text-ada-001',
-]
+async function loadModels(): Promise<string[]> {
+  const config = await fetch(`${API_HOST}/api/config`).then((r) => r.json())
+  return config.openai_model_names
+}
 
-const ConfigPanel: FC<ConfigProps> = ({ config }) => {
+const ConfigPanel: FC<ConfigProps> = ({ config, models }) => {
   const [tab, setTab] = useState<ProviderType>(config.provider)
   const { bindings: apiKeyBindings } = useInput(config.configs[ProviderType.GPT3]?.apiKey ?? '')
-  const [model, setModel] = useState(config.configs[ProviderType.GPT3]?.model ?? GPT3_MODELS[0])
+  const [model, setModel] = useState(config.configs[ProviderType.GPT3]?.model ?? models[0])
   const { setToast } = useToasts()
 
   const save = useCallback(async () => {
@@ -48,7 +47,7 @@ const ConfigPanel: FC<ConfigProps> = ({ config }) => {
             <span>OpenAI official API, more stable, charge by usage</span>
             <div className="flex flex-row gap-2">
               <Select scale={2 / 3} value={model} onChange={(v) => setModel(v as string)}>
-                {GPT3_MODELS.map((m) => (
+                {models.map((m) => (
                   <Select.Option key={m} value={m}>
                     {m}
                   </Select.Option>
@@ -77,11 +76,14 @@ const ConfigPanel: FC<ConfigProps> = ({ config }) => {
 }
 
 function ProviderSelect() {
-  const query = useSWR('provider-configs', getProviderConfigs)
+  const query = useSWR('provider-configs', async () => {
+    const [config, models] = await Promise.all([getProviderConfigs(), loadModels()])
+    return { config, models }
+  })
   if (query.isLoading) {
     return <Spinner />
   }
-  return <ConfigPanel config={query.data!} />
+  return <ConfigPanel config={query.data!.config} models={query.data!.models} />
 }
 
 export default ProviderSelect
