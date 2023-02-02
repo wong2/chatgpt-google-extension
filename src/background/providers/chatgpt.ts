@@ -78,7 +78,7 @@ export class ChatGPTProvider implements Provider {
             },
           },
         ],
-        model: 'text-davinci-002-render',
+        model: 'text-davinci-002-render-next',
         parent_message_id: uuidv4(),
       }),
       onMessage(message: string) {
