@@ -131,7 +131,8 @@ function ChatGPTQuery(props: Props) {
             } else {
               return (
                 <span className="italic block mt-2 text-xs">
-                  OpenAI requires passing a security check every once in a while.
+                  OpenAI requires passing a security check every once in a while. If this keeps
+                  happening, change AI provider to OpenAI API in the extension options.
                 </span>
               )
             }
