@@ -8,11 +8,11 @@ interface ConfigProps {
 }
 
 const GPT3_MODELS = [
+  'text-chat-davinci-002-20230126',
   'text-davinci-003',
   'text-curie-001',
   'text-babbage-001',
   'text-ada-001',
-  'text-chat-davinci-002-20230126',
 ]
 
 const ConfigPanel: FC<ConfigProps> = ({ config }) => {
@@ -40,7 +40,7 @@ const ConfigPanel: FC<ConfigProps> = ({ config }) => {
   return (
     <div className="flex flex-col gap-3">
       <Tabs value={tab} onChange={(v) => setTab(v as ProviderType)}>
-        <Tabs.Item label="ChatGPT" value={ProviderType.ChatGPT}>
+        <Tabs.Item label="ChatGPT webapp" value={ProviderType.ChatGPT}>
           The API that powers ChatGPT webapp, free, but sometimes unstable
         </Tabs.Item>
         <Tabs.Item label="OpenAI API" value={ProviderType.GPT3}>
