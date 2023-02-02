@@ -6,6 +6,14 @@ export class OpenAIProvider implements Provider {
     this.token = token
     this.model = model
   }
+
+  private buildPrompt(prompt: string): string {
+    if (this.model !== 'text-chat-davinci-002-20230126') {
+      return prompt
+    }
+    return `Respond conversationally.<|im_end|>\n\nUser: ${prompt}<|im_sep|>\nChatGPT:`
+  }
+
   async generateAnswer(params: GenerateAnswerParams) {
     let result = ''
     await fetchSSE('https://api.openai.com/v1/completions', {
@@ -17,7 +25,7 @@ export class OpenAIProvider implements Provider {
       },
       body: JSON.stringify({
         model: this.model,
-        prompt: params.prompt,
+        prompt: this.buildPrompt(params.prompt),
         stream: true,
         max_tokens: 2048,
       }),
