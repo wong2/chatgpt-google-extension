@@ -1,5 +1,6 @@
 import ExpiryMap from 'expiry-map'
 import { v4 as uuidv4 } from 'uuid'
+import { API_HOST } from '../../utils'
 import { fetchSSE } from '../fetch-sse'
 import { GenerateAnswerParams, Provider } from '../types'
 
@@ -46,6 +47,16 @@ export async function getChatGPTAccessToken(): Promise<string> {
   return data.accessToken
 }
 
+async function fetchModelName() {
+  try {
+    const config = await fetch(`${API_HOST}/api/config`).then((r) => r.json())
+    return config.chatgpt_webapp_model_name
+  } catch (err) {
+    console.error(err)
+    return null
+  }
+}
+
 export class ChatGPTProvider implements Provider {
   constructor(private token: string) {
     this.token = token
@@ -78,7 +89,7 @@ export class ChatGPTProvider implements Provider {
             },
           },
         ],
-        model: 'text-davinci-002-render',
+        model: (await fetchModelName()) || 'text-davinci-002-render',
         parent_message_id: uuidv4(),
       }),
       onMessage(message: string) {

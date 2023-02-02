@@ -11,3 +11,6 @@ export function detectSystemColorScheme() {
 export function getExtensionVersion() {
   return Browser.runtime.getManifest().version
 }
+
+export const API_HOST = 'https://chatgpt4google.com'
+// const API_HOST = 'http://localhost:3000'
