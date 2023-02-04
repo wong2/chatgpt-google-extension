@@ -1,6 +1,6 @@
 import ExpiryMap from 'expiry-map'
 import { v4 as uuidv4 } from 'uuid'
-import { API_HOST } from '../../utils'
+import { fetchExtensionConfigs } from '../../api'
 import { fetchSSE } from '../fetch-sse'
 import { GenerateAnswerParams, Provider } from '../types'
 
@@ -49,8 +49,8 @@ export async function getChatGPTAccessToken(): Promise<string> {
 
 async function fetchModelName() {
   try {
-    const config = await fetch(`${API_HOST}/api/config`).then((r) => r.json())
-    return config.chatgpt_webapp_model_name
+    const configs = await fetchExtensionConfigs()
+    return configs.chatgpt_webapp_model_name
   } catch (err) {
     console.error(err)
     return null

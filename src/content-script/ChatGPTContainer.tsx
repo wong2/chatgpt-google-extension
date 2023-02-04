@@ -1,10 +1,10 @@
-import { TriggerMode } from '../config'
-import useSWRImmutable from 'swr/immutable'
-import ChatGPTCard from './ChatGPTCard'
-import Promotion from './Promotion'
-import { getPromotion } from './api'
 import { useState } from 'react'
+import useSWRImmutable from 'swr/immutable'
+import { fetchPromotion } from '../api'
+import { TriggerMode } from '../config'
+import ChatGPTCard from './ChatGPTCard'
 import { QueryStatus } from './ChatGPTQuery'
+import Promotion from './Promotion'
 
 interface Props {
   question: string
@@ -13,9 +13,11 @@ interface Props {
 
 function ChatGPTContainer(props: Props) {
   const [queryStatus, setQueryStatus] = useState<QueryStatus>()
-  const query = useSWRImmutable(queryStatus === 'success' ? 'promotion' : undefined, getPromotion, {
-    shouldRetryOnError: false,
-  })
+  const query = useSWRImmutable(
+    queryStatus === 'success' ? 'promotion' : undefined,
+    fetchPromotion,
+    { shouldRetryOnError: false },
+  )
   return (
     <>
       <div className="chat-gpt-card">

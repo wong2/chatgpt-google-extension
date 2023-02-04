@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { captureEvent } from '../analytics'
-import { PromotionResponse } from './api'
+import type { PromotionResponse } from '../api'
 
 interface Props {
   data: PromotionResponse

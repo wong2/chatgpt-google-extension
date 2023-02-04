@@ -1,8 +1,8 @@
 import { Button, Input, Select, Spinner, Tabs, useInput, useToasts } from '@geist-ui/core'
 import { FC, useCallback, useState } from 'react'
 import useSWR from 'swr'
+import { fetchExtensionConfigs } from '../api'
 import { getProviderConfigs, ProviderConfigs, ProviderType, saveProviderConfigs } from '../config'
-import { API_HOST } from '../utils'
 
 interface ConfigProps {
   config: ProviderConfigs
@@ -10,8 +10,8 @@ interface ConfigProps {
 }
 
 async function loadModels(): Promise<string[]> {
-  const config = await fetch(`${API_HOST}/api/config`).then((r) => r.json())
-  return config.openai_model_names
+  const configs = await fetchExtensionConfigs()
+  return configs.openai_model_names
 }
 
 const ConfigPanel: FC<ConfigProps> = ({ config, models }) => {
