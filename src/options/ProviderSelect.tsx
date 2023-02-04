@@ -26,6 +26,10 @@ const ConfigPanel: FC<ConfigProps> = ({ config, models }) => {
         alert('Please enter your OpenAI API key')
         return
       }
+      if (!model || !models.includes(model)) {
+        alert('Please select a valid model')
+        return
+      }
     }
     await saveProviderConfigs(tab, {
       [ProviderType.GPT3]: {
@@ -34,7 +38,7 @@ const ConfigPanel: FC<ConfigProps> = ({ config, models }) => {
       },
     })
     setToast({ text: 'Changes saved', type: 'success' })
-  }, [apiKeyBindings.value, model, setToast, tab])
+  }, [apiKeyBindings.value, model, models, setToast, tab])
 
   return (
     <div className="flex flex-col gap-3">
@@ -44,9 +48,17 @@ const ConfigPanel: FC<ConfigProps> = ({ config, models }) => {
         </Tabs.Item>
         <Tabs.Item label="OpenAI API" value={ProviderType.GPT3}>
           <div className="flex flex-col gap-2">
-            <span>OpenAI official API, more stable, charge by usage</span>
+            <span>
+              OpenAI official API, more stable,{' '}
+              <span className="font-semibold">charge by usage</span>
+            </span>
             <div className="flex flex-row gap-2">
-              <Select scale={2 / 3} value={model} onChange={(v) => setModel(v as string)}>
+              <Select
+                scale={2 / 3}
+                value={model}
+                onChange={(v) => setModel(v as string)}
+                placeholder="model"
+              >
                 {models.map((m) => (
                   <Select.Option key={m} value={m}>
                     {m}
