@@ -12,6 +12,8 @@ A browser extension to display ChatGPT response alongside Google (and other sear
 
 [Install from Mozilla Add-on Store](https://chatgpt4google.com/firefox?utm_source=github)
 
+[Changelog](https://chatgpt-for-google.canny.io/changelog) | [Buy Me a Coffee](https://www.buymeacoffee.com/wong2)
+
 ## Supported Search Engines
 
 Google, Baidu, Bing, DuckDuckGo, Brave, Yahoo, Naver, Yandex, Kagi, Searx
