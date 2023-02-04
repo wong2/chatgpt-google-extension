@@ -8,10 +8,10 @@ export class OpenAIProvider implements Provider {
   }
 
   private buildPrompt(prompt: string): string {
-    if (this.model !== 'text-chat-davinci-002-20230126') {
-      return prompt
+    if (this.model.startsWith('text-chat-davinci')) {
+      return `Respond conversationally.<|im_end|>\n\nUser: ${prompt}<|im_sep|>\nChatGPT:`
     }
-    return `Respond conversationally.<|im_end|>\n\nUser: ${prompt}<|im_sep|>\nChatGPT:`
+    return prompt
   }
 
   async generateAnswer(params: GenerateAnswerParams) {
