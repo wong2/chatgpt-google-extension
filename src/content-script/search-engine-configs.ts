@@ -72,4 +72,9 @@ export const config: Record<string, SearchEngine> = {
     sidebarContainerQuery: ['#sidebar_results'],
     appendContainerQuery: [],
   },
+  daum: {
+    inputQuery: ["input[name='q']"],
+    sidebarContainerQuery: ['#mAside'],
+    appendContainerQuery: ['#cMain'],
+  },
 }

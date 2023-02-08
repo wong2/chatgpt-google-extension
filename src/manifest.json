@@ -230,7 +230,8 @@
         "https://*.yandex.uz/search*",
         "https://*.yandex.kz/search*",
         "https://*.yandex.by/search*",
-        "https://searx.be/search*"
+        "https://searx.be/search*",
+        "https://search.daum.net/search*"
       ],
       "js": ["content-script.js"],
       "css": ["content-script.css"]
