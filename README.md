@@ -25,6 +25,7 @@ Google, Baidu, Bing, DuckDuckGo, Brave, Yahoo, Naver, Yandex, Kagi, Searx
 
 - Supports all popular search engines
 - Supports the official OpenAI API
+- Supports ChatGPT Plus
 - Markdown rendering
 - Code highlights
 - Dark mode
