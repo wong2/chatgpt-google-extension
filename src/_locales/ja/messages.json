@@ -1,0 +1,8 @@
+{
+  "appName": {
+    "message": "ChatGPT for Google"
+  },
+  "appDesc": {
+    "message": "ChatGPTからの回答を検索エンジンの結果と共に表示します"
+  }
+}
