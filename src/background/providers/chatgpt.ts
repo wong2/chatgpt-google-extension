@@ -47,8 +47,9 @@ export async function getChatGPTAccessToken(): Promise<string> {
 }
 
 export class ChatGPTProvider implements Provider {
-  constructor(private token: string) {
+  constructor(private token: string, private model: string) {
     this.token = token
+    this.model = model
   }
 
   private async fetchModels(): Promise<
@@ -60,8 +61,7 @@ export class ChatGPTProvider implements Provider {
 
   private async getModelName(): Promise<string> {
     try {
-      const models = await this.fetchModels()
-      return models[0].slug
+      return this.model
     } catch (err) {
       console.error(err)
       return 'text-davinci-002-render'

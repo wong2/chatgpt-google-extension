@@ -65,21 +65,30 @@ interface GPT3ProviderConfig {
   apiKey: string
 }
 
+interface ChatGPTProviderConfig {
+  model: string
+}
+
 export interface ProviderConfigs {
   provider: ProviderType
   configs: {
     [ProviderType.GPT3]: GPT3ProviderConfig | undefined
+    [ProviderType.ChatGPT]: ChatGPTProviderConfig | undefined
   }
 }
 
 export async function getProviderConfigs(): Promise<ProviderConfigs> {
   const { provider = ProviderType.ChatGPT } = await Browser.storage.local.get('provider')
-  const configKey = `provider:${ProviderType.GPT3}`
-  const result = await Browser.storage.local.get(configKey)
+  const OpenAIconfigKey = `provider:${ProviderType.GPT3}`
+  const ChatGPTconfigKey = `provider:${ProviderType.ChatGPT}`
+  const OpenAIResult = await Browser.storage.local.get(OpenAIconfigKey)
+  const ChatGPTResult = await Browser.storage.local.get(ChatGPTconfigKey)
+
   return {
     provider,
     configs: {
-      [ProviderType.GPT3]: result[configKey],
+      [ProviderType.GPT3]: OpenAIResult[OpenAIconfigKey],
+      [ProviderType.ChatGPT]: ChatGPTResult[ChatGPTconfigKey],
     },
   }
 }
@@ -91,5 +100,6 @@ export async function saveProviderConfigs(
   return Browser.storage.local.set({
     provider,
     [`provider:${ProviderType.GPT3}`]: configs[ProviderType.GPT3],
+    [`provider:${ProviderType.ChatGPT}`]: configs[ProviderType.ChatGPT],
   })
 }

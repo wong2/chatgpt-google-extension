@@ -6,18 +6,24 @@ import { getProviderConfigs, ProviderConfigs, ProviderType, saveProviderConfigs 
 
 interface ConfigProps {
   config: ProviderConfigs
-  models: string[]
+  chatgpt_models: string[]
+  openai_models: string[]
 }
 
-async function loadModels(): Promise<string[]> {
+async function loadModels(): Promise<[string[], string[]]> {
   const configs = await fetchExtensionConfigs()
-  return configs.openai_model_names
+  return [configs.chatgpt_webapp_model_names, configs.openai_model_names]
 }
 
-const ConfigPanel: FC<ConfigProps> = ({ config, models }) => {
+const ConfigPanel: FC<ConfigProps> = ({ config, chatgpt_models, openai_models }) => {
   const [tab, setTab] = useState<ProviderType>(config.provider)
   const { bindings: apiKeyBindings } = useInput(config.configs[ProviderType.GPT3]?.apiKey ?? '')
-  const [model, setModel] = useState(config.configs[ProviderType.GPT3]?.model ?? models[0])
+  const [openai_model, setOpenAIModel] = useState(
+    config.configs[ProviderType.GPT3]?.model ?? openai_models[0],
+  )
+  const [chatgpt_model, setChatGPTModel] = useState(
+    config.configs[ProviderType.ChatGPT]?.model ?? chatgpt_models[0],
+  )
   const { setToast } = useToasts()
 
   const save = useCallback(async () => {
@@ -26,25 +32,56 @@ const ConfigPanel: FC<ConfigProps> = ({ config, models }) => {
         alert('Please enter your OpenAI API key')
         return
       }
-      if (!model || !models.includes(model)) {
-        alert('Please select a valid model')
+      if (!openai_model || !openai_models.includes(openai_model)) {
+        alert('Please select a valid openai_model')
+        return
+      }
+    }
+    if (tab === ProviderType.ChatGPT) {
+      if (!chatgpt_model || !chatgpt_models.includes(chatgpt_model)) {
+        alert('Please select a valid chatgpt_model')
         return
       }
     }
     await saveProviderConfigs(tab, {
       [ProviderType.GPT3]: {
-        model,
+        model: openai_model,
         apiKey: apiKeyBindings.value,
+      },
+      [ProviderType.ChatGPT]: {
+        model: chatgpt_model,
       },
     })
     setToast({ text: 'Changes saved', type: 'success' })
-  }, [apiKeyBindings.value, model, models, setToast, tab])
+  }, [
+    apiKeyBindings.value,
+    openai_model,
+    openai_models,
+    setToast,
+    tab,
+    chatgpt_model,
+    chatgpt_models,
+  ])
 
   return (
     <div className="flex flex-col gap-3">
       <Tabs value={tab} onChange={(v) => setTab(v as ProviderType)}>
         <Tabs.Item label="ChatGPT webapp" value={ProviderType.ChatGPT}>
           The API that powers ChatGPT webapp, free, but sometimes unstable
+          <div className="flex flex-row gap-2">
+            <Select
+              scale={2 / 3}
+              value={chatgpt_model}
+              onChange={(v) => setChatGPTModel(v as string)}
+              placeholder="model"
+            >
+              {chatgpt_models.map((m) => (
+                <Select.Option key={m} value={m}>
+                  {m}
+                </Select.Option>
+              ))}
+            </Select>
+          </div>
         </Tabs.Item>
         <Tabs.Item label="OpenAI API" value={ProviderType.GPT3}>
           <div className="flex flex-col gap-2">
@@ -55,11 +92,11 @@ const ConfigPanel: FC<ConfigProps> = ({ config, models }) => {
             <div className="flex flex-row gap-2">
               <Select
                 scale={2 / 3}
-                value={model}
-                onChange={(v) => setModel(v as string)}
+                value={openai_model}
+                onChange={(v) => setOpenAIModel(v as string)}
                 placeholder="model"
               >
-                {models.map((m) => (
+                {openai_models.map((m) => (
                   <Select.Option key={m} value={m}>
                     {m}
                   </Select.Option>
@@ -95,7 +132,13 @@ function ProviderSelect() {
   if (query.isLoading) {
     return <Spinner />
   }
-  return <ConfigPanel config={query.data!.config} models={query.data!.models} />
+  return (
+    <ConfigPanel
+      config={query.data!.config}
+      chatgpt_models={query.data!.models[0]}
+      openai_models={query.data!.models[1]}
+    />
+  )
 }
 
 export default ProviderSelect
