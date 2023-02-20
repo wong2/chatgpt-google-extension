@@ -5,6 +5,12 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/chatgpt4google?style=social)](https://twitter.com/chatgpt4google)
 ![License](https://img.shields.io/github/license/wong2/chatgpt-google-extension)
 
+### Notice (2023-02-20)
+
+As this extension has been acquired, this code repository will no longer be updated from now on.
+
+---
+
 A browser extension to display ChatGPT response alongside Google (and other search engines) results
 
 [Install from Chrome Web Store](https://chatgpt4google.com/chrome?utm_source=github)
