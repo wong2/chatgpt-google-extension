@@ -24,11 +24,13 @@
     "react-markdown": "^8.0.4",
     "rehype-highlight": "^6.0.0",
     "swr": "^2.0.0",
+    "turndown": "^7.1.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
     "@types/lodash-es": "^4.17.6",
+    "@types/turndown": "^5.0.1",
     "@types/uuid": "^9.0.0",
     "@types/webextension-polyfill": "^0.9.2",
     "@typescript-eslint/eslint-plugin": "^5.47.0",

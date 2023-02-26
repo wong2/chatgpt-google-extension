@@ -5,7 +5,7 @@ import { detectSystemColorScheme } from '../utils'
 import ChatGPTContainer from './ChatGPTContainer'
 import { config, SearchEngine } from './search-engine-configs'
 import './styles.scss'
-import { getPossibleElementByQuerySelector } from './utils'
+import { getGoogleSearchResult, getPossibleElementByQuerySelector } from './utils'
 
 async function mount(question: string, siteConfig: SearchEngine) {
   const container = document.createElement('div')
@@ -50,11 +50,17 @@ async function run() {
   if (searchInput && searchInput.value) {
     console.debug('Mount ChatGPT on', siteName)
     const userConfig = await getUserConfig()
-    const searchValueWithLanguageOption =
+    let question = searchInput.value
+
+    if (userConfig.googleSearch) {
+      question = (await getGoogleSearchResult(question)) + `\n\nQuestion:\n """${question}"""`
+    }
+
+    question =
       userConfig.language === Language.Auto
-        ? searchInput.value
-        : `${searchInput.value}(in ${userConfig.language})`
-    mount(searchValueWithLanguageOption, siteConfig)
+        ? question
+        : `Answer the question in ${userConfig.language}:\n\n ${question}`
+    mount(question, siteConfig)
   }
 }
 
