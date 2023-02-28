@@ -21,7 +21,7 @@ A browser extension to display ChatGPT response alongside Google (and other sear
 
 ## Supported Search Engines
 
-Google, Baidu, Bing, DuckDuckGo, Brave, Yahoo, Naver, Yandex, Kagi, Searx
+Google, Baidu, Bing, DuckDuckGo, Brave, Yahoo, Naver, Yandex, Kagi, Searx, Neeva
 
 ## Screenshot
 
