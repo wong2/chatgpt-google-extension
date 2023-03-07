@@ -38,7 +38,7 @@ export enum Language {
 }
 
 const userConfigWithDefaultValue = {
-  triggerMode: TriggerMode.Always,
+  triggerMode: TriggerMode.Manually,
   theme: Theme.Auto,
   language: Language.Auto,
 }
