@@ -9,6 +9,9 @@
 
 As this extension has been acquired, this code repository will no longer be updated from now on.
 
+**My new project:**
+[ChatHub: All-in-one chatbot client](https://chathub.gg)
+
 ---
 
 A browser extension to display ChatGPT response alongside Google (and other search engines) results
