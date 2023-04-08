@@ -1,3 +1,16 @@
+# ChatGPT for Google No Ads
+
+As the author has sold this plugin and subsequent versions have not followed the GPL3 agreement to open source the code, it is unclear what changes have been made to the subsequent versions by outsiders. Therefore, it has been decided to fork this version, continue distributing it under the GPL3 license, and remove the ads.
+
+由于作者已将此插件出售，而后续版本并没有遵循 GPL3 约定开放源代码，对于后续版本做了什么外人并不明确。故决定 fork 此版本，继续以 GPL3 协议发行，并删除了广告。
+
+下载地址 
+
+Chrome: pending...
+
+Firefox: pending...
+
+------------------------
 # ChatGPT for Google
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/wong2/chatgpt-google-extension/pre-release-build.yml)
