@@ -1,6 +1,6 @@
 import { createParser } from 'eventsource-parser'
 import { isEmpty } from 'lodash-es'
-import { streamAsyncIterable } from './stream-async-iterable.js'
+import { streamAsyncIterable } from './stream-async-iterable'
 
 export async function fetchSSE(
   resource: string,
