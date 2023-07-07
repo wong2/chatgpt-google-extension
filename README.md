@@ -1,7 +1,6 @@
 # ChatGPT for Google
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/wong2/chatgpt-google-extension/pre-release-build.yml)
-![Visitors](https://visitor-badge.glitch.me/badge?page_id=wong2.chat-gpt-google-extension&left_color=green&right_color=red)
 [![Twitter Follow](https://img.shields.io/twitter/follow/chatgpt4google?style=social)](https://twitter.com/chatgpt4google)
 ![License](https://img.shields.io/github/license/wong2/chatgpt-google-extension)
 
@@ -19,8 +18,6 @@ A browser extension to display ChatGPT response alongside Google (and other sear
 [Install from Chrome Web Store](https://chatgpt4google.com/chrome?utm_source=github)
 
 [Install from Mozilla Add-on Store](https://chatgpt4google.com/firefox?utm_source=github)
-
-[Changelog](https://chatgpt-for-google.canny.io/changelog)
 
 ## Supported Search Engines
 
@@ -63,3 +60,8 @@ Enable "Allow access to search page results" in the extension management page
 2. Install dependencies with `npm`
 3. `npm run build`
 4. Load `build/chromium/` or `build/firefox/` directory to your browser
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=wong2/chatgpt-google-extension&type=Date)](https://star-history.com/#wong2/chatgpt-google-extension&Date)
+
