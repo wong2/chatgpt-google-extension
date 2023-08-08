@@ -8,8 +8,7 @@
 
 As this extension has been acquired, this code repository will no longer be updated from now on.
 
-**My new project:**
-[ChatHub: All-in-one chatbot client](https://github.com/chathub-dev/chathub)
+# My new project: [ChatHub: All-in-one chatbot client](https://github.com/chathub-dev/chathub)
 
 ---
 
