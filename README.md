@@ -10,6 +10,9 @@ As this extension has been acquired, this code repository will no longer be upda
 
 # My new project: [ChatHub: All-in-one chatbot client](https://github.com/chathub-dev/chathub)
 
+Help nominate me as a GitHub Star: https://stars.github.com/nominate/
+> I nominate @wong2 as a GitHub Star 
+
 ---
 
 A browser extension to display ChatGPT response alongside Google (and other search engines) results
