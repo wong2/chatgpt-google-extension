@@ -1,4 +1,5 @@
 import { CssBaseline, GeistProvider, Radio, Select, Text, Toggle, useToasts } from '@geist-ui/core'
+import { ToggleEvent } from '@geist-ui/core/esm/toggle'
 import { capitalize } from 'lodash-es'
 import { useCallback, useEffect, useMemo, useState } from 'preact/hooks'
 import '../base.css'
@@ -47,6 +48,15 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
   const onLanguageChange = useCallback(
     (language: Language) => {
       updateUserConfig({ language })
+      setToast({ text: 'Changes saved', type: 'success' })
+    },
+    [setToast],
+  )
+
+  const onGoogleSearchChange = useCallback(
+    (event: ToggleEvent) => {
+      const googleSearch = event.target.checked
+      updateUserConfig({ googleSearch })
       setToast({ text: 'Changes saved', type: 'success' })
     },
     [setToast],
@@ -130,6 +140,15 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
             </Select.Option>
           ))}
         </Select>
+        <Text h3 className="mt-8">
+          Allow Google Results for ChatGPT
+        </Text>
+        <div className="flex flex-row items-center gap-4">
+          <Toggle initialChecked onChange={onGoogleSearchChange} />
+          <Text b margin={0}>
+            Allow ChatGPT to access some Google search data and have more up-to-date answers.
+          </Text>
+        </div>
         <Text h3 className="mt-5 mb-0">
           AI Provider
         </Text>
