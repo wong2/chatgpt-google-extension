@@ -1,10 +1,10 @@
-# ChatGPT for Google
+# aiGPT for aiDrive Company Ecosystem and Google 
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/wong2/chatgpt-google-extension/pre-release-build.yml)
 [![Twitter Follow](https://img.shields.io/twitter/follow/chatgpt4google?style=social)](https://twitter.com/chatgpt4google)
 ![License](https://img.shields.io/github/license/wong2/chatgpt-google-extension)
 
-### Notice (2023-02-20)
+### Notice (2023-05-16)
 
 As this extension has been acquired, this code repository will no longer be updated from now on.
 
