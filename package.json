@@ -11,6 +11,7 @@
   "dependencies": {
     "@geist-ui/core": "^2.3.8",
     "@primer/octicons-react": "^17.9.0",
+    "copilot": "^0.5.1",
     "eventsource-parser": "^0.0.5",
     "expiry-map": "^2.0.0",
     "github-markdown-css": "^5.1.0",
