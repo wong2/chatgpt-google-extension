@@ -1,3 +1,4 @@
+#sudo su 
 # ChatGPT for Google
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/wong2/chatgpt-google-extension/pre-release-build.yml)
